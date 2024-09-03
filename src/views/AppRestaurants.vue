@@ -11,6 +11,7 @@ export default {
 	},
 	data() {
 		return {
+			restaurants: [],
 			// posts: "",
 		};
 	},
@@ -22,11 +23,10 @@ export default {
 		// },
 	},
 	mounted() {
-		// axios.get("http://localhost:8000/api/posts").then((result) => {
-		// 	console.log(result.data.posts);
-		// 	this.posts = result.data.posts;
-		// 	console.log(this.posts.length);
-		// });
+		axios.get('http://127.0.0.1:8000/api/restaurants').then(response => {
+			console.log(response.data.restaurants);
+			this.restaurants = response.data.restaurants
+		})
 	},
 };
 </script>
@@ -46,8 +46,8 @@ export default {
 		</div>
 
 		<div class="row mx-0">
-			<div v-for="i in 12" :key="i" class="col-3 p-3">
-				<RestaurantsCard />
+			<div v-for="singleRestaurat in restaurants" :key="i" class="col-3 p-3">
+				<RestaurantsCard :singleRestaurat="singleRestaurat" />
 			</div>
 		</div>
 
