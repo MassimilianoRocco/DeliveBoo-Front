@@ -1,9 +1,13 @@
 <script>
+import AppHeader from "./components/AppHeader.vue";
+import AppJumbo from "./views/AppJumbo.vue";
 import AppRestaurants from "./views/AppRestaurants.vue";
 
 export default {
 	name: "App",
 	components: {
+		AppHeader,
+		AppJumbo,
 		AppRestaurants,
 	},
 
@@ -35,6 +39,10 @@ export default {
 
 <template>
 	<div class="app_Container w-100">
+		<AppHeader />
+
+		<AppJumbo />
+
 		<AppRestaurants />
 
 		<button
