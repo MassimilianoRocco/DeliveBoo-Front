@@ -1,5 +1,6 @@
 <script>
 import AppHeader from './components/AppHeader.vue';
+import AppJumbo from './views/AppJumbo.vue';
 
 
 
@@ -8,6 +9,7 @@ export default{
 
   components:{
     AppHeader,
+    AppJumbo,
  
   },
 
@@ -29,7 +31,7 @@ mounted(){
 
   <div class="app_Container w-100">
     <AppHeader />
-
+    <AppJumbo />
   </div>
 
 </template>
