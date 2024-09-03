@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import AppHome from "./views/AppHome.vue";
+// import AppHome from "./views/AppHome.vue";
 // import AppAbout from "./views/AppAbout.vue";
 // import AppProjects from "./views/AppProjects.vue";
 // import AppContacts from "./views/AppContacts.vue";
@@ -10,11 +10,11 @@ import AppHome from "./views/AppHome.vue";
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
-		{
-			path: "/",
-			name: "home",
-			component: AppHome,
-		},
+		// {
+		// 	path: "/",
+		// 	name: "home",
+		// 	component: AppHome,
+		// },
 	],
 });
 
