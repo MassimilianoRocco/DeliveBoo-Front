@@ -2,6 +2,8 @@
 import AppHeader from "./components/AppHeader.vue";
 import AppJumbo from "./views/AppJumbo.vue";
 import AppRestaurants from "./views/AppRestaurants.vue";
+import AppServices from "./views/AppServices.vue";
+import AppWorkWithUs from "./views/AppWorkWithUs.vue";
 
 export default {
 	name: "App",
@@ -9,6 +11,8 @@ export default {
 		AppHeader,
 		AppJumbo,
 		AppRestaurants,
+		AppServices,
+		AppWorkWithUs,
 	},
 
 	data() {
@@ -45,6 +49,10 @@ export default {
 
 		<AppRestaurants />
 
+		<!-- <AppServices class="mt-5" /> -->
+		<AppServices/>
+		<AppWorkWithUs />
+
 		<button
 			type="button"
 			class="btn position-fixed rounded-circle border border-3 border-black"
@@ -54,6 +62,7 @@ export default {
 			<div class="background"></div>
 			<i class="fas fa-arrow-up"></i>
 		</button>
+
 	</div>
 </template>
 

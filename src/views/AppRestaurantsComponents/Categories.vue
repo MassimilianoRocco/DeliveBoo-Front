@@ -7,6 +7,8 @@ export default {
 				// list of categories
 			],
 			clickedCategory: null,
+			// mi da errore in console perche vuole che category venga dichiarata
+			category:'',
 		};
 	},
 	methods: {
