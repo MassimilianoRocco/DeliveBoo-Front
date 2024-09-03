@@ -23,7 +23,7 @@ mounted(){
 
 <template>
 
-    <div class="container-fluid bg-warning my_container g-0 p-0 m-0">
+    <div class="container-fluid bg-warning my_container g-0 p-0">
 
                 <!-- VIDEO SECTION  -->
         <div class="my_videoSection p-0 m-0 g-0">
@@ -33,19 +33,18 @@ mounted(){
             </video>
         </div>
     </div> 
-
 </template>
 
 <style scoped>
     .my_container{
-        height: 85vh;
+        height: 100vh;
     }
     .my_videoSection{
-        height: 85vh;
+        height: 100vh;
         
     }
     .my_Video{
-        height: 85vh;
+        height: 100vh;
         width: 100%;
         object-fit: cover;
         display: block;
@@ -53,9 +52,6 @@ mounted(){
 
     @media screen and (max-width: 992px) {
 
-        div{
-            height: 75vh;
-            
-        }
+
     }
 </style>

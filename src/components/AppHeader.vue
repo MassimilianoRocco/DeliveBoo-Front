@@ -23,7 +23,7 @@ mounted(){
 
 <template>
 
-    <header class="p-3 bg-dark text-white d-flex align-items-center">
+    <header class="p-3 text-white d-flex align-items-center">
         <div class="container-fluid h-auto ">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
@@ -43,20 +43,18 @@ mounted(){
             </div>
         </div>
     </header>
-
-    <!-- <main class="container-fluid bg-warning my_container g-0">
-        <div class="my_container ">
-
-        </div>
-        
-        TEST DA ELIMINARE _________________________
-    </main> -->
 </template>
 
 <style scoped>
 
     header{
         height: 15vh;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: rgba(33, 37, 41, 0.5) !important;
+        z-index: 800;
+        
     }
     .my_logo{
         height: 80px;
@@ -69,12 +67,6 @@ mounted(){
        border-color: unset;
        padding: 2px 10px;
     }
-
-    /* .my_container{
-        height: 85vh;
-        test-da-eliminare
-    } */
-
     @media screen and (max-width: 992px) {
         header{
             height: 25vh;
@@ -82,9 +74,5 @@ mounted(){
         .my_logo{
             margin: 0;
         }
-        /* main{
-            height: 75vh;
-            test-da-eliminare
-        } */
     }
 </style>
