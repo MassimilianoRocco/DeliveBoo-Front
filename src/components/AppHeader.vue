@@ -23,10 +23,10 @@ mounted(){
 
 <template>
 
-    <header class="p-3 bg-dark text-white">
-        <div class="container-fluid">
+    <header class="p-3 bg-dark text-white d-flex align-items-center">
+        <div class="container-fluid h-auto ">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
                     <img src="/src/assets/DeliveBoo-Photoroom.png" alt="logo DeliveBoo" class="my_logo">
                 </a>
 
@@ -38,17 +38,53 @@ mounted(){
                 </ul>
 
                 <div class="">
-                    <button type="button" class="btn btn-warning">Login/Registrati</button>
+                    <button type="button" class="btn btn-warning my_button">Login/Registrati</button>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- <main class="container-fluid bg-warning my_container g-0">
+        <div class="my_container ">
+
+        </div>
+        
+        TEST DA ELIMINARE _________________________
+    </main> -->
 </template>
 
 <style scoped>
+
+    header{
+        height: 15vh;
+    }
     .my_logo{
-        height: 70px;
+        height: 80px;
         margin-right: 2rem;
+    }
+
+    .my_button{
+       background-color: #BF1B2C; 
+       color: white;
+       border-color: unset;
+       padding: 2px 10px;
+    }
+
+    /* .my_container{
+        height: 85vh;
+        test-da-eliminare
+    } */
+
+    @media screen and (max-width: 992px) {
+        header{
+            height: 25vh;
+        }
+        .my_logo{
+            margin: 0;
+        }
+        /* main{
+            height: 75vh;
+            test-da-eliminare
+        } */
     }
 </style>
