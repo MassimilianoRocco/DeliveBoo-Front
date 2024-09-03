@@ -14,6 +14,7 @@ export default {
 			this.clickedCategory = category;
 		},
 	},
+	mounted() {},
 };
 </script>
 
@@ -32,10 +33,6 @@ export default {
 </template>
 
 <style scoped>
-.deb {
-	border: 3px dashed blue;
-}
-
 img:hover {
 	transition: 0.4s ease-in-out;
 	scale: 1.1;

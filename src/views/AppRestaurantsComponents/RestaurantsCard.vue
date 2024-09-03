@@ -1,6 +1,7 @@
 <script>
 export default {
 	name: "RestaurantsCard",
+	// props: { element: Object },
 	data() {
 		return {};
 	},
@@ -23,6 +24,14 @@ export default {
 				<img class="card-img-top" :src="element.thumb" alt="" loading="lazy" />
 			</template> -->
 
+		<!-- LINKARE L'IMMAGINE ALLA PAGINA SINGLE RESTAURANT -->
+
+		<!-- <router-link
+			class="btn btn-warning fw-bold"
+			:to="{ name: 'single-restaurant', params: { id: element.id } }">
+			
+		</router-link> -->
+
 		<img
 			class="card-img-top"
 			src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
@@ -35,11 +44,7 @@ export default {
 			<!-- <p class="fw-bold fs-4 text-warning">{{ element.project_title }}</p>
 			<p>Project start: {{ element.start_project }}</p>
 			<p>Project end: {{ element.end_project }}</p>
-			<router-link
-				class="btn btn-warning fw-bold"
-				:to="{ name: 'single-project', params: { id: element.id } }"
-				>READ MORE</router-link
-			> -->
+			 -->
 		</div>
 	</div>
 </template>
