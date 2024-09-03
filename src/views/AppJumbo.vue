@@ -23,7 +23,7 @@ mounted(){
 
 <template>
 
-    <div class="container-fluid bg-warning my_container g-0 p-0">
+    <div id="video" class="container-fluid bg-warning my_container g-0 p-0">
 
                 <!-- VIDEO SECTION  -->
         <div class="my_videoSection p-0 m-0 g-0">
