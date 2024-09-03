@@ -54,6 +54,7 @@ export default {
         
         <!-- NB: l'index di questo ciclo e l'index del ciclo di sopra non ahnno nulla a che fare l'uno ocn l'altro. l'index non esce dallo scope del suo ciclo -->
         <div v-for="element, index in store.services" :key="index" :class="{active: descIndex === index}" class="desc_container text-center">{{ element.desc }}</div>
+        <!-- <div v-for="element, index in store.services" :key="index"  class="desc_container text-center active">{{ element.desc }}</div> -->
 
     </div>
 
@@ -62,12 +63,14 @@ export default {
 <style scoped>
 .active{
     opacity: 1!important;
-    transition: 1s;
+    transition: .4s;
+    bottom: 10% !important;
 }
 
 .desc_container {
     opacity: 0;
     left: 50%;
+    bottom: 0;
     transform: translate(-50%);
     position: absolute;
     margin: auto;
@@ -100,7 +103,7 @@ i {
     width: 90%;
     -webkit-box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
-    height: 45rem;
+    height: 47rem;
 }
 
 .card_propria {
