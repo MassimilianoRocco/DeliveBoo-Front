@@ -1,10 +1,11 @@
 <script>
 import axios from "axios";
-import Categories from "./AppRestaurantsComponents/Categories.vue";
-import RestaurantsCard from "./AppRestaurantsComponents/RestaurantsCard.vue";
-import AppJumbo from "./AppJumbo.vue";
-import AppServices from "./AppServices.vue";
-import AppWorkWithUs from "./AppWorkWithUs.vue";
+import store from "../store";
+import Categories from "../components/Categories.vue";
+import RestaurantsCard from "../components/RestaurantsCard.vue";
+import AppJumbo from "../components/AppJumbo.vue";
+import AppServices from "../components/AppServices.vue";
+import AppWorkWithUs from "../components/AppWorkWithUs.vue";
 
 export default {
 	name: "AppRestaurants",
@@ -17,7 +18,7 @@ export default {
 	},
 	data() {
 		return {
-			restaurants: [],
+			store,
 			// posts: "",
 		};
 	},
@@ -31,7 +32,7 @@ export default {
 	mounted() {
 		axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
 			console.log(response.data.restaurants);
-			this.restaurants = response.data.restaurants;
+			store.restaurants = response.data.restaurants;
 		});
 	},
 };
@@ -56,7 +57,7 @@ export default {
 
 			<div class="row mx-0">
 				<div
-					v-for="singleRestaurat in restaurants"
+					v-for="singleRestaurat in store.restaurants"
 					:key="i"
 					class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
 					<RestaurantsCard :singleRestaurat="singleRestaurat" />
