@@ -14,7 +14,7 @@ export default {
     data() {
         return {
             store,
-            descIndex: 0
+            descIndex: null
         }
     },
     methods: {
