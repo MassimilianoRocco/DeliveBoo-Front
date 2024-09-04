@@ -47,8 +47,6 @@ export default {
 		<RouterView />
 
 		<!-- <AppServices class="mt-5" /> -->
-		<AppServices/>
-		<AppWorkWithUs />
 
 		<button
 			type="button"
@@ -59,7 +57,6 @@ export default {
 			<div class="background"></div>
 			<i class="fas fa-arrow-up"></i>
 		</button>
-
 	</div>
 </template>
 

@@ -3,6 +3,8 @@ import axios from "axios";
 import Categories from "./AppRestaurantsComponents/Categories.vue";
 import RestaurantsCard from "./AppRestaurantsComponents/RestaurantsCard.vue";
 import AppJumbo from "./AppJumbo.vue";
+import AppServices from "./AppServices.vue";
+import AppWorkWithUs from "./AppWorkWithUs.vue";
 
 export default {
 	name: "AppRestaurants",
@@ -10,6 +12,8 @@ export default {
 		Categories,
 		RestaurantsCard,
 		AppJumbo,
+		AppServices,
+		AppWorkWithUs,
 	},
 	data() {
 		return {
@@ -58,6 +62,10 @@ export default {
 					<RestaurantsCard :singleRestaurat="singleRestaurat" />
 				</div>
 			</div>
+
+			<AppServices />
+
+			<AppWorkWithUs />
 
 			<!-- <RestaurantsCard v-for="post in posts.data" :element="post" />
 
