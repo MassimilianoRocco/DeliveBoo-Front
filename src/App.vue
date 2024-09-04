@@ -1,17 +1,11 @@
 <script>
 import { RouterView } from "vue-router";
 import AppHeader from "./components/AppHeader.vue";
-import AppRestaurants from "./views/AppRestaurants.vue";
-import AppServices from "./views/AppServices.vue";
-import AppWorkWithUs from "./views/AppWorkWithUs.vue";
 
 export default {
 	name: "App",
 	components: {
 		AppHeader,
-		AppRestaurants,
-		AppServices,
-		AppWorkWithUs,
 	},
 
 	data() {
