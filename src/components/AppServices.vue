@@ -61,9 +61,7 @@ export default {
         </div>
 
         <div class="breakpoint_small">
-
-            <AppContentCarousel/>
-            si cvedeg
+            <AppContentCarousel />
         </div>
 
     </div>
@@ -84,15 +82,16 @@ export default {
 }
 
 .card_propria img {
-    object-fit: contain;
+    /* object-fit: contain; */
     position: absolute;
     left: 0;
     top: 0;
     width: 120%;
 }
 
-.card_propria:last-of-type img {
-    width: 100%;
+.card_propria:first-of-type img {
+    width: 140%;
+    transform: translate(-5%);
 }
 
 .active {
@@ -148,7 +147,7 @@ i {
     transition: .4s;
     overflow: hidden;
     position: relative;
-    background-size: cover;
+    /* background-size: cover; */
 }
 
 .card_propria:hover {
@@ -161,6 +160,9 @@ i {
 <!-- medai quesries -->
 <style scoped>
 @media (max-width:1450px) {
+    h1 {
+        padding-top: 2rem;
+    }
     .breakpoint_small {
         display: block;
     }
@@ -169,8 +171,23 @@ i {
         display: none;
     }
 
-    .container-fluido{
+    .container-fluido {
         padding: 0;
     }
+
+}
+
+@media (max-width:995px) {
+
+    
+
+    .container-fluido{
+        height: 700px;
+    }
+}
+@media (max-width:770px) {
+
+ 
+
 }
 </style>
