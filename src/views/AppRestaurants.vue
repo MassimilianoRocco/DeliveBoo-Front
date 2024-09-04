@@ -11,6 +11,7 @@ export default {
 	},
 	data() {
 		return {
+			restaurants: [],
 			// posts: "",
 		};
 	},
@@ -22,36 +23,36 @@ export default {
 		// },
 	},
 	mounted() {
-		// axios.get("http://localhost:8000/api/posts").then((result) => {
-		// 	console.log(result.data.posts);
-		// 	this.posts = result.data.posts;
-		// 	console.log(this.posts.length);
-		// });
+		axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
+			console.log(response.data.restaurants);
+			this.restaurants = response.data.restaurants;
+		});
 	},
 };
 </script>
 
 <template>
-	<div class="container">
-		<div class="col text-center">
-			<h1 class="text-center fw-bold display-5 my-5 text-warning">SCEGLI IL TUO RISTORANTE</h1>
-		</div>
-
-		<!-- <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-5"> -->
-		<Categories />
-		<!-- </div> -->
-
-		<div class="text-center">
-			<h1 class="text-center fw-bold display-5 my-5 text-warning">LISTA RISTORANTI</h1>
-		</div>
-
-		<div class="row mx-0">
-			<div v-for="i in 12" :key="i" class="col-3 p-3">
-				<RestaurantsCard />
+	<div class="myBox">
+		<div class="container">
+			<div class="col text-center">
+				<h1 class="text-center fw-bold display-5 py-5 text-white">SCEGLI IL TUO RISTORANTE</h1>
 			</div>
-		</div>
 
-		<!-- <RestaurantsCard v-for="post in posts.data" :element="post" />
+			<!-- <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-5"> -->
+			<Categories />
+			<!-- </div> -->
+
+			<div class="text-center">
+				<h1 class="text-center fw-bold display-5 my-5 text-white">LISTA RISTORANTI</h1>
+			</div>
+
+			<div class="row mx-0">
+				<div v-for="singleRestaurat in restaurants" :key="i" class="col-3 p-3">
+					<RestaurantsCard :singleRestaurat="singleRestaurat" />
+				</div>
+			</div>
+
+			<!-- <RestaurantsCard v-for="post in posts.data" :element="post" />
 
 			<nav aria-label="Page navigation">
 				<ul class="pagination">
@@ -67,7 +68,13 @@ export default {
 					</li>
 				</ul>
 			</nav> -->
+		</div>
 	</div>
 </template>
 
-<style></style>
+<style scoped>
+.myBox {
+	background-image: url("../assets/background.jpg") !important;
+	background-size: cover;
+}
+</style>

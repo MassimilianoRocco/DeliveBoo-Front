@@ -1,6 +1,9 @@
 <script>
 export default {
 	name: "RestaurantsCard",
+	props: {
+		singleRestaurat: Object,
+	},
 	data() {
 		return {};
 	},
@@ -19,7 +22,7 @@ export default {
 					loading="lazy" />
 			</template>
 
-			<template v-else>
+<template v-else>
 				<img class="card-img-top" :src="element.thumb" alt="" loading="lazy" />
 			</template> -->
 
@@ -31,15 +34,11 @@ export default {
 		<!-- CONTENUTO CARD -->
 
 		<div class="card-body text-center fw-bold">
-			<p>NOME RISTORANTE</p>
+			<p>{{ singleRestaurat.name }}</p>
 			<!-- <p class="fw-bold fs-4 text-warning">{{ element.project_title }}</p>
 			<p>Project start: {{ element.start_project }}</p>
 			<p>Project end: {{ element.end_project }}</p>
-			<router-link
-				class="btn btn-warning fw-bold"
-				:to="{ name: 'single-project', params: { id: element.id } }"
-				>READ MORE</router-link
-			> -->
+			 -->
 		</div>
 	</div>
 </template>
