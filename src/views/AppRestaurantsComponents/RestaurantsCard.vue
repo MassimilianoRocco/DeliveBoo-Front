@@ -1,8 +1,13 @@
 <script>
+import { RouterLink } from "vue-router";
+
 export default {
 	name: "RestaurantsCard",
 	props: {
-		singleRestaurat: Object,
+		singleRestaurat: {
+			type: Object,
+			required: true,
+		},
 	},
 	data() {
 		return {};
@@ -26,19 +31,17 @@ export default {
 				<img class="card-img-top" :src="element.thumb" alt="" loading="lazy" />
 			</template> -->
 
-		<img
-			class="card-img-top"
-			src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
-			alt="" />
+		<router-link :to="{ name: 'single-restaurant', params: { id: singleRestaurat.id } }">
+			<img
+				class="card-img-top"
+				src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
+				alt="" />
+		</router-link>
 
 		<!-- CONTENUTO CARD -->
 
 		<div class="card-body text-center fw-bold">
 			<p>{{ singleRestaurat.name }}</p>
-			<!-- <p class="fw-bold fs-4 text-warning">{{ element.project_title }}</p>
-			<p>Project start: {{ element.start_project }}</p>
-			<p>Project end: {{ element.end_project }}</p>
-			 -->
 		</div>
 	</div>
 </template>

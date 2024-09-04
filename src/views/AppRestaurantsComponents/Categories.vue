@@ -25,9 +25,8 @@ export default {
 </script>
 
 <template>
-	<div class="row mx-0 justify-content-center">
-		<!-- v-for="category in categories" :key="category.id" -->
-		<div v-for="i in categories" :key="i" class="col-2 p-3">
+	<div class="row mx-0 px-0 justify-content-center">
+		<div v-for="i in categories" :key="i" class="col-6 col-sm-4 col-md-3 col-lg-2 p-3">
 			<img
 				class="w-100 rounded-4 shadow-lg"
 				src="https://archive.org/download/placeholder-image/placeholder-image.jpg"

@@ -2,12 +2,14 @@
 import axios from "axios";
 import Categories from "./AppRestaurantsComponents/Categories.vue";
 import RestaurantsCard from "./AppRestaurantsComponents/RestaurantsCard.vue";
+import AppJumbo from "./AppJumbo.vue";
 
 export default {
 	name: "AppRestaurants",
 	components: {
 		Categories,
 		RestaurantsCard,
+		AppJumbo,
 	},
 	data() {
 		return {
@@ -32,6 +34,8 @@ export default {
 </script>
 
 <template>
+	<AppJumbo />
+
 	<div class="myBox">
 		<div class="container">
 			<div class="col text-center">
@@ -47,7 +51,10 @@ export default {
 			</div>
 
 			<div class="row mx-0">
-				<div v-for="singleRestaurat in restaurants" :key="i" class="col-3 p-3">
+				<div
+					v-for="singleRestaurat in restaurants"
+					:key="i"
+					class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
 					<RestaurantsCard :singleRestaurat="singleRestaurat" />
 				</div>
 			</div>

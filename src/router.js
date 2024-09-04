@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-// import AppHome from "./views/AppHome.vue";
+import AppRestaurant from "./views/AppRestaurants.vue";
 import SingleRestaurant from "./views/SingleRestaurant.vue";
 
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
-		// {
-		// 	path: "/",
-		// 	name: "home",
-		// 	component: AppHome,
-		// },
+		{
+			path: "/",
+			name: "appRestaurant",
+			component: AppRestaurant,
+		},
 		{
 			path: "/restaurants/:id",
 			name: "single-restaurant",

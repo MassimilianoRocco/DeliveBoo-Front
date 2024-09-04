@@ -8,6 +8,6 @@ export default {
 };
 </script>
 
-<template></template>
+<template>ciao</template>
 
 <style scoped></style>
