@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import store from "../store";
+import store from "../store/store";
 import Categories from "../components/Categories.vue";
 import RestaurantsCard from "../components/RestaurantsCard.vue";
 import AppJumbo from "../components/AppJumbo.vue";
