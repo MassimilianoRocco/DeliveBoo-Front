@@ -50,31 +50,50 @@ export default {
 
         <div class="card-body text-center fw-bold">
             <p>{{ singleProduct.name }}</p>
-            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId"><i
-                    class="fa-solid fa-plus"></i> Aggiungi al carrello</button>
+            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal"
+                :data-bs-target="'#' + singleProduct.id"><i class="fa-solid fa-plus"></i> Aggiungi al
+                carrello</button>
         </div>
     </div>
 
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal fade" :id="singleProduct.id" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitleId">
-                        Aggiungere {{ singleProduct.name }} al carrello ?
+                        Aggiungere {{ singleProduct.name }} al carrello
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="container-fluid">Add rows here</div>
+                    <div class="row">
+                        <div class="col-4">
+                            <template v-if="singleProduct.image_path.startsWith('http')">
+                                <img :src="singleProduct.image_path" class="img-fluid" :alt="singleProduct.name">
+                            </template>
+                            <template v-else>
+                                <img :src="base_url + '/storage/' + singleProduct.image_path" class="img-fluid"
+                                    :alt="singleProduct.name">
+                            </template>
+                        </div>
+                        <div class="col-6 ">
+                            <p><span class="fw-bold">Prezzo : </span>{{ singleProduct.price }}€</p>
+                            <div class="d-flex align-items-center justify-content-start gap-2">
+                                <i class="fa-solid fa-minus p-2 bg-warning rounded-circle"></i>
+                                <span class="fs-3">123</span>
+                                <i class="fa-solid fa-plus p-2 bg-warning rounded-circle"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-warning"><i
+                            class="fs-5 text-white fa-solid fa-cart-plus me-2"></i>
+                        0.00 €</button>
                 </div>
             </div>
         </div>

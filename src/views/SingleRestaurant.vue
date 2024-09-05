@@ -24,6 +24,8 @@ export default {
 			console.log(response.data.restaurant)
 			if (response.data.restaurant.length > 0) {
 				this.restaurant = response.data.restaurant[0];
+				console.log(this.restaurant)
+
 			} else {
 				this.$router.push({ name: "not-found" })
 			}
@@ -31,11 +33,29 @@ export default {
 
 		axios.get(url + "/products").then((response) => {
 			if (response.data.product) {
+				// for (let i = 0; i < response.data.product.length; i++) {
+				// 	if (response.data.product[i].type == 'Food' || response.data.product[i].type == 'Dessert') {
+				// 		this.piatti.push(response.data.product[i])
+				// 		if (!this.piatti[i].visible) {
+				// 			this.piatti.splice(i, 1)
+				// 		}
+				// 		console.log(this.piatti)
+				// 	} else {
+				// 		this.bibite.push(response.data.product[i])
+				// 		if (!this.bibite[i].visible) {
+				// 			this.bibite.splice(i, 1)
+				// 		}
+				// 	}
+				// }
 				for (let i = 0; i < response.data.product.length; i++) {
 					if (response.data.product[i].type == 'Food' || response.data.product[i].type == 'Dessert') {
-						this.piatti.push(response.data.product[i])
+						if (response.data.product[i].visible) {
+							this.piatti.push(response.data.product[i])
+						}
 					} else {
-						this.bibite.push(response.data.product[i])
+						if (response.data.product[i].visible) {
+							this.bibite.push(response.data.product[i])
+						}
 					}
 				}
 			}
@@ -49,12 +69,21 @@ export default {
 		<div class="container">
 			<!-- CONTROLLO V-IF PERCHÈ LA PAGINA CARICA PRIMA DELLA CHIAMATA API -->
 
-			<div v-if="restaurant" class="row mx-0 deb justify-content-center">
-				<div class="col-6 deb">
-					<img class="card-img-top rounded-4 border border-3" :src="restaurant.image_path" loading="lazy" />
+			<div v-if="restaurant" class="row mx-0 mb-4 p-2 mx-3 bg-white rounded-4 justify-content-center ">
+				<div class="col-3 p-0">
+					<img class="w-100 rounded-4 " :src="restaurant.image_path" loading="lazy" />
 				</div>
-				<div class="col-6 deb">
-					<p>{{ restaurant.name }}</p>
+				<div class="col ms-2">
+					<h1>{{ restaurant.name }}</h1>
+					<h4>{{ restaurant.user.email }}</h4>
+					<h4>{{ restaurant.address }}</h4>
+					<h4>{{ restaurant.phone }}</h4>
+					<p>{{ restaurant.description }}</p>
+
+					<span v-for="singleCategory in restaurant.categories" class="badge bg-warning p-2 me-2">
+						{{ singleCategory.name }}
+					</span>
+
 				</div>
 			</div>
 			<!-- <div v-else>non ci sono</div> -->
@@ -62,14 +91,14 @@ export default {
 			<div v-if="piatti && bibite">
 				<div class="row mx-0">
 
-					<h1>I NOSTRI PIATTI</h1>
+					<h1 class="text-white fw-bold ms-1">I NOSTRI PIATTI</h1>
 					<div v-for="singleProduct in piatti" :key="i" class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
-						<ProductCard :singleProduct="singleProduct" />
+						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
 
-					<h1>LE NOSTRE BEVANDE</h1>
+					<h1 class="text-white fw-bold ms-1">LE NOSTRE BEVANDE</h1>
 					<div v-for="singleProduct in bibite" :key="i" class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
-						<ProductCard :singleProduct="singleProduct" />
+						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
 				</div>
 			</div>
@@ -82,6 +111,11 @@ export default {
 </template>
 
 <style scoped>
+.badge {
+	background-image: url("../assets/background.jpg") !important;
+	background-size: cover;
+}
+
 .myBox {
 	background-image: url("../assets/background.jpg") !important;
 	background-size: cover;

@@ -30,8 +30,13 @@ export default {
 			</template> -->
 
 		<router-link :to="{ name: 'single-restaurant', params: { id: singleRestaurat.id } }">
-			<img class="card-img-top" src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
-				alt="" />
+			<template v-if="singleRestaurat.image_path.startsWith('http')">
+				<img :src="singleRestaurat.image_path" class="card-img-top" :alt="singleRestaurat.name">
+			</template>
+			<template v-else>
+				<img :src="base_url + '/storage/' + singleRestaurat.image_path" class="card-img-top"
+					:alt="singleRestaurat.name">
+			</template>
 		</router-link>
 
 		<!-- CONTENUTO CARD -->
