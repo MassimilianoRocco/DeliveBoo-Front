@@ -1,0 +1,104 @@
+<script>
+export default {
+    name: "ProducCard",
+    props: {
+        singleProduct: {
+            type: Object,
+            required: true,
+        },
+    },
+    data() {
+        return {
+            base_url: 'http://127.0.0.1:8000',
+        };
+    },
+    mounted() {
+        var modalId = document.getElementById('modalId');
+
+        modalId.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            let button = event.relatedTarget;
+            // Extract info from data-bs-* attributes
+            let recipient = button.getAttribute('data-bs-whatever');
+
+            // Use above variables to manipulate the DOM
+        });
+    }
+};
+</script>
+
+<template>
+
+    <div class="card p-0 m-0">
+        <div class="img-container ratio ratio-4x3 p-0 m-0">
+            <template v-if="singleProduct.image_path.startsWith('http')">
+                <img :src="singleProduct.image_path" class="card-img-top p-0 m-0" :alt="singleProduct.name">
+            </template>
+            <template v-else>
+                <img :src="base_url + '/storage/' + singleProduct.image_path" class="card-img-top"
+                    :alt="singleProduct.name">
+            </template>
+            <div class="on-element p-3">
+                <p v-if="singleProduct.ingredients" class="text-center fw-bold m-0 ">INGREDIENTI</p>
+                <span v-if="singleProduct.ingredients">{{ singleProduct.ingredients }}</span>
+                <p>
+                    <span class="fw-bold">Prezzo: </span>
+                    <span>{{ singleProduct.price }}€</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="card-body text-center fw-bold">
+            <p>{{ singleProduct.name }}</p>
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId"><i
+                    class="fa-solid fa-plus"></i> Aggiungi al carrello</button>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">
+                        Aggiungere {{ singleProduct.name }} al carrello ?
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">Add rows here</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</template>
+
+<style scoped>
+.on-element {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transition: 0.3s ease;
+    color: #FFFFFF00;
+    background: #ffffffce;
+    background: none;
+}
+
+.img-container:hover .on-element {
+    background: #ffffffce;
+    color: #434959;
+}
+</style>
