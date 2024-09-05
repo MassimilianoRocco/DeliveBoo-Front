@@ -30,9 +30,7 @@ export default {
 			</template> -->
 
 		<router-link :to="{ name: 'single-restaurant', params: { id: singleRestaurat.id } }">
-			<img
-				class="card-img-top"
-				src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
+			<img class="card-img-top" src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
 				alt="" />
 		</router-link>
 
@@ -44,7 +42,7 @@ export default {
 	</div>
 </template>
 
-<style>
+<style scoped>
 .card:hover {
 	scale: 1.1;
 	transition: 0.4s ease-in-out;

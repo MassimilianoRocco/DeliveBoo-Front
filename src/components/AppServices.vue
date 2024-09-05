@@ -1,7 +1,7 @@
 <script>
 
 import AppContentCarousel from "./AppContentCarousel.vue";
-import store from "../store.js"
+import store from "../store/store.js"
 
 
 export default {
