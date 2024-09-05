@@ -36,6 +36,11 @@ mounted(){
 </template>
 
 <style scoped>
+#video{
+    background-color: rgba(33, 37, 41, 0.5) !important;
+/* z-index: -1; */
+/* position: fixed; */
+}
     .my_container{
         height: 100vh;
     }
