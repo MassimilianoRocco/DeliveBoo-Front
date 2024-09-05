@@ -27,6 +27,8 @@ export default {
     },
     mounted() {
 
+        document.addEventListener('mouseup', this.mouseRelease)
+
     }
 }
 </script>
@@ -43,7 +45,7 @@ export default {
         <!-- la documentazione su questi "@events" è in fondo alla pagina -->
 
         <div class="debug" id="carousel" :class="{ smooth: isSmooth, slow: isSmooth }" @mousemove="dragging"
-            @mousedown="isClicked = !isClicked, isSmooth = !isSmooth" @mouseup="mouseRelease()">
+            @mousedown="isClicked = !isClicked, isSmooth = !isSmooth" >
 
 
 
@@ -121,7 +123,7 @@ export default {
     padding: 1rem;
 }
 
-.elemento:hover{
+.elemento:hover {
     cursor: pointer;
 }
 
