@@ -56,9 +56,7 @@ export default {
 			</div>
 
 			<div class="row mx-0">
-				<div
-					v-for="singleRestaurat in store.restaurants"
-					:key="i"
+				<div v-for="singleRestaurat in store.restaurants" :key="i"
 					class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
 					<RestaurantsCard :singleRestaurat="singleRestaurat" />
 				</div>
@@ -92,7 +90,7 @@ export default {
 .myBox {
 	background-image: url("../assets/background.jpg") !important;
 	background-size: cover;
-	padding:7rem 0 ;
+	padding: 7rem 0;
 	/* padding-bottom:7rem 0 ; */
 }
 </style>
