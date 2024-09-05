@@ -44,7 +44,7 @@ export default {
 	<div class="myBox">
 		<div class="container">
 			<div class="col text-center">
-				<h1 class="text-center fw-bold display-5 py-5 text-white">SCEGLI IL TUO RISTORANTE</h1>
+				<h1 class="text-center fw-bold display-5 pb-5 text-white">SCEGLI IL TUO RISTORANTE</h1>
 			</div>
 
 			<!-- <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-5"> -->
@@ -52,7 +52,7 @@ export default {
 			<!-- </div> -->
 
 			<div class="text-center">
-				<h1 class="text-center fw-bold display-5 my-5 text-white">LISTA RISTORANTI</h1>
+				<h1 class="text-center fw-bold display-5 my-5 pb-2 text-white">LISTA RISTORANTI</h1>
 			</div>
 
 			<div class="row mx-0">
@@ -92,5 +92,7 @@ export default {
 .myBox {
 	background-image: url("../assets/background.jpg") !important;
 	background-size: cover;
+	padding:7rem 0 ;
+	/* padding-bottom:7rem 0 ; */
 }
 </style>

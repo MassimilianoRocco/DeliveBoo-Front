@@ -114,11 +114,15 @@ export default {
 
     /* border: 2px dashed red; */
     border-radius: 30px;
-    height: 490px;
+    height: 550px;
     background: white;
     -webkit-box-shadow: 0px 0px 20px -4px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 0px 20px -4px rgba(0, 0, 0, 0.5);
     padding: 1rem;
+}
+
+.elemento:hover{
+    cursor: pointer;
 }
 
 .name {
@@ -190,9 +194,15 @@ p {
     .container_a {
         height: 800 !important;
     }
-    .img-container{
+
+    .img-container {
         height: 60%;
     }
+
+    .elemento {
+        height: 470px;
+    }
+
 }
 
 @media (max-width:770px) {
@@ -209,7 +219,7 @@ p {
     }
 
     .immagine {
-        width: 400px ;
+        width: 400px;
         /* border: 2px dashed orange; */
     }
 }

@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 
 const storeData = {
-	services: [
+    services: [
         {
             title: 'CONSEGAN RAPIDA E AFFIDABILE',
             img: "https://www.foodserviceweb.it/wp-content/uploads/sites/4/2020/11/contratto-rider.jpg",
@@ -19,7 +19,7 @@ const storeData = {
         },
     ],
 
-	carouselData: [
+    carouselData: [
         {
             name: "Davide di Giacomo",
             task: "Web Developer",
@@ -47,15 +47,34 @@ const storeData = {
         },
     ],
 
-	categoriesSelected: [],
+    categoriesSelected: [],
 
-	restaurants: [],
+    restaurants: [],
 
-	requestRestaurants: {
-		method: "GET",
-		url: "http://127.0.0.1:8000/api/restaurants",
-		params: null,
-	},
+    requestRestaurants: {
+        method: "GET",
+        url: "http://127.0.0.1:8000/api/restaurants",
+        params: null,
+    },
+
+    getLinks: [
+        { link: "Lavora con noi", url: "#" },
+        { link: "Sfoglia i Ristoranti", url: "#" },
+        { link: "Opzioni di Pagamento", url: "#" },
+        { link: "Assistenza Clienti", url: "#" },
+        { link: "FAQ", url: "#" },
+        { link: "Termini e Condizioni", url: "#" },
+    ],
+    netLinks: [
+        { link: "Diventa Partner", url: "#" },
+        { link: "Vantaggi per i Ristoranti", url: "#" },
+        { link: "Il Nostro Team", url: "#" },
+        { link: "Servizi per Aziende", url: "#" },
+        { link: "Il Mio Account", url: "#" },
+    ],
+    headOne: "Get EduPrime",
+    headTwo: "Networking",
+
 };
 
 export default reactive(storeData);
