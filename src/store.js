@@ -19,33 +19,6 @@ const storeData = {
         },
     ],
 
-    carouselData: [
-        {
-            name: "Davide di Giacomo",
-            task: "Web Developer",
-            img: "img/naruto-1.jpg",
-        },
-        {
-            name: "Edoardo Menicucci",
-            task: "Web Developer",
-            img: "img/naruto-2.jpg",
-        },
-        {
-            name: "Vladislav Ciuperca",
-            task: "Web Developer",
-            img: "img/naruto-3.jpg",
-        },
-        {
-            name: "Gaara Qualcosa",
-            task: "Hokage della Sabbia",
-            img: "img/naruto-5.jpg",
-        },
-        {
-            name: "Sakura Qualcosa",
-            task: "Ninja Curatore",
-            img: "img/naruto-4.jpg",
-        },
-    ],
 
     categoriesSelected: [],
 
