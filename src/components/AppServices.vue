@@ -1,20 +1,21 @@
 <script>
 
-import store from "../store.js"
+import AppContentCarousel from "./AppContentCarousel.vue";
+import store from "../store/store.js"
 
 
 export default {
 
 
     components: {
-
+        AppContentCarousel
 
     },
 
     data() {
         return {
             store,
-            descIndex: null
+            descIndex: 0,
         }
     },
     methods: {
@@ -36,33 +37,65 @@ export default {
 <template>
 
 
-    <div class="container-fluid">
+    <div class="container-fluido">
 
         <h1 class="text-center pb-5">I NOSTRI SERVIZI</h1>
 
-        <!-- contenitore per le card -->
-        <div class="card-container d-flex justify-content-center text-center gap-5">
-            <!-- ciclo per stampare le card e funzione che cambia l'index della descrizione-->
-            <div v-for="element, index of store.services" class="card_propria" @mouseover="changeDescIndex(index)">
-                <div class="card-body">
-                    <i :class="element.icon" class="p-3"></i>
-                    <p class="card-title fw-bold">{{ element.title }}</p>
+        <!-- contenitore WIDE per le card -->
+        <div class="breakpoint_wide">
+
+            <div class="card-container d-flex justify-content-center text-center gap-5">
+                <!-- ciclo per stampare le card e funzione che cambia l'index della descrizione-->
+                <div v-for="element, index of store.services" class="card_propria" @mouseover="changeDescIndex(index)">
+                    <div class="card-body">
+                        <img :src="element.img" alt="">
+                        <p class="card-title fw-bold">{{ element.title }}</p>
+                    </div>
                 </div>
             </div>
+
+
+            <div v-for="element, index in store.services" :key="index" :class="{ active: descIndex === index }"
+                class="desc_container text-center">{{ element.desc }}</div>
+
         </div>
-        
-        
-        <!-- NB: l'index di questo ciclo e l'index del ciclo di sopra non ahnno nulla a che fare l'uno ocn l'altro. l'index non esce dallo scope del suo ciclo -->
-        <div v-for="element, index in store.services" :key="index" :class="{active: descIndex === index}" class="desc_container text-center">{{ element.desc }}</div>
-        <!-- <div v-for="element, index in store.services" :key="index"  class="desc_container text-center active">{{ element.desc }}</div> -->
+
+        <div class="breakpoint_small">
+            <AppContentCarousel />
+        </div>
 
     </div>
 
 </template>
 
 <style scoped>
-.active{
-    opacity: 1!important;
+.breakpoint_small {
+    display: none;
+}
+
+.card-title {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card_propria img {
+    /* object-fit: contain; */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 120%;
+}
+
+.card_propria:first-of-type img {
+    width: 140%;
+    transform: translate(-5%);
+}
+
+.active {
+    opacity: 1 !important;
     transition: .4s;
     bottom: 10% !important;
 }
@@ -83,7 +116,6 @@ export default {
     border: 1px solid rgb(180, 180, 180);
 }
 
-
 h1 {
     font-weight: 700;
 }
@@ -93,8 +125,7 @@ i {
     margin: 3rem;
 }
 
-
-.container-fluid {
+.container-fluido {
     position: relative;
     margin: auto;
     margin-top: 10rem;
@@ -104,15 +135,19 @@ i {
     -webkit-box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
     height: 47rem;
+    background: white;
 }
 
 .card_propria {
-    width: calc(80% / 3);
+    width: 400px;
     height: 17rem;
     border: 1px solid rgb(180, 180, 180);
     border-radius: 30px;
     box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
     transition: .4s;
+    overflow: hidden;
+    position: relative;
+    /* background-size: cover; */
 }
 
 .card_propria:hover {
@@ -120,9 +155,39 @@ i {
     transform: scale(1.09);
     transition: .4s;
 }
+</style>
 
-.card_propria:hover p {
-    color: rgb(72, 69, 116);
-    transition: .2s;
+<!-- medai quesries -->
+<style scoped>
+@media (max-width:1450px) {
+    h1 {
+        padding-top: 2rem;
+    }
+    .breakpoint_small {
+        display: block;
+    }
+
+    .breakpoint_wide {
+        display: none;
+    }
+
+    .container-fluido {
+        padding: 0;
+    }
+
+}
+
+@media (max-width:995px) {
+
+    
+
+    .container-fluido{
+        height: 700px;
+    }
+}
+@media (max-width:770px) {
+
+ 
+
 }
 </style>

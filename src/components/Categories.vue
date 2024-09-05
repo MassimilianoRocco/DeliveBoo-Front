@@ -1,7 +1,6 @@
 <script>
 import axios from "axios";
-import store from "../store";
-
+import store from '../store/store'
 export default {
 	name: "Categories",
 	data() {
@@ -45,7 +44,7 @@ export default {
 	},
 	mounted() {
 		axios.get("http://127.0.0.1:8000/api/categories").then((response) => {
-			// console.log(response.data.categories);
+			console.log(response.data.categories);
 			this.categories = response.data.categories;
 		});
 	},
