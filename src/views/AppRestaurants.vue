@@ -55,11 +55,14 @@ export default {
 				<h1 class="text-center fw-bold display-5 my-5 pb-2 text-white">LISTA RISTORANTI</h1>
 			</div>
 
+			<h4 class="ps-3">Trovati {{ store.restaurants.length }} ristoranti</h4>
 			<div class="row mx-0">
-				<div v-for="singleRestaurat in store.restaurants" :key="i"
+				<div v-if="store.restaurants.length>0" v-for="singleRestaurat in store.restaurants" :key="i"
 					class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
 					<RestaurantsCard :singleRestaurat="singleRestaurat" />
 				</div>
+
+				<h2 v-else>Non ci sono ristoranti per i filtri applicati</h2>
 			</div>
 
 			<AppServices />
@@ -88,8 +91,11 @@ export default {
 
 <style scoped>
 .myBox {
-	background-image: url("../assets/background.jpg") !important;
-	background-size: cover;
+	background-color: #FBAB7E;
+	background-image: linear-gradient(90deg, #FBAB7E 0%, #F7CE68 50%, #fbab7e 100%);
+
+
+
 	padding: 7rem 0;
 	/* padding-bottom:7rem 0 ; */
 }

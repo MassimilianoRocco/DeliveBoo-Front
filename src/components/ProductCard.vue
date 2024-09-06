@@ -38,21 +38,28 @@ export default {
                 <img :src="base_url + '/storage/' + singleProduct.image_path" class="card-img-top"
                     :alt="singleProduct.name">
             </template>
-            <div class="on-element p-3">
-                <p v-if="singleProduct.ingredients" class="text-center fw-bold m-0 ">INGREDIENTI</p>
-                <span v-if="singleProduct.ingredients">{{ singleProduct.ingredients }}</span>
-                <p>
-                    <span class="fw-bold">Prezzo: </span>
-                    <span>{{ singleProduct.price }}€</span>
-                </p>
-            </div>
         </div>
 
-        <div class="card-body text-center fw-bold">
+        <div class="card-body text-center fw-bold" style="height: 15rem;">
             <p>{{ singleProduct.name }}</p>
-            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal"
-                :data-bs-target="'#' + singleProduct.id"><i class="fa-solid fa-plus"></i> Aggiungi al
-                carrello</button>
+            <div class="">
+                <p v-if="singleProduct.ingredients" class="text-center fw-bold m-0" style="font-size: 14px;">INGREDIENTI</p>
+                <p v-if="singleProduct.ingredients" style="height: 3.2rem; font-size: 12px;" class="overflow-auto">{{ singleProduct.ingredients }}</p>
+            </div>
+
+            <div class="card-footer">
+                <div class="row justify-content-between align-items-center flex-column flex-sm-row">
+                    <div class="col-sm-12 col-md-8 text-center text-md-end">
+                        <p class="m-0 pe-sm-0 pe-md-2">{{ singleProduct.price }}€</p>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                            :data-bs-target="'#' + singleProduct.id"><i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

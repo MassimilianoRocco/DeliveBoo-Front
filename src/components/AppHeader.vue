@@ -38,7 +38,7 @@ mounted(){
                 </ul>
 
                 <div class="">
-                    <a href="http://127.0.0.1:8000/login">
+                    <a href="http://127.0.0.1:8000/auth">
                         <button type="button" class="btn btn-warning my_button">Login/Registrati</button>
                     </a>
                 </div>

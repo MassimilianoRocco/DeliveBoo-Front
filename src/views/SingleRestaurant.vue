@@ -65,7 +65,7 @@ export default {
 </script>
 
 <template>
-	<div class="myBox">
+	<div class="myBox p-sm-0">
 		<div class="container">
 			<!-- CONTROLLO V-IF PERCHÈ LA PAGINA CARICA PRIMA DELLA CHIAMATA API -->
 
@@ -92,12 +92,12 @@ export default {
 				<div class="row mx-0">
 
 					<h1 class="text-white fw-bold ms-1">I NOSTRI PIATTI</h1>
-					<div v-for="singleProduct in piatti" :key="i" class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
+					<div v-for="singleProduct in piatti" :key="i" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
 						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
 
 					<h1 class="text-white fw-bold ms-1">LE NOSTRE BEVANDE</h1>
-					<div v-for="singleProduct in bibite" :key="i" class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
+					<div v-for="singleProduct in bibite" :key="i" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
 						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
 				</div>
@@ -117,9 +117,8 @@ export default {
 }
 
 .myBox {
-	background-image: url("../assets/background.jpg") !important;
-	background-size: cover;
-	padding: 10rem;
+	background-color: #FBAB7E;
+	background-image: linear-gradient(90deg, #FBAB7E 0%, #F7CE68 50%, #fbab7e 100%);
 }
 
 .deb {
