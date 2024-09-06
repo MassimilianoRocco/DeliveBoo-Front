@@ -40,11 +40,13 @@ export default {
             </template>
         </div>
 
-        <div class="card-body text-center fw-bold" style="height: 15rem;">
+        <div class="card-body text-center fw-bold">
             <p>{{ singleProduct.name }}</p>
             <div class="">
-                <p v-if="singleProduct.ingredients" class="text-center fw-bold m-0" style="font-size: 14px;">INGREDIENTI</p>
-                <p v-if="singleProduct.ingredients" style="height: 3.2rem; font-size: 12px;" class="overflow-auto">{{ singleProduct.ingredients }}</p>
+                <p v-if="singleProduct.ingredients" class="text-center fw-bold m-0" style="font-size: 14px;">INGREDIENTI
+                </p>
+                <p v-if="singleProduct.ingredients" style="height: 3.2rem; font-size: 12px;" class="overflow-auto">{{
+                    singleProduct.ingredients }}</p>
             </div>
 
             <div class="card-footer">
