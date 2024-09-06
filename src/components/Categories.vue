@@ -54,24 +54,29 @@ export default {
 <template>
 	<div class="row mx-0 px-0 justify-content-center">
 		<div v-for="(category, indice) in categories" :key="category" class="col-6 col-sm-4 col-md-3 col-lg-2 p-3">
-			<img class="w-100 rounded-4 shadow-lg"
-				src="https://archive.org/download/placeholder-image/placeholder-image.jpg" alt=""
-				@click="selectCategory(indice)" :class="{ active: clickedCategories.includes(indice) }" />
-			<div class="pt-2">{{ category.name }}</div>
+			<div id="img_container" class="w-100 shadow-lg rounded-4 p-2 border border-2 position-relative"
+				@click="selectCategory(indice)" :class="{ active: clickedCategories.includes(indice) }">
+				<img class="img-fluid mx-auto d-block " :src="category.image_path" alt="" style="height: 100px;" />
+				<div
+					class="position-absolute top-100 start-50 translate-middle text-dark bg-white text-center fs-5 fw-bold text-nowrap badge rounded-pill">
+					{{ category.name }}
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <style scoped>
-img:hover {
+#img_container:hover {
 	transition: 0.4s ease-in-out;
 	scale: 1.05;
 	cursor: pointer;
 }
 
 .active {
-	border: 2px solid #ccc;
+	filter: grayscale(100%);
+	/* border: 2px solid #ccc;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-	scale: 1.15;
+	scale: 1.15; */
 }
 </style>
