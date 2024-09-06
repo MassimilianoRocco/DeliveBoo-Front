@@ -53,16 +53,10 @@ export default {
 
 <template>
 	<div class="row mx-0 px-0 justify-content-center">
-		<div
-			v-for="(category, indice) in categories"
-			:key="category"
-			class="col-6 col-sm-4 col-md-3 col-lg-2 p-3">
-			<img
-				class="w-100 rounded-4 shadow-lg"
-				src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
-				alt=""
-				@click="selectCategory(indice)"
-				:class="{ active: clickedCategories.includes(indice) }" />
+		<div v-for="(category, indice) in categories" :key="category" class="col-6 col-sm-4 col-md-3 col-lg-2 p-3">
+			<img class="w-100 rounded-4 shadow-lg"
+				src="https://archive.org/download/placeholder-image/placeholder-image.jpg" alt=""
+				@click="selectCategory(indice)" :class="{ active: clickedCategories.includes(indice) }" />
 			<div class="pt-2">{{ category.name }}</div>
 		</div>
 	</div>
