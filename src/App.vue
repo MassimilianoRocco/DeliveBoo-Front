@@ -43,14 +43,10 @@ export default {
 		<RouterView />
 
 		<!-- <AppServices class="mt-5" /> -->
-		 <AppFooter/>
+		<AppFooter />
 
-		<button
-			type="button"
-			class="btn position-fixed rounded-circle border border-3 border-black"
-			id="btn-scroll-top"
-			v-if="checkScroll"
-			@click="backToTop">
+		<button type="button" class="btn position-fixed rounded-circle border border-3 border-black" id="btn-scroll-top"
+			v-if="checkScroll" @click="backToTop">
 			<div class="background"></div>
 			<i class="fas fa-arrow-up"></i>
 		</button>
