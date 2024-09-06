@@ -33,7 +33,7 @@ mounted(){
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="#video" class="nav-link px-2 text-white">Home</a></li>
                     <li><a href="#ristoranti" class="nav-link px-2 text-white">Lista Ristoranti</a></li>
-                    <li><a href="#chiSiamo" class="nav-link px-2 text-white">Chi siamo</a></li>
+                    <li><a href="#servizi" class="nav-link px-2 text-white">Cosa offriamo</a></li>
                     <li><a href="#lavora" class="nav-link px-2 text-white">Lavora con noi</a></li>
                 </ul>
 
@@ -50,7 +50,7 @@ mounted(){
 <style scoped>
 
     header{
-        height: 15vh;
+        height: 10vh;
         position: fixed;
         top: 0;
         width: 100%;
@@ -59,7 +59,7 @@ mounted(){
         
     }
     .my_logo{
-        height: 80px;
+        height: 70px;
         margin-right: 2rem;
     }
 

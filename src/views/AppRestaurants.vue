@@ -41,7 +41,7 @@ export default {
 <template>
 	<AppJumbo />
 
-	<div class="myBox">
+	<div class="myBox" id="ristoranti">
 		<div class="container">
 			<div class="col text-center">
 				<h1 class="text-center fw-bold display-5 pb-5 text-white">SCEGLI IL TUO RISTORANTE</h1>

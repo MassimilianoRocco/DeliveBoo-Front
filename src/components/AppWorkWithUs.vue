@@ -29,7 +29,7 @@ export default {
 </script>
 
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid" id="lavora">
         <h1 class="text-center">LAVORA CON NOI</h1>
 
         <div class="section_container d-flex debug">

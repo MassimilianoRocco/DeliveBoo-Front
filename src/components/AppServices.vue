@@ -37,7 +37,7 @@ export default {
 <template>
 
 
-    <div class="container-fluido">
+    <div class="container-fluido" id="servizi">
 
         <h1 class="text-center pb-5">I NOSTRI SERVIZI</h1>
 
