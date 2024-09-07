@@ -3,11 +3,19 @@ export default {
 	name: "AppHeader",
 
 	data() {
-		return {};
+		return {
+			cart: null,
+		};
 	},
 	methods: {},
 
-	mounted() {},
+	mounted() {
+		this.cart = localStorage.getItem("cart");
+		if (this.cart) {
+			this.cart = JSON.parse(this.cart);
+		}
+		console.log(this.cart);
+	},
 };
 </script>
 
@@ -29,7 +37,7 @@ export default {
 				<div class="d-flex align-items-center gap-3">
 					<div class="position-relative">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
-						<span class="my_cart_number"></span>
+						<span v-if="cart && cart.length > 0" class="my_cart_number">{{ cart.length }}</span>
 					</div>
 					<a href="http://127.0.0.1:8000/auth">
 						<button type="button" class="btn btn-warning my_button">Login/Registrati</button>

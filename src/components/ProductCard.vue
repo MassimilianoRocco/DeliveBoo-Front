@@ -11,7 +11,7 @@ export default {
 		return {
 			base_url: "http://127.0.0.1:8000",
 			quantity: 1,
-			totalPrice: "",
+			totalPrice: null,
 		};
 	},
 	methods: {
@@ -35,7 +35,58 @@ export default {
 		},
 		getPrice(elemento) {
 			let result = elemento * this.quantity;
-			this.totalPrice = result.toFixed(2);
+			this.totalPrice = parseFloat(result);
+			this.totalPrice = this.totalPrice.toFixed(2);
+		},
+		addToCart(singleProduct) {
+			singleProduct.quantity = this.quantity;
+			singleProduct.totalPrice = this.totalPrice;
+			// controllo la presenza di un carrello esistente
+			let cart = localStorage.getItem("cart");
+			if (cart) {
+				// Se esiste lo trasformo in array di oggetti
+				cart = JSON.parse(cart);
+			} else {
+				// Se non esiste creo un array vuoto
+				cart = [];
+			}
+
+			// aggiungo singleProduct al carrello
+			let elementExist;
+			let elementIndex;
+			cart.forEach((element, index) => {
+				if (element.id != singleProduct.id) {
+					elementExist = false;
+				} else {
+					elementExist = true;
+					elementIndex = index;
+				}
+			});
+
+			if (elementExist) {
+				cart[elementIndex].quantity += singleProduct.quantity;
+				cart[elementIndex].totalPrice = parseFloat(cart[elementIndex].totalPrice) + parseFloat(singleProduct.totalPrice);
+				let numeroStringa = cart[elementIndex].totalPrice.toString();
+				if (!numeroStringa.includes(".")) {
+					numeroStringa += ".00";
+				} else {
+					let decimali = numeroStringa.split(".")[1];
+					if (decimali.length == 1) {
+						numeroStringa += "0";
+					}
+				}
+				cart[elementIndex].totalPrice = numeroStringa;
+			} else {
+				cart.push(singleProduct);
+			}
+
+			// if (cart.length > 0) {
+			// 	document.querySelector(".my_cart_number").innerHTML = cart.length;
+			// } else {
+			// 	document.querySelector(".my_cart_number").innerHTML = "";
+			// }
+			// Salvo l'array aggiornato nel localStorage
+			localStorage.setItem("cart", JSON.stringify(cart));
 		},
 		// showModal() {
 		// 	var modalId = document.getElementById("modalId");
@@ -48,7 +99,13 @@ export default {
 		// 	});
 		// },
 	},
-	mounted() {},
+	mounted() {
+		// localStorage.clear();
+		// document.querySelector(".my_cart_number").innerHTML = 1;
+		// document.querySelector(".my_cart_number").addEventListener("click", function () {
+		// 	this.updateCart(showCart.id);
+		// });
+	},
 };
 </script>
 
@@ -119,7 +176,7 @@ export default {
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-warning">
+					<button @click="addToCart(singleProduct)" data-bs-dismiss="modal" type="button" class="btn btn-warning">
 						<i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i
 						><input :value="totalPrice + '€'" class="my_total_price_input" disabled />
 					</button>
