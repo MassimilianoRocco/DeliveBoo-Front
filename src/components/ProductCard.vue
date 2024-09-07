@@ -10,9 +10,33 @@ export default {
 	data() {
 		return {
 			base_url: "http://127.0.0.1:8000",
+			quantity: 1,
+			totalPrice: "",
 		};
 	},
 	methods: {
+		addQuantity(elemento) {
+			if (this.quantity < 99) {
+				this.quantity++;
+				this.getPrice(elemento);
+			} else {
+				this.quantity = 99;
+				this.getPrice(elemento);
+			}
+		},
+		decreaseQuantity(elemento) {
+			if (this.quantity < 2) {
+				this.quantity = 1;
+				this.getPrice(elemento);
+			} else {
+				this.quantity--;
+				this.getPrice(elemento);
+			}
+		},
+		getPrice(elemento) {
+			let result = elemento * this.quantity;
+			this.totalPrice = result.toFixed(2);
+		},
 		// showModal() {
 		// 	var modalId = document.getElementById("modalId");
 		// 	modalId.addEventListener("show.bs.modal", function (event) {
@@ -52,7 +76,12 @@ export default {
 						<p class="m-0 pe-sm-0 pe-md-2">{{ singleProduct.price }}€</p>
 					</div>
 					<div class="col-sm-12 col-md-3">
-						<button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" :data-bs-target="'#' + singleProduct.id">
+						<button
+							@click="getPrice(singleProduct.price)"
+							type="button"
+							class="btn btn-warning btn-sm"
+							data-bs-toggle="modal"
+							:data-bs-target="'#' + singleProduct.id">
 							<i class="fa-solid fa-plus"></i>
 						</button>
 					</div>
@@ -82,15 +111,18 @@ export default {
 						<div class="col-6">
 							<p><span class="fw-bold">Prezzo : </span>{{ singleProduct.price }}€</p>
 							<div class="d-flex align-items-center justify-content-start gap-2">
-								<i class="fa-solid fa-minus p-2 bg-warning rounded-circle"></i>
-								<span class="fs-3">123</span>
-								<i class="fa-solid fa-plus p-2 bg-warning rounded-circle"></i>
+								<i @click="decreaseQuantity(singleProduct.price)" class="fa-solid fa-minus p-2 bg-warning rounded-circle"></i>
+								<input v-model="quantity" class="my_quantity_input" disabled />
+								<i @click="addQuantity(singleProduct.price)" class="fa-solid fa-plus p-2 bg-warning rounded-circle"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-warning"><i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i> 0.00 €</button>
+					<button type="button" class="btn btn-warning">
+						<i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i
+						><input :value="totalPrice + '€'" class="my_total_price_input" disabled />
+					</button>
 				</div>
 			</div>
 		</div>
@@ -98,20 +130,25 @@ export default {
 </template>
 
 <style scoped>
-.on-element {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	transition: 0.3s ease;
-	color: #ffffff00;
-	background: #ffffffce;
-	background: none;
+.fa-minus:hover,
+.fa-plus:hover {
+	transform: scale(1.2);
+	transition: 300ms;
 }
 
-.img-container:hover .on-element {
-	background: #ffffffce;
-	color: #434959;
+.my_total_price_input {
+	border: none;
+	width: 4rem;
+	text-align: center;
+	outline: none;
+}
+.my_quantity_input {
+	border: none;
+	width: 1.5rem;
+	text-align: center;
+	outline: none;
+}
+input:disabled {
+	background-color: rgba(255, 255, 255, 0);
 }
 </style>
