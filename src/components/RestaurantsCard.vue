@@ -42,7 +42,7 @@ export default {
 		<!-- CONTENUTO CARD -->
 
 		<div class="card-body text-center fw-bold position-relative">
-			<p>{{ singleRestaurat.name }}</p>
+			<p class="m-0">{{ singleRestaurat.name }}</p>
 			<div class="position-absolute top-0 start-50 translate-middle d-inline-flex justify-content-center">
 				<span v-for="singolaCategoria in singleRestaurat.categories" class="bg-dark badge rounded-pill me-1">
 					{{ singolaCategoria.name }}
