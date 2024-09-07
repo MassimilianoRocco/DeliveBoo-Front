@@ -31,7 +31,6 @@ export default {
 	},
 	mounted() {
 		axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
-			console.log(response.data.restaurants);
 			store.restaurants = response.data.restaurants;
 		});
 	},
@@ -57,8 +56,7 @@ export default {
 
 			<h4 class="ps-3">Trovati {{ store.restaurants.length }} ristoranti</h4>
 			<div class="row mx-0">
-				<div v-if="store.restaurants.length>0" v-for="singleRestaurat in store.restaurants" :key="i"
-					class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
+				<div v-if="store.restaurants.length > 0" v-for="singleRestaurat in store.restaurants" class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
 					<RestaurantsCard :singleRestaurat="singleRestaurat" />
 				</div>
 
@@ -91,10 +89,8 @@ export default {
 
 <style scoped>
 .myBox {
-	background-color: #FBAB7E;
-	background-image: linear-gradient(90deg, #FBAB7E 0%, #F7CE68 50%, #fbab7e 100%);
-
-
+	background-color: #fbab7e;
+	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%);
 
 	padding: 7rem 0;
 	/* padding-bottom:7rem 0 ; */

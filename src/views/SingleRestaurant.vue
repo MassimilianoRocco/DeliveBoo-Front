@@ -18,16 +18,14 @@ export default {
 	},
 	methods: {},
 	mounted() {
+		console.log(document.querySelector(".my_cart_number"));
 		const url = `${this.store.requestRestaurants.url}/${this.$route.params.id}`;
 
 		axios.get(url).then((response) => {
-			console.log(response.data.restaurant)
 			if (response.data.restaurant.length > 0) {
 				this.restaurant = response.data.restaurant[0];
-				console.log(this.restaurant)
-
 			} else {
-				this.$router.push({ name: "not-found" })
+				this.$router.push({ name: "not-found" });
 			}
 		});
 
@@ -48,30 +46,30 @@ export default {
 				// 	}
 				// }
 				for (let i = 0; i < response.data.product.length; i++) {
-					if (response.data.product[i].type == 'Food' || response.data.product[i].type == 'Dessert') {
+					if (response.data.product[i].type == "Food" || response.data.product[i].type == "Dessert") {
 						if (response.data.product[i].visible) {
-							this.piatti.push(response.data.product[i])
+							this.piatti.push(response.data.product[i]);
 						}
 					} else {
 						if (response.data.product[i].visible) {
-							this.bibite.push(response.data.product[i])
+							this.bibite.push(response.data.product[i]);
 						}
 					}
 				}
 			}
-		})
+		});
 	},
 };
 </script>
 
 <template>
-	<div class="myBox p-sm-0">
+	<div class="myBox">
 		<div class="container">
 			<!-- CONTROLLO V-IF PERCHÈ LA PAGINA CARICA PRIMA DELLA CHIAMATA API -->
 
-			<div v-if="restaurant" class="row mx-0 mb-4 p-2 mx-3 bg-white rounded-4 justify-content-center ">
+			<div v-if="restaurant" class="row mx-0 mb-4 p-2 mx-3 bg-white rounded-4 justify-content-center">
 				<div class="col-3 p-0">
-					<img class="w-100 rounded-4 " :src="restaurant.image_path" loading="lazy" />
+					<img class="w-100 rounded-4" :src="restaurant.image_path" loading="lazy" />
 				</div>
 				<div class="col ms-2">
 					<h1>{{ restaurant.name }}</h1>
@@ -83,31 +81,25 @@ export default {
 					<span v-for="singleCategory in restaurant.categories" class="badge bg-warning p-2 me-2">
 						{{ singleCategory.name }}
 					</span>
-
 				</div>
 			</div>
 			<!-- <div v-else>non ci sono</div> -->
 
 			<div v-if="piatti && bibite">
 				<div class="row mx-0">
-
 					<h1 class="text-white fw-bold ms-1">I NOSTRI PIATTI</h1>
-					<div v-for="singleProduct in piatti" :key="i" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
+					<div v-for="singleProduct in piatti" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
 						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
 
 					<h1 class="text-white fw-bold ms-1">LE NOSTRE BEVANDE</h1>
-					<div v-for="singleProduct in bibite" :key="i" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
+					<div v-for="singleProduct in bibite" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
 						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
-
-
 </template>
 
 <style scoped>
@@ -117,8 +109,9 @@ export default {
 }
 
 .myBox {
-	background-color: #FBAB7E;
-	background-image: linear-gradient(90deg, #FBAB7E 0%, #F7CE68 50%, #fbab7e 100%);
+	padding: 7rem 0 5rem 0;
+	background-color: #fbab7e;
+	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%);
 }
 
 .deb {

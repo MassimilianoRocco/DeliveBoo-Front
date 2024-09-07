@@ -32,9 +32,7 @@ export default {
 					params: this.store.requestRestaurants.params,
 				})
 				.then((response) => {
-					console.log(response.data);
 					store.restaurants = response.data.restaurants;
-					console.log(store.restaurants);
 				});
 		},
 		isCategorySelected(indice) {
@@ -43,7 +41,6 @@ export default {
 	},
 	mounted() {
 		axios.get("http://127.0.0.1:8000/api/categories").then((response) => {
-			console.log(response.data.categories);
 			this.categories = response.data.categories;
 		});
 	},
