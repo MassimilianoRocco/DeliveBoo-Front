@@ -14,7 +14,7 @@ export default {
 <template>
 	<header class="p-3 text-white d-flex align-items-center">
 		<div class="container-fluid h-auto">
-			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
 				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
 					<img src="/src/assets/DeliveBoo-Photoroom.png" alt="logo DeliveBoo" class="my_logo" />
 				</a>
@@ -26,7 +26,11 @@ export default {
 					<li><a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white">Lavora con noi</a></li>
 				</ul>
 
-				<div class="">
+				<div class="d-flex align-items-center gap-3">
+					<div class="position-relative">
+						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
+						<span class="my_cart_number"></span>
+					</div>
 					<a href="http://127.0.0.1:8000/auth">
 						<button type="button" class="btn btn-warning my_button">Login/Registrati</button>
 					</a>
@@ -37,6 +41,25 @@ export default {
 </template>
 
 <style scoped>
+.my_cart_number {
+	font-size: 10px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	background-color: white;
+	color: red;
+	border: 1px solid red;
+	border-radius: 50%;
+}
+
+.my_cart_number:empty {
+	display: none;
+}
+
 header {
 	height: 10vh;
 	position: fixed;
@@ -56,12 +79,19 @@ header {
 	border-color: unset;
 	padding: 2px 10px;
 }
+
 @media screen and (max-width: 992px) {
 	header {
-		height: 25vh;
+		height: 10vh;
 	}
 	.my_logo {
 		margin: 0;
+	}
+	ul {
+		display: none;
+	}
+	#my_box_header {
+		justify-content: space-between !important;
 	}
 }
 </style>
