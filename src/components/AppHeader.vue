@@ -67,6 +67,10 @@ export default {
 				this.updateTotalPayment();
 			}
 		},
+		// deleteCart() {
+		// 	localStorage.removeItem("cart");
+		// 	this.cart = null;
+		// },
 		updateHeader() {
 			this.cart = localStorage.getItem("cart");
 			if (this.cart) {
@@ -136,12 +140,13 @@ export default {
 			id="offcanvasScrolling"
 			aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
-				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo Carrello</h5>
+				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo Carrello</h5>
+				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
 				<div class="h-25 overflow-auto">
-					<h5 v-if="cart && cart.length == 0">Carrello vuoto</h5>
+					<!-- <h5 v-if="cart && cart.length == 0">Carrello vuoto</h5> -->
 					<table v-if="cart && cart.length > 0" class="table">
 						<thead>
 							<tr class="text-center">
