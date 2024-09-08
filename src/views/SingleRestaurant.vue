@@ -18,7 +18,6 @@ export default {
 	},
 	methods: {},
 	mounted() {
-		console.log(document.querySelector(".my_cart_number"));
 		const url = `${this.store.requestRestaurants.url}/${this.$route.params.id}`;
 
 		axios.get(url).then((response) => {
