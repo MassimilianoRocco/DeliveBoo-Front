@@ -1,10 +1,12 @@
 <script>
+import EventBus from "../eventBus.js";
 export default {
 	name: "ProducCard",
 	props: {
 		singleProduct: {
 			type: Object,
 			required: true,
+			differenceRestaurant: false,
 		},
 	},
 	data() {
@@ -33,8 +35,14 @@ export default {
 				this.getPrice(elemento);
 			}
 		},
-		getPrice(elemento) {
-			let result = elemento * this.quantity;
+		getPrice(price, product) {
+			let cart = localStorage.getItem("cart");
+			if (cart) {
+				cart = JSON.parse(cart);
+				const restaurantId = product;
+				this.differenceRestaurant = cart.some((element) => element.restaurant_id !== restaurantId);
+			}
+			let result = price * this.quantity;
 			this.totalPrice = parseFloat(result);
 			this.totalPrice = this.totalPrice.toFixed(2);
 		},
@@ -87,6 +95,16 @@ export default {
 			// }
 			// Salvo l'array aggiornato nel localStorage
 			localStorage.setItem("cart", JSON.stringify(cart));
+			this.refreshHeader();
+		},
+		deleteCart() {
+			localStorage.removeItem("cart");
+			this.differenceRestaurant = false;
+			window.location.reload();
+			this.refreshHeader();
+		},
+		refreshHeader() {
+			EventBus.emit("refreshHeader");
 		},
 		// showModal() {
 		// 	var modalId = document.getElementById("modalId");
@@ -134,7 +152,7 @@ export default {
 					</div>
 					<div class="col-sm-12 col-md-3">
 						<button
-							@click="getPrice(singleProduct.price)"
+							@click="getPrice(singleProduct.price, singleProduct.restaurant_id)"
 							type="button"
 							class="btn btn-warning btn-sm"
 							data-bs-toggle="modal"
@@ -152,11 +170,18 @@ export default {
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="modalTitleId">Aggiungere {{ singleProduct.name }} al carrello</h5>
+					<h5 v-if="differenceRestaurant">Attenzione!</h5>
+					<h5 v-if="!differenceRestaurant" class="modal-title" id="modalTitleId">Aggiungere {{ singleProduct.name }} al carrello</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div class="row">
+					<h5 v-if="differenceRestaurant">
+						Hai già un ordine in corso con un altro ristorante, per effettuare un nuovo ordine svuota il carrello
+					</h5>
+					<button v-if="differenceRestaurant" @click="deleteCart()" data-bs-dismiss="modal" type="button" class="btn btn-danger">
+						Svuota carrello
+					</button>
+					<div v-if="!differenceRestaurant" class="row">
 						<div class="col-4">
 							<template v-if="singleProduct.image_path.startsWith('http')">
 								<img :src="singleProduct.image_path" class="img-fluid" :alt="singleProduct.name" />
@@ -175,7 +200,7 @@ export default {
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
+				<div v-if="!differenceRestaurant" class="modal-footer">
 					<button @click="addToCart(singleProduct)" data-bs-dismiss="modal" type="button" class="btn btn-warning">
 						<i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i
 						><input :value="totalPrice + '€'" class="my_total_price_input" disabled />
