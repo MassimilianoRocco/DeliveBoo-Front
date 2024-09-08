@@ -87,12 +87,6 @@ export default {
 			} else {
 				cart.push(singleProduct);
 			}
-
-			// if (cart.length > 0) {
-			// 	document.querySelector(".my_cart_number").innerHTML = cart.length;
-			// } else {
-			// 	document.querySelector(".my_cart_number").innerHTML = "";
-			// }
 			// Salvo l'array aggiornato nel localStorage
 			localStorage.setItem("cart", JSON.stringify(cart));
 			this.refreshHeader();
@@ -106,24 +100,8 @@ export default {
 		refreshHeader() {
 			EventBus.emit("refreshHeader");
 		},
-		// showModal() {
-		// 	var modalId = document.getElementById("modalId");
-		// 	modalId.addEventListener("show.bs.modal", function (event) {
-		// 		// Button that triggered the modal
-		// 		let button = event.relatedTarget;
-		// 		// Extract info from data-bs-* attributes
-		// 		let recipient = button.getAttribute("data-bs-whatever");
-		// 		// Use above variables to manipulate the DOM
-		// 	});
-		// },
 	},
-	mounted() {
-		// localStorage.clear();
-		// document.querySelector(".my_cart_number").innerHTML = 1;
-		// document.querySelector(".my_cart_number").addEventListener("click", function () {
-		// 	this.updateCart(showCart.id);
-		// });
-	},
+	mounted() {},
 };
 </script>
 

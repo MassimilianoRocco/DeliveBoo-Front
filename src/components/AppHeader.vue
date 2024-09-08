@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 import EventBus from "../eventBus.js";
 export default {
 	name: "AppHeader",
@@ -7,6 +8,11 @@ export default {
 		return {
 			cart: null,
 			totalPayment: null,
+			name: "davide",
+			email: "davide@davide.it",
+			phone: "3311234567",
+			address: "via roma",
+			order: {},
 		};
 	},
 	methods: {
@@ -67,10 +73,6 @@ export default {
 				this.updateTotalPayment();
 			}
 		},
-		// deleteCart() {
-		// 	localStorage.removeItem("cart");
-		// 	this.cart = null;
-		// },
 		updateHeader() {
 			this.cart = localStorage.getItem("cart");
 			if (this.cart) {
@@ -87,6 +89,40 @@ export default {
 			} else {
 				this.totalPayment = "0.00";
 			}
+		},
+		async submitOrder() {
+			try {
+				const orderData = {
+					name: this.name,
+					email: this.email,
+					phone: this.phone,
+					address: this.address,
+					total_price: this.totalPayment,
+					restaurant_id: this.getRestaurantIdFromCart(),
+					products: this.cart.map((product) => ({
+						product_id: product.id,
+						quantity: product.quantity,
+						price: product.price,
+						name: product.name,
+					})),
+				};
+				console.log(orderData);
+
+				const response = await axios.post("http://127.0.0.1:8000/api/orders", orderData);
+
+				if (response.status === 200) {
+					console.log("Order submitted successfully:", response.data);
+					this.cart = null;
+					localStorage.removeItem("cart");
+				} else {
+					console.error("Failed to submit order:", response.data);
+				}
+			} catch (error) {
+				console.error("An error occurred while submitting the order:", error);
+			}
+		},
+		getRestaurantIdFromCart() {
+			return this.cart.length > 0 ? this.cart[0].restaurant_id : null;
 		},
 	},
 	beforeUnmount() {
@@ -178,6 +214,25 @@ export default {
 						</tr>
 					</thead>
 				</table>
+				<form v-if="cart && cart.length > 0" @submit.prevent="submitOrder">
+					<div class="mb-3">
+						<label for="name" class="form-label">Nome</label>
+						<input v-model="name" type="text" class="form-control" id="name" required />
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label">Email</label>
+						<input v-model="email" type="email" class="form-control" id="email" required />
+					</div>
+					<div class="mb-3">
+						<label for="phone" class="form-label">Telefono</label>
+						<input v-model="phone" type="text" class="form-control" id="phone" required />
+					</div>
+					<div class="mb-3">
+						<label for="address" class="form-label">Indirizzo</label>
+						<input v-model="address" type="text" class="form-control" id="address" required />
+					</div>
+					<button type="submit" class="btn btn-primary">Conferma Ordine</button>
+				</form>
 			</div>
 		</div>
 	</header>
