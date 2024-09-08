@@ -1,20 +1,101 @@
 <script>
+import EventBus from "../eventBus.js";
 export default {
 	name: "AppHeader",
 
 	data() {
 		return {
 			cart: null,
+			totalPayment: null,
 		};
 	},
-	methods: {},
-
+	methods: {
+		addProduct(i) {
+			this.cart = localStorage.getItem("cart");
+			if (this.cart) {
+				this.cart = JSON.parse(this.cart);
+				if (this.cart[i].quantity < 99) {
+					this.cart[i].quantity += 1;
+					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) + parseFloat(this.cart[i].price);
+					let numeroStringa = this.cart[i].totalPrice.toString();
+					if (!numeroStringa.includes(".")) {
+						numeroStringa += ".00";
+					} else {
+						let decimali = numeroStringa.split(".")[1];
+						if (decimali.length == 1) {
+							numeroStringa += "0";
+						}
+					}
+					this.cart[i].totalPrice = numeroStringa;
+				} else {
+					this.cart[i].quantity = 99;
+				}
+				localStorage.setItem("cart", JSON.stringify(this.cart));
+				this.updateTotalPayment();
+			}
+		},
+		decreaseProduct(i) {
+			this.cart = localStorage.getItem("cart");
+			if (this.cart) {
+				this.cart = JSON.parse(this.cart);
+				if (this.cart[i].quantity > 1) {
+					this.cart[i].quantity -= 1;
+					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) - parseFloat(this.cart[i].price);
+					let numeroStringa = this.cart[i].totalPrice.toString();
+					if (!numeroStringa.includes(".")) {
+						numeroStringa += ".00";
+					} else {
+						let decimali = numeroStringa.split(".")[1];
+						if (decimali.length == 1) {
+							numeroStringa += "0";
+						}
+					}
+					this.cart[i].totalPrice = numeroStringa;
+				} else {
+					this.deleteProduct(i);
+				}
+				localStorage.setItem("cart", JSON.stringify(this.cart));
+				this.updateTotalPayment();
+			}
+		},
+		deleteProduct(i) {
+			this.cart = localStorage.getItem("cart");
+			if (this.cart) {
+				this.cart = JSON.parse(this.cart);
+				this.cart.splice(i, 1);
+				localStorage.setItem("cart", JSON.stringify(this.cart));
+				this.updateTotalPayment();
+			}
+		},
+		updateHeader() {
+			this.cart = localStorage.getItem("cart");
+			if (this.cart) {
+				this.cart = JSON.parse(this.cart);
+			} else {
+				this.cart = [];
+			}
+			this.$forceUpdate();
+			this.updateTotalPayment();
+		},
+		updateTotalPayment() {
+			if (this.cart) {
+				this.totalPayment = this.cart.reduce((total, product) => total + parseFloat(product.totalPrice), 0).toFixed(2);
+			} else {
+				this.totalPayment = "0.00";
+			}
+		},
+	},
+	beforeUnmount() {
+		EventBus.off("refreshHeader", this.updateHeader);
+	},
 	mounted() {
+		EventBus.on("refreshHeader", this.updateHeader);
+		// localStorage.clear();
 		this.cart = localStorage.getItem("cart");
 		if (this.cart) {
 			this.cart = JSON.parse(this.cart);
 		}
-		console.log(this.cart);
+		this.updateTotalPayment();
 	},
 };
 </script>
@@ -35,7 +116,7 @@ export default {
 				</ul>
 
 				<div class="d-flex align-items-center gap-3">
-					<div class="position-relative">
+					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
 						<span v-if="cart && cart.length > 0" class="my_cart_number">{{ cart.length }}</span>
 					</div>
@@ -43,6 +124,55 @@ export default {
 						<button type="button" class="btn btn-warning my_button">Login/Registrati</button>
 					</a>
 				</div>
+			</div>
+		</div>
+		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
+
+		<div
+			class="offcanvas w-50 offcanvas-end"
+			data-bs-scroll="true"
+			data-bs-backdrop="false"
+			tabindex="-1"
+			id="offcanvasScrolling"
+			aria-labelledby="offcanvasScrollingLabel">
+			<div class="offcanvas-header">
+				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo Carrello</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+				<div class="h-25 overflow-auto">
+					<h5 v-if="cart && cart.length == 0">Carrello vuoto</h5>
+					<table v-if="cart && cart.length > 0" class="table">
+						<thead>
+							<tr class="text-center">
+								<th scope="col">Nome</th>
+								<th scope="col">Quantità</th>
+								<th scope="col">Prezzo Totale</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(product, i) in cart" class="text-center">
+								<td>{{ product.name }}</td>
+								<td>
+									<i @click="decreaseProduct(i)" class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
+									<span class="mx-2">{{ product.quantity }}</span>
+									<i @click="addProduct(i)" class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
+								</td>
+								<td>{{ product.totalPrice }} €</td>
+								<td><i @click="deleteProduct(i)" class="fa-solid fa-trash text-danger"></i></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<table v-if="cart && cart.length > 0" class="table">
+					<thead>
+						<tr class="text-center">
+							<th scope="col">Totale da pagare:</th>
+							<th scope="col">{{ totalPayment }} €</th>
+						</tr>
+					</thead>
+				</table>
 			</div>
 		</div>
 	</header>
