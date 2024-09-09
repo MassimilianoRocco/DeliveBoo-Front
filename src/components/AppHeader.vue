@@ -1,9 +1,10 @@
 <script>
 import axios from "axios";
 import EventBus from "../eventBus.js";
+import dropin from "braintree-web-drop-in";
+
 export default {
 	name: "AppHeader",
-
 	data() {
 		return {
 			cart: null,
@@ -13,6 +14,12 @@ export default {
 			phone: "3311234567",
 			address: "via roma",
 			order: {},
+
+			clientToken: null,
+			instance: null,
+			loading: false,
+
+			dynamicBg: 'none'
 		};
 	},
 	methods: {
@@ -91,6 +98,7 @@ export default {
 			}
 		},
 		async submitOrder() {
+			this.pay();
 			try {
 				const orderData = {
 					name: this.name,
@@ -124,12 +132,82 @@ export default {
 		getRestaurantIdFromCart() {
 			return this.cart.length > 0 ? this.cart[0].restaurant_id : null;
 		},
+		initializeBraintree() {
+			dropin.create({
+				authorization: this.clientToken,
+				container: '#dropin-container',
+				locale: 'it_IT',
+			}, (error, instance) => {
+				if (error) {
+					console.error(error);
+				} else {
+					this.instance = instance;
+				}
+			});
+		},
+		pay() {
+			if (!this.instance) return;
+			this.loading = true;
+
+			this.instance.requestPaymentMethod((error, payload) => {
+				if (error) {
+					console.error(error);
+					this.loading = false;
+					return;
+				}
+
+				// Invia il nonce al server Laravel insieme all'importo
+				axios.post("http://127.0.0.1:8000/api/braintree/checkout", {
+					payment_method_nonce: payload.nonce,
+					amount: this.totalPayment, // Usa l'importo passato come prop
+				})
+					.then(response => {
+						if (response.data.success) {
+							alert("Pagamento completato!");
+							// Puoi fare ulteriori azioni come svuotare il carrello
+							this.$emit('paymentSuccess');
+						} else {
+							alert("Errore nel pagamento: " + response.data.message);
+						}
+						this.loading = false;
+					})
+					.catch(error => {
+						console.error("Errore nel pagamento:", error);
+						this.loading = false;
+					});
+			});
+		}
 	},
 	beforeUnmount() {
 		EventBus.off("refreshHeader", this.updateHeader);
 	},
 	mounted() {
+		window.addEventListener('scroll', () => {
+			const scrollTop = document.documentElement.scrollTop
+			if (scrollTop >= 816) {
+				this.dynamicBg = 'rgba(0, 0, 0, 0.5) !important'
+			}
+			else {
+				this.dynamicBg = 'none'
+			}
+		})
+
 		EventBus.on("refreshHeader", this.updateHeader);
+
+		axios.get("http://127.0.0.1:8000/api/braintree/token")
+			.then(response => {
+				// console.log(response.data.token)
+				this.clientToken = response.data.token;
+				// Inizializza il Braintree Drop-in UI
+
+				this.$nextTick(() => {
+					this.initializeBraintree();
+				});
+
+			})
+			.catch(error => {
+				console.error("Errore nel recuperare il token:", error);
+			});
 		// localStorage.clear();
 		this.cart = localStorage.getItem("cart");
 		if (this.cart) {
@@ -141,7 +219,7 @@ export default {
 </script>
 
 <template>
-	<header class="p-3 text-white d-flex align-items-center">
+	<header class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }">
 		<div class="container-fluid h-auto">
 			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
 				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
@@ -150,13 +228,15 @@ export default {
 
 				<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 					<li><a href="http://localhost:5173/#video" class="nav-link px-2 text-white">Home</a></li>
-					<li><a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista Ristoranti</a></li>
+					<li><a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista
+							Ristoranti</a></li>
 					<li><a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white">Cosa offriamo</a></li>
 					<li><a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white">Lavora con noi</a></li>
 				</ul>
 
 				<div class="d-flex align-items-center gap-3">
-					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+						aria-controls="offcanvasScrolling">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
 						<span v-if="cart && cart.length > 0" class="my_cart_number">{{ cart.length }}</span>
 					</div>
@@ -168,15 +248,11 @@ export default {
 		</div>
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
-		<div
-			class="offcanvas w-50 offcanvas-end"
-			data-bs-scroll="true"
-			data-bs-backdrop="false"
-			tabindex="-1"
-			id="offcanvasScrolling"
-			aria-labelledby="offcanvasScrollingLabel">
+		<div class="offcanvas w-50 offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+			id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
-				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo Carrello</h5>
+				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo
+					Carrello</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
@@ -196,7 +272,8 @@ export default {
 							<tr v-for="(product, i) in cart" class="text-center">
 								<td>{{ product.name }}</td>
 								<td>
-									<i @click="decreaseProduct(i)" class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
+									<i @click="decreaseProduct(i)"
+										class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
 									<span class="mx-2">{{ product.quantity }}</span>
 									<i @click="addProduct(i)" class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
 								</td>
@@ -231,7 +308,12 @@ export default {
 						<label for="address" class="form-label">Indirizzo</label>
 						<input v-model="address" type="text" class="form-control" id="address" required />
 					</div>
-					<button type="submit" class="btn btn-primary">Conferma Ordine</button>
+					<!-- <button type="submit" class="btn btn-primary">Conferma Ordine</button> -->
+					<div>
+						<div id="dropin-container"></div>
+						<button :disabled="loading">Paga ora</button>
+					</div>
+
 				</form>
 			</div>
 		</div>
@@ -239,6 +321,19 @@ export default {
 </template>
 
 <style scoped>
+button {
+	background-color: #28a745;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+}
+
+button:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
 .my_cart_number {
 	font-size: 10px;
 	width: 20px;
@@ -263,9 +358,10 @@ header {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	background-color: rgba(33, 37, 41, 0.5) !important;
+	transition: .6s;
 	z-index: 800;
 }
+
 .my_logo {
 	height: 70px;
 	margin-right: 2rem;
@@ -282,12 +378,15 @@ header {
 	header {
 		height: 10vh;
 	}
+
 	.my_logo {
 		margin: 0;
 	}
+
 	ul {
 		display: none;
 	}
+
 	#my_box_header {
 		justify-content: space-between !important;
 	}

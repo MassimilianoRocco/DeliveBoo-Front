@@ -29,6 +29,8 @@ export default {
 				this.checkScroll = false;
 			}
 		},
+		
+		
 	},
 	mounted() {
 		window.addEventListener(`scroll`, this.handleScroll);
@@ -37,10 +39,10 @@ export default {
 </script>
 
 <template>
-	<div class="app_Container w-100">
+	<div class="app_Container w-100" >
 		<AppHeader />
 
-		<RouterView />
+		<RouterView/>
 
 		<!-- <AppServices class="mt-5" /> -->
 		<AppFooter />

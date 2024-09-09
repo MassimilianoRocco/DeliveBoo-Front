@@ -60,10 +60,10 @@ export default {
             <div class="rightCont d-flex flex-column gap-2">
 
                 <div class=" search-input">
-                    <input :class="{ shrink: shorten }" type="mail" placeholder="Email Adress...">
-                    <button @mouseover="isHover()" @mouseleave="isNotHover()">
+                    <!-- <input :class="{ shrink: shorten }" type="mail" placeholder="Email Adress..."> -->
+                    <!-- <button @mouseover="isHover()" @mouseleave="isNotHover()">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
+                    </button> -->
                 </div>
 
                 <h4 class="round-font my-4">Cerca per Categoria</h4>
