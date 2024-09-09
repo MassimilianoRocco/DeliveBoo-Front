@@ -189,7 +189,7 @@ export default {
 	mounted() {
 		window.addEventListener("scroll", () => {
 			const scrollTop = document.documentElement.scrollTop;
-			if (scrollTop >= 816) {
+			if (scrollTop >= 10) {
 				this.dynamicBg = "rgba(0, 0, 0, 0.5) !important";
 			} else {
 				this.dynamicBg = "none";
