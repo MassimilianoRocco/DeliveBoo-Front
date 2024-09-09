@@ -17,22 +17,26 @@ export default {
 		};
 	},
 	methods: {
-		addQuantity(elemento) {
+		addQuantity(price, elemento) {
 			if (this.quantity < 99) {
 				this.quantity++;
-				this.getPrice(elemento);
+				this.getPrice(price, elemento.restaurant_id
+				);
 			} else {
 				this.quantity = 99;
-				this.getPrice(elemento);
+				this.getPrice(price, elemento.restaurant_id
+				);
 			}
 		},
-		decreaseQuantity(elemento) {
+		decreaseQuantity(price, elemento) {
 			if (this.quantity < 2) {
 				this.quantity = 1;
-				this.getPrice(elemento);
+				this.getPrice(price, elemento.restaurant_id
+				);
 			} else {
 				this.quantity--;
-				this.getPrice(elemento);
+				this.getPrice(price, elemento.restaurant_id
+				);
 			}
 		},
 		getPrice(price, product) {
@@ -46,51 +50,48 @@ export default {
 			this.totalPrice = parseFloat(result);
 			this.totalPrice = this.totalPrice.toFixed(2);
 		},
+
 		addToCart(singleProduct) {
 			singleProduct.quantity = this.quantity;
 			singleProduct.totalPrice = this.totalPrice;
-			// controllo la presenza di un carrello esistente
+
 			let cart = localStorage.getItem("cart");
+			// Se esiste lo trasformo in array di oggetti
+			cart = JSON.parse(cart);
+
+			let productExists = false;
+
 			if (cart) {
-				// Se esiste lo trasformo in array di oggetti
-				cart = JSON.parse(cart);
+				if (cart.length > 0) {
+					cart.forEach((element, index) => {
+						if (element.id === singleProduct.id) {
+							productExists = true;
+							cart[index].quantity += singleProduct.quantity;
+							cart[index].totalPrice = parseFloat(cart[index].totalPrice) + parseFloat(singleProduct.totalPrice);
+							let numeroStringa = cart[index].totalPrice.toString();
+							if (!numeroStringa.includes(".")) {
+								numeroStringa += ".00";
+							} else {
+								let decimali = numeroStringa.split(".")[1];
+								if (decimali.length == 1) {
+									numeroStringa += "0";
+								}
+							}
+							cart[index].totalPrice = numeroStringa;
+						}
+					});
+				}
 			} else {
 				// Se non esiste creo un array vuoto
 				cart = [];
 			}
-
-			// aggiungo singleProduct al carrello
-			let elementExist;
-			let elementIndex;
-			cart.forEach((element, index) => {
-				if (element.id != singleProduct.id) {
-					elementExist = false;
-				} else {
-					elementExist = true;
-					elementIndex = index;
-				}
-			});
-
-			if (elementExist) {
-				cart[elementIndex].quantity += singleProduct.quantity;
-				cart[elementIndex].totalPrice = parseFloat(cart[elementIndex].totalPrice) + parseFloat(singleProduct.totalPrice);
-				let numeroStringa = cart[elementIndex].totalPrice.toString();
-				if (!numeroStringa.includes(".")) {
-					numeroStringa += ".00";
-				} else {
-					let decimali = numeroStringa.split(".")[1];
-					if (decimali.length == 1) {
-						numeroStringa += "0";
-					}
-				}
-				cart[elementIndex].totalPrice = numeroStringa;
-			} else {
+			if (!productExists) {
 				cart.push(singleProduct);
 			}
-			// Salvo l'array aggiornato nel localStorage
 			localStorage.setItem("cart", JSON.stringify(cart));
 			this.refreshHeader();
 		},
+
 		deleteCart() {
 			localStorage.removeItem("cart");
 			this.differenceRestaurant = false;
@@ -101,7 +102,8 @@ export default {
 			EventBus.emit("refreshHeader");
 		},
 	},
-	mounted() { },
+	mounted() {
+	},
 };
 </script>
 
@@ -177,10 +179,10 @@ export default {
 						<div class="col-6">
 							<p><span class="fw-bold">Prezzo : </span>{{ singleProduct.price }}€</p>
 							<div class="d-flex align-items-center justify-content-start gap-2">
-								<i @click="decreaseQuantity(singleProduct.price)"
+								<i @click="decreaseQuantity(singleProduct.price, singleProduct)"
 									class="fa-solid fa-minus p-2 bg-warning rounded-circle"></i>
 								<input v-model="quantity" class="my_quantity_input" disabled />
-								<i @click="addQuantity(singleProduct.price)"
+								<i @click="addQuantity(singleProduct.price, singleProduct)"
 									class="fa-solid fa-plus p-2 bg-warning rounded-circle"></i>
 							</div>
 						</div>

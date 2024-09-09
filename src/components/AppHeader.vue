@@ -229,16 +229,9 @@ export default {
 <template>
 	<header class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }">
 		<div class="container-fluid h-auto">
-			<div
-				id="my_box_header"
-				class="d-flex align-items-center justify-content-center justify-content-lg-start">
-				<a
-					href="/"
-					class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
-					<img
-						src="/src/assets/DeliveBoo-Photoroom.png"
-						alt="logo DeliveBoo"
-						class="my_logo" />
+			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
+				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
+					<img src="/src/assets/DeliveBoo-Photoroom.png" alt="logo DeliveBoo" class="my_logo" />
 				</a>
 
 				<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -246,28 +239,20 @@ export default {
 						<a href="http://localhost:5173/#video" class="nav-link px-2 text-white">Home</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white"
-							>Lista Ristoranti</a
-						>
+						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista
+							Ristoranti</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white"
-							>Cosa offriamo</a
-						>
+						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white">Cosa offriamo</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white"
-							>Lavora con noi</a
-						>
+						<a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white">Lavora con noi</a>
 					</li>
 				</ul>
 
 				<div class="d-flex align-items-center gap-3">
-					<div
-						class="position-relative"
-						data-bs-toggle="offcanvas"
-						data-bs-target="#offcanvasScrolling"
-						aria-controls="offcanvasScrolling">
+					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+						aria-controls="offcanvasScrolling" @click="initializeBraintree()">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
 						<span v-if="cart && cart.length > 0" class="my_cart_number">{{
 							cart.length
@@ -281,23 +266,14 @@ export default {
 		</div>
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
-		<div
-			class="offcanvas w-50 offcanvas-end"
-			data-bs-scroll="true"
-			data-bs-backdrop="false"
-			tabindex="-1"
-			id="offcanvasScrolling"
-			aria-labelledby="offcanvasScrollingLabel">
+		<div class="offcanvas w-50 offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+			id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
 				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
 					Riepilogo Carrello
 				</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
-				<button
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="offcanvas"
-					aria-label="Close"></button>
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
 				<div class="h-25 overflow-auto">
@@ -315,13 +291,10 @@ export default {
 							<tr v-for="(product, i) in cart" class="text-center">
 								<td>{{ product.name }}</td>
 								<td>
-									<i
-										@click="decreaseProduct(i)"
+									<i @click="decreaseProduct(i)"
 										class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
 									<span class="mx-2">{{ product.quantity }}</span>
-									<i
-										@click="addProduct(i)"
-										class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
+									<i @click="addProduct(i)" class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
 								</td>
 								<td>{{ product.totalPrice }} €</td>
 								<td>
