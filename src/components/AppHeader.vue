@@ -4,23 +4,23 @@ export default {
 
     data() {
         return {
-            scrollValue: 0,
-            finalHeight: '100vh',
+            dynamicBg: 'none'
         }
     },
     methods: {
-    //   placeholder
+        //   placeholder
     },
     mounted() {
         window.addEventListener('scroll', () => {
             const scrollTop = document.documentElement.scrollTop
+            if (scrollTop >= 816) {
+                this.dynamicBg = 'rgba(0, 0, 0, 0.5) !important'
+            }
+            else {
+                this.dynamicBg = 'none'
+            }
 
-            this.scrollValue = scrollTop
-        
-            this.finalHeight = `${Math.max(100 - scrollTop / 9.5, 0)}vh`;
 
-            
-            
 
         });
 
@@ -32,14 +32,12 @@ export default {
 
 <template>
 
-    <header class="p-3 text-white d-flex align-items-start debug_3" :style="{ height: finalHeight }" >
+    <header class="p-3 text-white d-flex align-items-start debug_3" :style="{ background: dynamicBg }">
         <div class="container-fluid h-auto">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start debug_1">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
                     <img src="/src/assets/DeliveBoo-Photoroom.png" alt="logo DeliveBoo" class="my_logo">
                 </a>
-                <div class="debug">posizione scroll - {{ this.scrollValue }}</div>
-                <div class="debug_2">la tua finestra sara grande - {{ this.finalHeight }}</div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="#video" class="nav-link px-2 text-white">Home</a></li>
                     <li><a href="#ristoranti" class="nav-link px-2 text-white">Lista Ristoranti</a></li>
@@ -75,10 +73,11 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(175, 175, 175, 0.5) !important;
-    border:2px dashed red;
+    /* background-color: rgba(0, 0, 0, 0.5) !important; */
+    /* border: 2px dashed red; */
     z-index: 800;
     min-height: 7rem !important;
+    transition: .6s;
 }
 
 .my_logo {

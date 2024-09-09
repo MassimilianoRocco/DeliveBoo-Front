@@ -18,7 +18,9 @@ export default {
 			const categoryId = indice + 1;
 			if (this.store.categoriesSelected.includes(categoryId)) {
 				this.store.categoriesSelected = this.store.categoriesSelected.filter(
-					(id) => id !== categoryId
+					(id) => id !== categoryId,
+					console.log(categoryId),
+					
 				);
 			} else {
 				this.store.categoriesSelected.push(categoryId);

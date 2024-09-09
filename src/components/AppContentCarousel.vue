@@ -7,6 +7,12 @@ export default {
             isClicked: false,
             isSmooth: true,
             store,
+            horiScroll: '',
+
+            scrollable: '0',
+            scrolled: '0',
+            // scrollWidth: '',
+            // scrollLeft: '',
         }
     },
     methods: {
@@ -20,12 +26,49 @@ export default {
             this.isSmooth = true;
         },
 
+        Right() {
+            const carousel = document.getElementById('carousel');
+            const distanzaScrollabile = carousel.scrollWidth - carousel.clientWidth;
 
+            const distanzaScrollata = carousel.scrollLeft
+            if (distanzaScrollata >= distanzaScrollabile) {
+                carousel.scrollLeft = 0;
+                console.log("Tornato all'inizio");
+            } else {
+                carousel.scrollLeft += 1000;
+                console.log("scrollDX");
+            }
+
+        },
+
+        Left() {
+            const carousel = document.getElementById('carousel');
+            const distanzaScrollata = carousel.scrollLeft
+
+            if (distanzaScrollata <= 0) {
+                carousel.scrollLeft = carousel.scrollWidth - carousel.clientWidth;
+                console.log("Tornato alla fine");
+            } else {
+                carousel.scrollLeft -= 1000;
+                console.log("scrollSX");
+            }
+
+        },
     },
     created() {
 
     },
     mounted() {
+        // debugging
+        // setInterval(() => {
+        //     const carousel = document.getElementById('carousel');
+        //     const distanzaScrollabile = carousel.scrollWidth - carousel.clientWidth;
+        //     const distanzaScrollata = carousel.scrollLeft
+
+        //     this.scrollable = distanzaScrollabile
+        //     this.scrolled = distanzaScrollata
+
+        // }, 20);
 
         document.addEventListener('mouseup', this.mouseRelease)
 
@@ -41,11 +84,13 @@ export default {
 
     <div class="container_a black">
 
-
+        <button class="sx" @click="Left()">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
         <!-- la documentazione su questi "@events" è in fondo alla pagina -->
 
         <div class="debug" id="carousel" :class="{ smooth: isSmooth, slow: isSmooth }" @mousemove="dragging"
-            @mousedown="isClicked = !isClicked, isSmooth = !isSmooth" >
+            @mousedown="isClicked = !isClicked, isSmooth = !isSmooth">
 
 
 
@@ -62,7 +107,9 @@ export default {
 
             </div>
         </div>
-
+        <button class="dx" @click="Right()">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
 
     </div>
 
@@ -80,6 +127,16 @@ export default {
     border-radius: 30px;
     overflow: hidden;
     /* border: 2px dashed blue; */
+}
+
+button {
+    width: 50px;
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 25px;
+    background: orange;
+    color: white;
+    margin: 7px;
 }
 
 .container_a {

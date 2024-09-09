@@ -35,7 +35,7 @@ export default {
         <div class="section_container d-flex debug">
             <div class="section_left debug">
                 <div class="img_container debug">
-                    <img src="https://www.giuseppecaprotti.it/2019/wp-content/uploads/Rider-Delivery-illustrazione-06-LT.jpg"
+                    <img src="https://www.blinkco.io/wp-content/uploads/2021/05/food-delivery_featured-image.jpeg"
                         alt="">
                 </div>
             </div>
@@ -65,6 +65,7 @@ export default {
 
 .section_left {
     width: 60%;
+    /* width: 100%; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,6 +85,7 @@ img {
 
 .section_right {
     width: 40%;
+    /* width: 100%; */
     padding: 3rem 1rem;
 }
 
@@ -91,19 +93,19 @@ img {
     padding: 1rem 0;
 }
 
-button{
-    padding: .5rem!important;
+button {
+    padding: .5rem !important;
 }
 
 .section_container {
     height: 90%;
     margin: 3rem 0;
+    /* display: flex;
+    flex-direction: column; */
 }
 
 h1 {
     font-weight: 700;
-    /* padding-top: 8rem; */
-    /* padding: 5rem; */
 }
 
 .container-fluid {
@@ -117,5 +119,34 @@ h1 {
     box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
     height: 50rem;
     background: white;
+}
+</style>
+
+<style scoped>
+@media (max-width:1250px) {
+    h1 {
+        color: fuchsia !important;
+    }
+.section_left{
+    width: 100%;
+}
+.section_right{
+    width: 100%;
+}
+    .section_container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-fluid {
+
+        min-height: 80rem;
+    }
+}
+@media (max-width:1000px) {
+    .container-fluid {
+
+min-height: 65rem;
+}
 }
 </style>
