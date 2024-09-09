@@ -13,6 +13,7 @@ export default {
 			phone: "3311234567",
 			address: "via roma",
 			order: {},
+			dynamicBg: 'none'
 		};
 	},
 	methods: {
@@ -129,6 +130,16 @@ export default {
 		EventBus.off("refreshHeader", this.updateHeader);
 	},
 	mounted() {
+		window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop
+            if (scrollTop >= 816) {
+                this.dynamicBg = 'rgba(0, 0, 0, 0.5) !important'
+            }
+            else {
+                this.dynamicBg = 'none'
+            }
+		})
+
 		EventBus.on("refreshHeader", this.updateHeader);
 		// localStorage.clear();
 		this.cart = localStorage.getItem("cart");
@@ -141,7 +152,7 @@ export default {
 </script>
 
 <template>
-	<header class="p-3 text-white d-flex align-items-center">
+	<header class="p-3 text-white d-flex align-items-center" :style="{background: dynamicBg}">
 		<div class="container-fluid h-auto">
 			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
 				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
@@ -263,7 +274,7 @@ header {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	background-color: rgba(33, 37, 41, 0.5) !important;
+	transition: .6s;
 	z-index: 800;
 }
 .my_logo {
