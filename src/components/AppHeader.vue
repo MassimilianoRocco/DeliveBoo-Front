@@ -19,6 +19,11 @@ export default {
 			instance: null,
 			loading: false,
 
+			nameValid: false,
+			emailValid: false,
+			phoneValid: false,
+			addressValid: false,
+
 			dynamicBg: "none",
 		};
 	},
@@ -29,7 +34,8 @@ export default {
 				this.cart = JSON.parse(this.cart);
 				if (this.cart[i].quantity < 99) {
 					this.cart[i].quantity += 1;
-					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) + parseFloat(this.cart[i].price);
+					this.cart[i].totalPrice =
+						parseFloat(this.cart[i].totalPrice) + parseFloat(this.cart[i].price);
 					let numeroStringa = this.cart[i].totalPrice.toString();
 					if (!numeroStringa.includes(".")) {
 						numeroStringa += ".00";
@@ -53,7 +59,8 @@ export default {
 				this.cart = JSON.parse(this.cart);
 				if (this.cart[i].quantity > 1) {
 					this.cart[i].quantity -= 1;
-					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) - parseFloat(this.cart[i].price);
+					this.cart[i].totalPrice =
+						parseFloat(this.cart[i].totalPrice) - parseFloat(this.cart[i].price);
 					let numeroStringa = this.cart[i].totalPrice.toString();
 					if (!numeroStringa.includes(".")) {
 						numeroStringa += ".00";
@@ -93,7 +100,9 @@ export default {
 		},
 		updateTotalPayment() {
 			if (this.cart) {
-				this.totalPayment = this.cart.reduce((total, product) => total + parseFloat(product.totalPrice), 0).toFixed(2);
+				this.totalPayment = this.cart
+					.reduce((total, product) => total + parseFloat(product.totalPrice), 0)
+					.toFixed(2);
 			} else {
 				this.totalPayment = "0.00";
 			}
@@ -185,20 +194,20 @@ export default {
 		},
 		validateName() {
 			if (this.name.length < 3 || this.name.length > 255) {
-				this.validation = false;
+				this.nameValid = false;
 				return false;
 			} else {
-				this.validation = true;
+				this.nameValid = true;
 				return true;
 			}
 		},
 		validateEmail(email) {
 			const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 			if (re.test(String(email).toLowerCase())) {
-				this.validation = true;
+				this.emailValid = true;
 				return true;
 			} else {
-				this.validation = false;
+				this.emailValid = false;
 				return false;
 			}
 		},
@@ -206,28 +215,24 @@ export default {
 			const phonePattern = /^\d{10}$/;
 
 			if (!phonePattern.test(phone)) {
-				this.validation = false;
+				this.phoneValid = false;
 				return false;
 			} else {
-				this.validation = true;
+				this.phoneValid = true;
 				return true;
 			}
 		},
 		validateAddress(address) {
 			if (address === "") {
-				this.validation = false;
+				this.addressValid = false;
 				return false;
 			} else {
-				this.validation = true;
+				this.addressValid = true;
 				return true;
 			}
 		},
 		validationInput() {
-			if (this.validation) {
-				return true;
-			} else {
-				return false;
-			}
+			return this.nameValid && this.emailValid && this.phoneValid && this.addressValid;
 		},
 	},
 	beforeUnmount() {
@@ -272,9 +277,16 @@ export default {
 <template>
 	<header class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }">
 		<div class="container-fluid h-auto">
-			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
-				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
-					<img src="/src/assets/DeliveBoo-Photoroom.png" alt="logo DeliveBoo" class="my_logo" />
+			<div
+				id="my_box_header"
+				class="d-flex align-items-center justify-content-center justify-content-lg-start">
+				<a
+					href="/"
+					class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
+					<img
+						src="/src/assets/DeliveBoo-Photoroom.png"
+						alt="logo DeliveBoo"
+						class="my_logo" />
 				</a>
 
 				<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -282,13 +294,19 @@ export default {
 						<a href="http://localhost:5173/#video" class="nav-link px-2 text-white">Home</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista Ristoranti</a>
+						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white"
+							>Lista Ristoranti</a
+						>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white">Cosa offriamo</a>
+						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white"
+							>Cosa offriamo</a
+						>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white">Lavora con noi</a>
+						<a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white"
+							>Lavora con noi</a
+						>
 					</li>
 				</ul>
 
@@ -300,7 +318,9 @@ export default {
 						aria-controls="offcanvasScrolling"
 						@click="initializeBraintree()">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
-						<span v-if="cart && cart.length > 0" class="my_cart_number">{{ cart.length }}</span>
+						<span v-if="cart && cart.length > 0" class="my_cart_number">{{
+							cart.length
+						}}</span>
 					</div>
 					<a href="http://127.0.0.1:8000/auth">
 						<button type="button" class="btn btn-warning my_button">Login/Registrati</button>
@@ -318,9 +338,15 @@ export default {
 			id="offcanvasScrolling"
 			aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
-				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo Carrello</h5>
+				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
+					Riepilogo Carrello
+				</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="offcanvas"
+					aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
 				<div class="h-25 overflow-auto">
@@ -338,9 +364,13 @@ export default {
 							<tr v-for="(product, i) in cart" class="text-center">
 								<td>{{ product.name }}</td>
 								<td>
-									<i @click="decreaseProduct(i)" class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
+									<i
+										@click="decreaseProduct(i)"
+										class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
 									<span class="mx-2">{{ product.quantity }}</span>
-									<i @click="addProduct(i)" class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
+									<i
+										@click="addProduct(i)"
+										class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
 								</td>
 								<td>{{ product.totalPrice }} €</td>
 								<td>
@@ -361,22 +391,46 @@ export default {
 				<form v-if="cart && cart.length > 0" @submit.prevent="pay()">
 					<div class="mb-3">
 						<label for="name" class="form-label">Nome</label>
-						<input @input="validateName()" v-model="name" type="text" class="shadow-none form-control" id="name" required />
+						<input
+							@input="validateName()"
+							v-model="name"
+							type="text"
+							class="shadow-none form-control"
+							id="name"
+							required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateName()">Errore</p>
 					</div>
 					<div class="mb-3">
 						<label for="email" class="form-label">Email</label>
-						<input @input="validateEmail(email)" v-model="email" type="email" class="form-control" id="email" required />
+						<input
+							@input="validateEmail(email)"
+							v-model="email"
+							type="email"
+							class="form-control"
+							id="email"
+							required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateEmail(email)">Errore</p>
 					</div>
 					<div class="mb-3">
 						<label for="phone" class="form-label">Telefono</label>
-						<input @input="validatePhone(phone)" v-model="phone" type="text" class="form-control" id="phone" required />
+						<input
+							@input="validatePhone(phone)"
+							v-model="phone"
+							type="text"
+							class="form-control"
+							id="phone"
+							required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validatePhone(phone)">Errore</p>
 					</div>
 					<div class="mb-3">
 						<label for="address" class="form-label">Indirizzo</label>
-						<input @input="validateAddress(address)" v-model="address" type="text" class="form-control" id="address" required />
+						<input
+							@input="validateAddress(address)"
+							v-model="address"
+							type="text"
+							class="form-control"
+							id="address"
+							required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateAddress(address)">Errore</p>
 					</div>
 					<!-- <button type="submit" class="btn btn-primary">Conferma Ordine</button> -->
