@@ -62,26 +62,30 @@ export default {
 			let productExists = false;
 
 			if (cart) {
-				if (cart.length > 0) {
-					cart.forEach((element, index) => {
-						if (element.id === singleProduct.id) {
-							productExists = true;
-							cart[index].quantity += singleProduct.quantity;
-							cart[index].totalPrice = parseFloat(cart[index].totalPrice) + parseFloat(singleProduct.totalPrice);
-							let numeroStringa = cart[index].totalPrice.toString();
-							if (!numeroStringa.includes(".")) {
-								numeroStringa += ".00";
-							} else {
-								let decimali = numeroStringa.split(".")[1];
-								if (decimali.length == 1) {
-									numeroStringa += "0";
-								}
+				console.log('entrato nel primo if')
+				// if (cart.length > 0) {
+				cart.forEach((element, index) => {
+					if (element.id === singleProduct.id) {
+						console.log('entrato nel foreach')
+
+						productExists = true;
+						cart[index].quantity += singleProduct.quantity;
+						cart[index].totalPrice = parseFloat(cart[index].totalPrice) + parseFloat(singleProduct.totalPrice);
+						let numeroStringa = cart[index].totalPrice.toString();
+						if (!numeroStringa.includes(".")) {
+							numeroStringa += ".00";
+						} else {
+							let decimali = numeroStringa.split(".")[1];
+							if (decimali.length == 1) {
+								numeroStringa += "0";
 							}
-							cart[index].totalPrice = numeroStringa;
 						}
-					});
-				}
+						cart[index].totalPrice = numeroStringa;
+					}
+				});
+				// }
 			} else {
+				console.log('creato')
 				// Se non esiste creo un array vuoto
 				cart = [];
 			}
