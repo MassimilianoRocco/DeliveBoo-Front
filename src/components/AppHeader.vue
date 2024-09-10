@@ -9,12 +9,12 @@ export default {
 		return {
 			cart: null,
 			totalPayment: null,
-			name: "davide",
-			email: "davide@davide.it",
-			phone: "3311234567",
-			address: "via roma",
+			name: "",
+			email: "",
+			phone: "",
+			address: "",
 			order: {},
-
+			validation: false,
 			clientToken: null,
 			instance: null,
 			loading: false,
@@ -29,8 +29,7 @@ export default {
 				this.cart = JSON.parse(this.cart);
 				if (this.cart[i].quantity < 99) {
 					this.cart[i].quantity += 1;
-					this.cart[i].totalPrice =
-						parseFloat(this.cart[i].totalPrice) + parseFloat(this.cart[i].price);
+					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) + parseFloat(this.cart[i].price);
 					let numeroStringa = this.cart[i].totalPrice.toString();
 					if (!numeroStringa.includes(".")) {
 						numeroStringa += ".00";
@@ -54,8 +53,7 @@ export default {
 				this.cart = JSON.parse(this.cart);
 				if (this.cart[i].quantity > 1) {
 					this.cart[i].quantity -= 1;
-					this.cart[i].totalPrice =
-						parseFloat(this.cart[i].totalPrice) - parseFloat(this.cart[i].price);
+					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) - parseFloat(this.cart[i].price);
 					let numeroStringa = this.cart[i].totalPrice.toString();
 					if (!numeroStringa.includes(".")) {
 						numeroStringa += ".00";
@@ -95,15 +93,13 @@ export default {
 		},
 		updateTotalPayment() {
 			if (this.cart) {
-				this.totalPayment = this.cart
-					.reduce((total, product) => total + parseFloat(product.totalPrice), 0)
-					.toFixed(2);
+				this.totalPayment = this.cart.reduce((total, product) => total + parseFloat(product.totalPrice), 0).toFixed(2);
 			} else {
 				this.totalPayment = "0.00";
 			}
 		},
 		async submitOrder() {
-			this.pay();
+			// this.pay();
 			try {
 				const orderData = {
 					name: this.name,
@@ -172,6 +168,7 @@ export default {
 					})
 					.then((response) => {
 						if (response.data.success) {
+							this.submitOrder();
 							alert("Pagamento completato!");
 							// Puoi fare ulteriori azioni come svuotare il carrello
 							this.$emit("paymentSuccess");
@@ -185,6 +182,52 @@ export default {
 						this.loading = false;
 					});
 			});
+		},
+		validateName() {
+			if (this.name.length < 3 || this.name.length > 255) {
+				this.validation = false;
+				return false;
+			} else {
+				this.validation = true;
+				return true;
+			}
+		},
+		validateEmail(email) {
+			const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (re.test(String(email).toLowerCase())) {
+				this.validation = true;
+				return true;
+			} else {
+				this.validation = false;
+				return false;
+			}
+		},
+		validatePhone(phone) {
+			const phonePattern = /^\d{10}$/;
+
+			if (!phonePattern.test(phone)) {
+				this.validation = false;
+				return false;
+			} else {
+				this.validation = true;
+				return true;
+			}
+		},
+		validateAddress(address) {
+			if (address === "") {
+				this.validation = false;
+				return false;
+			} else {
+				this.validation = true;
+				return true;
+			}
+		},
+		validationInput() {
+			if (this.validation) {
+				return true;
+			} else {
+				return false;
+			}
 		},
 	},
 	beforeUnmount() {
@@ -239,8 +282,7 @@ export default {
 						<a href="http://localhost:5173/#video" class="nav-link px-2 text-white">Home</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista
-							Ristoranti</a>
+						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista Ristoranti</a>
 					</li>
 					<li>
 						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white">Cosa offriamo</a>
@@ -251,12 +293,14 @@ export default {
 				</ul>
 
 				<div class="d-flex align-items-center gap-3">
-					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
-						aria-controls="offcanvasScrolling" @click="initializeBraintree()">
+					<div
+						class="position-relative"
+						data-bs-toggle="offcanvas"
+						data-bs-target="#offcanvasScrolling"
+						aria-controls="offcanvasScrolling"
+						@click="initializeBraintree()">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
-						<span v-if="cart && cart.length > 0" class="my_cart_number">{{
-							cart.length
-						}}</span>
+						<span v-if="cart && cart.length > 0" class="my_cart_number">{{ cart.length }}</span>
 					</div>
 					<a href="http://127.0.0.1:8000/auth">
 						<button type="button" class="btn btn-warning my_button">Login/Registrati</button>
@@ -266,12 +310,15 @@ export default {
 		</div>
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
-		<div class="offcanvas w-50 offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-			id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+		<div
+			class="offcanvas w-50 offcanvas-end"
+			data-bs-scroll="true"
+			data-bs-backdrop="false"
+			tabindex="-1"
+			id="offcanvasScrolling"
+			aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
-				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
-					Riepilogo Carrello
-				</h5>
+				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo Carrello</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
@@ -291,8 +338,7 @@ export default {
 							<tr v-for="(product, i) in cart" class="text-center">
 								<td>{{ product.name }}</td>
 								<td>
-									<i @click="decreaseProduct(i)"
-										class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
+									<i @click="decreaseProduct(i)" class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
 									<span class="mx-2">{{ product.quantity }}</span>
 									<i @click="addProduct(i)" class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
 								</td>
@@ -312,27 +358,32 @@ export default {
 						</tr>
 					</thead>
 				</table>
-				<form v-if="cart && cart.length > 0" @submit.prevent="submitOrder">
+				<form v-if="cart && cart.length > 0" @submit.prevent="pay()">
 					<div class="mb-3">
 						<label for="name" class="form-label">Nome</label>
-						<input v-model="name" type="text" class="form-control" id="name" required />
+						<input @input="validateName()" v-model="name" type="text" class="shadow-none form-control" id="name" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validateName()">Errore</p>
 					</div>
 					<div class="mb-3">
 						<label for="email" class="form-label">Email</label>
-						<input v-model="email" type="email" class="form-control" id="email" required />
+						<input @input="validateEmail(email)" v-model="email" type="email" class="form-control" id="email" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validateEmail(email)">Errore</p>
 					</div>
 					<div class="mb-3">
 						<label for="phone" class="form-label">Telefono</label>
-						<input v-model="phone" type="text" class="form-control" id="phone" required />
+						<input @input="validatePhone(phone)" v-model="phone" type="text" class="form-control" id="phone" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validatePhone(phone)">Errore</p>
 					</div>
 					<div class="mb-3">
 						<label for="address" class="form-label">Indirizzo</label>
-						<input v-model="address" type="text" class="form-control" id="address" required />
+						<input @input="validateAddress(address)" v-model="address" type="text" class="form-control" id="address" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validateAddress(address)">Errore</p>
 					</div>
 					<!-- <button type="submit" class="btn btn-primary">Conferma Ordine</button> -->
 					<div>
 						<div id="dropin-container"></div>
-						<button :disabled="loading">Paga ora</button>
+						<button v-if="!validationInput()" disabled>Paga ora</button>
+						<button v-else :disabled="loading">Paga ora</button>
 					</div>
 				</form>
 			</div>
