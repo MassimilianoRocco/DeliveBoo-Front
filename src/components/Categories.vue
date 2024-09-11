@@ -50,7 +50,7 @@ export default {
 </script>
 
 <template>
-	<div class="row mx-0 px-0 justify-content-center">
+	<div class="row mx-0 px-0 justify-content-center mb-5">
 		<div
 			v-for="(category, indice) in categories"
 			:key="category"
