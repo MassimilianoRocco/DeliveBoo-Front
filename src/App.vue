@@ -29,8 +29,6 @@ export default {
 				this.checkScroll = false;
 			}
 		},
-
-
 	},
 	mounted() {
 		window.addEventListener(`scroll`, this.handleScroll);
@@ -42,17 +40,20 @@ export default {
 	<div class="app_Container w-100">
 		<AppHeader />
 
-		<div style="background-color: black;">
+		<div style="background-color: black">
 			<RouterView />
 		</div>
 
-		<!-- <AppServices class="mt-5" /> -->
 		<AppFooter />
 
-		<button type="button" class="btn position-fixed rounded-circle border border-3 border-black" id="btn-scroll-top"
-			v-if="checkScroll" @click="backToTop">
+		<button
+			type="button"
+			class="btn position-fixed rounded-circle"
+			id="btn-scroll-top"
+			v-if="checkScroll"
+			@click="backToTop">
 			<div class="background"></div>
-			<i class="fas fa-arrow-up"></i>
+			<i class="fas fa-arrow-up fa-lg"></i>
 		</button>
 	</div>
 </template>
@@ -64,6 +65,7 @@ export default {
 	background-color: white;
 	z-index: 1;
 	overflow: hidden;
+	border: 4px solid #912731;
 }
 
 .background {
@@ -73,9 +75,13 @@ export default {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background-image: linear-gradient(#000000, #000000);
+	background-color: #912731;
 	transition: 0.5s;
 	z-index: -1;
+}
+
+i {
+	color: #912731;
 }
 
 button:hover .background {
