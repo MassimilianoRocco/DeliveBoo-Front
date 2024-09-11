@@ -23,6 +23,8 @@ export default {
 		axios.get(url).then((response) => {
 			if (response.data.restaurant.length > 0) {
 				this.restaurant = response.data.restaurant[0];
+				this.store.activeRestaurant = response.data.restaurant[0];
+				console.log(this.store.activeRestaurant)
 			} else {
 				this.$router.push({ name: "not-found" });
 			}
