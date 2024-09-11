@@ -143,7 +143,8 @@ export default {
 					setTimeout(() => {
 						this.isSendingPayment = false;
 						this.store.orderSent = false;
-					}, 5000);
+						this.closeOffCanv();
+					}, 2000);
 					localStorage.removeItem("cart");
 				} else {
 					console.error("Failed to submit order:", response.data);
@@ -249,6 +250,10 @@ export default {
 		validationInput() {
 			return this.nameValid && this.emailValid && this.phoneValid && this.addressValid;
 		},
+
+		closeOffCanv(){
+			document.getElementById('my_closeOffCanv').click();
+		}
 	},
 	beforeUnmount() {
 		EventBus.off("refreshHeader", this.updateHeader);
@@ -358,6 +363,7 @@ export default {
 				</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
 				<button
+					id="my_closeOffCanv"
 					type="button"
 					class="btn-close"
 					data-bs-dismiss="offcanvas"
