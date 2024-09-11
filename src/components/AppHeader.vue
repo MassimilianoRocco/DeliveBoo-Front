@@ -4,7 +4,6 @@ import EventBus from "../eventBus.js";
 import dropin from "braintree-web-drop-in";
 import store from "../store/store";
 
-
 export default {
 	name: "AppHeader",
 	data() {
