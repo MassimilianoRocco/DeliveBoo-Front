@@ -54,9 +54,17 @@ export default {
 				<h1 class="text-center fw-bold display-5 my-5 pb-2 text-white">LISTA RISTORANTI</h1>
 			</div>
 
-			<h4 class="ps-3">Trovati {{ store.restaurants.length }} ristoranti</h4>
+			<h4 class="ps-3">
+				<template v-if="store.restaurants.length == 1">
+					Trovato {{ store.restaurants.length }} ristorante
+				</template>
+				<template v-else> Trovati {{ store.restaurants.length }} ristoranti </template>
+			</h4>
 			<div class="row mx-0">
-				<div v-if="store.restaurants.length > 0" v-for="singleRestaurat in store.restaurants" class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
+				<div
+					v-if="store.restaurants.length > 0"
+					v-for="singleRestaurat in store.restaurants"
+					class="col-12 col-sm-6 col-md-4 col-lg-3 p-3">
 					<RestaurantsCard :singleRestaurat="singleRestaurat" />
 				</div>
 
