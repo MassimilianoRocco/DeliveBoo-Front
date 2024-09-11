@@ -299,8 +299,8 @@ export default {
 				</ul>
 
 				<div class="d-flex align-items-center gap-3">
-					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
-						aria-controls="offcanvasScrolling" @click="initializeBraintree()">
+					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+						aria-controls="offcanvasWithBothOptions" @click="initializeBraintree()">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
 						<span v-if="cart && cart.length > 0" class="my_cart_number">{{ cart.length }}</span>
 					</div>
@@ -312,13 +312,13 @@ export default {
 		</div>
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
-		<div class="offcanvas offcanvas-end widht_offcanvas" data-bs-scroll="true" data-bs-backdrop="false"
-			tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+		<div class="offcanvas offcanvas-end widht_offcanvas" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
+			id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
 			<div class="offcanvas-header">
-				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
+				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
 					{{ store.activeRestaurant.name }} <br>Riepilogo
 					Carrello </h5>
-				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
+				<h5 v-else class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Carrello vuoto</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
