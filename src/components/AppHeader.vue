@@ -2,11 +2,13 @@
 import axios from "axios";
 import EventBus from "../eventBus.js";
 import dropin from "braintree-web-drop-in";
+import store from "../store/store";
 
 export default {
 	name: "AppHeader",
 	data() {
 		return {
+			store,
 			cart: null,
 			totalPayment: null,
 			name: "",
@@ -18,7 +20,6 @@ export default {
 			clientToken: null,
 			instance: null,
 			loading: false,
-
 			nameValid: false,
 			emailValid: false,
 			phoneValid: false,
@@ -36,8 +37,7 @@ export default {
 				this.cart = JSON.parse(this.cart);
 				if (this.cart[i].quantity < 99) {
 					this.cart[i].quantity += 1;
-					this.cart[i].totalPrice =
-						parseFloat(this.cart[i].totalPrice) + parseFloat(this.cart[i].price);
+					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) + parseFloat(this.cart[i].price);
 					let numeroStringa = this.cart[i].totalPrice.toString();
 					if (!numeroStringa.includes(".")) {
 						numeroStringa += ".00";
@@ -61,8 +61,7 @@ export default {
 				this.cart = JSON.parse(this.cart);
 				if (this.cart[i].quantity > 1) {
 					this.cart[i].quantity -= 1;
-					this.cart[i].totalPrice =
-						parseFloat(this.cart[i].totalPrice) - parseFloat(this.cart[i].price);
+					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) - parseFloat(this.cart[i].price);
 					let numeroStringa = this.cart[i].totalPrice.toString();
 					if (!numeroStringa.includes(".")) {
 						numeroStringa += ".00";
@@ -102,9 +101,7 @@ export default {
 		},
 		updateTotalPayment() {
 			if (this.cart) {
-				this.totalPayment = this.cart
-					.reduce((total, product) => total + parseFloat(product.totalPrice), 0)
-					.toFixed(2);
+				this.totalPayment = this.cart.reduce((total, product) => total + parseFloat(product.totalPrice), 0).toFixed(2);
 			} else {
 				this.totalPayment = "0.00";
 			}
@@ -133,6 +130,10 @@ export default {
 				if (response.status === 200) {
 					console.log("Order submitted successfully:", response.data);
 					this.cart = null;
+					this.store.orderSent = true;
+					setTimeout(() => {
+						this.store.orderSent = false;
+					}, 5000);
 					localStorage.removeItem("cart");
 				} else {
 					console.error("Failed to submit order:", response.data);
@@ -180,7 +181,6 @@ export default {
 					.then((response) => {
 						if (response.data.success) {
 							this.submitOrder();
-							alert("Pagamento completato!");
 							// Puoi fare ulteriori azioni come svuotare il carrello
 							this.$emit("paymentSuccess");
 						} else {
@@ -289,8 +289,12 @@ export default {
 						<a href="http://localhost:5173/#video" class="nav-link px-2 text-white">Home</a>
 					</li>
 					<li>
+<<<<<<< HEAD
 						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista
 							Ristoranti</a>
+=======
+						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista Ristoranti</a>
+>>>>>>> main
 					</li>
 					<li>
 						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white">Cosa offriamo</a>
@@ -304,9 +308,7 @@ export default {
 					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
 						aria-controls="offcanvasScrolling" @click="initializeBraintree()">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
-						<span v-if="cart && cart.length > 0" class="my_cart_number">{{
-							cart.length
-						}}</span>
+						<span v-if="cart && cart.length > 0" class="my_cart_number">{{ cart.length }}</span>
 					</div>
 					<a href="http://127.0.0.1:8000/auth">
 						<button type="button" class="btn btn-warning my_button">Login/Registrati</button>
@@ -316,12 +318,20 @@ export default {
 		</div>
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
+<<<<<<< HEAD
 		<div class="offcanvas w-50 offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
 			id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+=======
+		<div
+			class="offcanvas w-25 offcanvas-end"
+			data-bs-scroll="true"
+			data-bs-backdrop="false"
+			tabindex="-1"
+			id="offcanvasScrolling"
+			aria-labelledby="offcanvasScrollingLabel">
+>>>>>>> main
 			<div class="offcanvas-header">
-				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
-					Riepilogo Carrello
-				</h5>
+				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo Carrello</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
@@ -346,8 +356,12 @@ export default {
 							<tr v-for="(product, i) in cart" class="text-center">
 								<td>{{ product.name }}</td>
 								<td>
+<<<<<<< HEAD
 									<i @click="decreaseProduct(i)"
 										class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
+=======
+									<i @click="decreaseProduct(i)" class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
+>>>>>>> main
 									<span class="mx-2">{{ product.quantity }}</span>
 									<i @click="addProduct(i)" class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
 								</td>
@@ -367,9 +381,14 @@ export default {
 						</tr>
 					</thead>
 				</table>
+				<div class="d-flex flex-column align-items-center" v-if="store.orderSent">
+					<h3>Ordine inviato con successo!</h3>
+					<i class="fa-regular fa-circle-check fs-1" style="color: #63e6be"></i>
+				</div>
 				<form v-if="cart && cart.length > 0" @submit.prevent="pay()">
 					<div class="mb-3">
 						<label for="name" class="form-label">Nome</label>
+<<<<<<< HEAD
 						<input @input="validateName()" v-model="name" type="text" class="shadow-none form-control"
 							id="name" required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateName()">Errore</p>
@@ -391,6 +410,25 @@ export default {
 						<input @input="validateAddress(address)" v-model="address" type="text" class="form-control"
 							id="address" required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateAddress(address)">Errore</p>
+=======
+						<input @input="validateName()" v-model="name" type="text" class="shadow-none form-control" id="name" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validateName()">Inserisci un nome con almeno 3 caratteri</p>
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label">Email</label>
+						<input @input="validateEmail(email)" v-model="email" type="email" class="form-control" id="email" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validateEmail(email)">Inserisci una mail valida</p>
+					</div>
+					<div class="mb-3">
+						<label for="phone" class="form-label">Telefono</label>
+						<input @input="validatePhone(phone)" v-model="phone" type="text" class="form-control" id="phone" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validatePhone(phone)">Inserisci un numero di 10 cifre</p>
+					</div>
+					<div class="mb-3">
+						<label for="address" class="form-label">Indirizzo</label>
+						<input @input="validateAddress(address)" v-model="address" type="text" class="form-control" id="address" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validateAddress(address)">Campo obbligatorio</p>
+>>>>>>> main
 					</div>
 					<!-- <button type="submit" class="btn btn-primary">Conferma Ordine</button> -->
 					<div>
