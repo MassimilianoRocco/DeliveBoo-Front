@@ -26,8 +26,6 @@ export default {
 			addressValid: false,
 
 			dynamicBg: "none",
-
-			isVisible: true,
 		};
 	},
 	methods: {
@@ -289,12 +287,7 @@ export default {
 						<a href="http://localhost:5173/#video" class="nav-link px-2 text-white">Home</a>
 					</li>
 					<li>
-<<<<<<< HEAD
-						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista
-							Ristoranti</a>
-=======
 						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista Ristoranti</a>
->>>>>>> main
 					</li>
 					<li>
 						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white">Cosa offriamo</a>
@@ -305,8 +298,12 @@ export default {
 				</ul>
 
 				<div class="d-flex align-items-center gap-3">
-					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
-						aria-controls="offcanvasScrolling" @click="initializeBraintree()">
+					<div
+						class="position-relative"
+						data-bs-toggle="offcanvas"
+						data-bs-target="#offcanvasScrolling"
+						aria-controls="offcanvasScrolling"
+						@click="initializeBraintree()">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
 						<span v-if="cart && cart.length > 0" class="my_cart_number">{{ cart.length }}</span>
 					</div>
@@ -318,10 +315,6 @@ export default {
 		</div>
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
-<<<<<<< HEAD
-		<div class="offcanvas w-50 offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-			id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-=======
 		<div
 			class="offcanvas w-25 offcanvas-end"
 			data-bs-scroll="true"
@@ -329,18 +322,12 @@ export default {
 			tabindex="-1"
 			id="offcanvasScrolling"
 			aria-labelledby="offcanvasScrollingLabel">
->>>>>>> main
 			<div class="offcanvas-header">
 				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo Carrello</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
-
-			<div v-if="!isVisible" class="offcanvas-body">
-				ciao
-			</div>
-
-			<div v-if="isVisible" class="offcanvas-body">
+			<div class="offcanvas-body">
 				<div class="h-25 overflow-auto">
 					<!-- <h5 v-if="cart && cart.length == 0">Carrello vuoto</h5> -->
 					<table v-if="cart && cart.length > 0" class="table">
@@ -356,12 +343,7 @@ export default {
 							<tr v-for="(product, i) in cart" class="text-center">
 								<td>{{ product.name }}</td>
 								<td>
-<<<<<<< HEAD
-									<i @click="decreaseProduct(i)"
-										class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
-=======
 									<i @click="decreaseProduct(i)" class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
->>>>>>> main
 									<span class="mx-2">{{ product.quantity }}</span>
 									<i @click="addProduct(i)" class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
 								</td>
@@ -388,29 +370,6 @@ export default {
 				<form v-if="cart && cart.length > 0" @submit.prevent="pay()">
 					<div class="mb-3">
 						<label for="name" class="form-label">Nome</label>
-<<<<<<< HEAD
-						<input @input="validateName()" v-model="name" type="text" class="shadow-none form-control"
-							id="name" required />
-						<p class="alert alert-danger p-1 m-0" v-if="!validateName()">Errore</p>
-					</div>
-					<div class="mb-3">
-						<label for="email" class="form-label">Email</label>
-						<input @input="validateEmail(email)" v-model="email" type="email" class="form-control"
-							id="email" required />
-						<p class="alert alert-danger p-1 m-0" v-if="!validateEmail(email)">Errore</p>
-					</div>
-					<div class="mb-3">
-						<label for="phone" class="form-label">Telefono</label>
-						<input @input="validatePhone(phone)" v-model="phone" type="text" class="form-control" id="phone"
-							required />
-						<p class="alert alert-danger p-1 m-0" v-if="!validatePhone(phone)">Errore</p>
-					</div>
-					<div class="mb-3">
-						<label for="address" class="form-label">Indirizzo</label>
-						<input @input="validateAddress(address)" v-model="address" type="text" class="form-control"
-							id="address" required />
-						<p class="alert alert-danger p-1 m-0" v-if="!validateAddress(address)">Errore</p>
-=======
 						<input @input="validateName()" v-model="name" type="text" class="shadow-none form-control" id="name" required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateName()">Inserisci un nome con almeno 3 caratteri</p>
 					</div>
@@ -428,7 +387,6 @@ export default {
 						<label for="address" class="form-label">Indirizzo</label>
 						<input @input="validateAddress(address)" v-model="address" type="text" class="form-control" id="address" required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateAddress(address)">Campo obbligatorio</p>
->>>>>>> main
 					</div>
 					<!-- <button type="submit" class="btn btn-primary">Conferma Ordine</button> -->
 					<div>

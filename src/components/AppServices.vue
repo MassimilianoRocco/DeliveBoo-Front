@@ -78,6 +78,9 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
+    text-shadow: 10px 10px 10px black;
+    /* outline:2px solid black; */
+
     transform: translate(-50%, -50%);
 }
 
@@ -155,6 +158,15 @@ i {
     transform: scale(1.09);
     transition: .4s;
 }
+img{
+    transition: .4s;
+    filter: brightness(.6);
+}
+.card_propria:hover img{
+    
+    filter: brightness(1);
+}
+
 </style>
 
 <!-- medai quesries -->
@@ -163,6 +175,7 @@ i {
     h1 {
         padding-top: 2rem;
     }
+
     .breakpoint_small {
         display: block;
     }
@@ -179,15 +192,12 @@ i {
 
 @media (max-width:995px) {
 
-    
 
-    .container-fluido{
+
+    .container-fluido {
         height: 700px;
     }
 }
-@media (max-width:770px) {
 
- 
-
-}
+@media (max-width:770px) {}
 </style>

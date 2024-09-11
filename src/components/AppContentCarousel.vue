@@ -35,7 +35,7 @@ export default {
                 carousel.scrollLeft = 0;
                 console.log("Tornato all'inizio");
             } else {
-                carousel.scrollLeft += 1000;
+                carousel.scrollLeft += 600;
                 console.log("scrollDX");
             }
 
@@ -49,7 +49,7 @@ export default {
                 carousel.scrollLeft = carousel.scrollWidth - carousel.clientWidth;
                 console.log("Tornato alla fine");
             } else {
-                carousel.scrollLeft -= 1000;
+                carousel.scrollLeft -= 600;
                 console.log("scrollSX");
             }
 
@@ -59,16 +59,16 @@ export default {
 
     },
     mounted() {
-        // debugging
-        // setInterval(() => {
-        //     const carousel = document.getElementById('carousel');
-        //     const distanzaScrollabile = carousel.scrollWidth - carousel.clientWidth;
-        //     const distanzaScrollata = carousel.scrollLeft
+        //  debugging
+        //  setInterval(() => {
+        //      const carousel = document.getElementById('carousel');
+        //      const distanzaScrollabile = carousel.scrollWidth - carousel.clientWidth;
+        //      const distanzaScrollata = carousel.scrollLeft
 
-        //     this.scrollable = distanzaScrollabile
-        //     this.scrolled = distanzaScrollata
+        //      this.scrollable = distanzaScrollabile
+        //      this.scrolled = distanzaScrollata
 
-        // }, 20);
+        //  }, 20);
 
         document.addEventListener('mouseup', this.mouseRelease)
 
@@ -280,6 +280,9 @@ p {
     .immagine {
         width: 400px;
         /* border: 2px dashed orange; */
+    }
+    button{
+        display: none;
     }
 }
 </style>

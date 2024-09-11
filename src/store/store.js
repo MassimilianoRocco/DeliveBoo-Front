@@ -13,7 +13,7 @@ const storeData = {
 			desc: "Tieniti aggiornato su ogni fase del tuo ordine grazie al nostro sistema di tracciamento in tempo reale. Dal momento in cui effettui l'ordine fino alla consegna alla tua porta, sarai sempre informato su dove si trova il tuo cibo!",
 		},
 		{
-			title: "OFFERTE E SCLUSIVE E PROMOZIONI",
+			title: "OFFERTE ESCLUSIVE E PROMOZIONI",
 			img: "https://img.freepik.com/psd-premium/psd-special-discount-burger-fast-food-design-per-i-social-media-e-il-modello-di-post-di-instagram_949961-780.jpg?w=826",
 			desc: "Approfitta di offerte speciali e promozioni riservate ai nostri utenti. Risparmia sui tuoi ristoranti preferiti con sconti imperdibili e accumula punti fedeltà per premi e vantaggi esclusivi. Con noi, mangiare bene conviene!",
 		},

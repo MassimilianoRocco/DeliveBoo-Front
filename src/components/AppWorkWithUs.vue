@@ -124,9 +124,7 @@ h1 {
 
 <style scoped>
 @media (max-width:1250px) {
-    h1 {
-        color: fuchsia !important;
-    }
+
 .section_left{
     width: 100%;
 }
