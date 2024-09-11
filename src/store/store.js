@@ -24,6 +24,7 @@ const storeData = {
 	categoriesSelected: [],
 
 	restaurants: [],
+	activeRestaurant: null,
 
 	requestRestaurants: {
 		method: "GET",
