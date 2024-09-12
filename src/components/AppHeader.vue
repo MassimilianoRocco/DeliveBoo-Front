@@ -33,6 +33,7 @@ export default {
 			isSendingPayment: false,
 
 			dynamicBg: "none",
+			isHome: true,
 		};
 	},
 	methods: {
@@ -254,10 +255,14 @@ export default {
 		closeOffCanv() {
 			document.getElementById("my_closeOffCanv").click();
 		},
+		closeOffCanv() {
+			document.getElementById("my_closeOffCanv").click();
+		},
 	},
 	beforeUnmount() {
 		EventBus.off("refreshHeader", this.updateHeader);
 	},
+
 	mounted() {
 		window.addEventListener("scroll", () => {
 			const scrollTop = document.documentElement.scrollTop;
@@ -353,7 +358,7 @@ export default {
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
 		<div
-			class="offcanvas w-25 offcanvas-end"
+			class="offcanvas w-50 offcanvas-end"
 			data-bs-scroll="true"
 			data-bs-backdrop="true"
 			tabindex="-1"
@@ -494,6 +499,10 @@ export default {
 </template>
 
 <style scoped>
+.bg_header_noHomo {
+	background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
 button {
 	background-color: #28a745;
 	color: white;
