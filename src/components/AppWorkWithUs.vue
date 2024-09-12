@@ -22,13 +22,12 @@ export default {
 <template>
 	<div id="lavora" class="pt-5">
 		<div class="container-fluid deb mt-5">
-			<h1 class="text-center">LAVORA CON NOI</h1>
+			<h1 class="text-center ">LAVORA CON NOI</h1>
 
 			<div class="section_container d-flex">
 				<div class="section_left debug">
 					<div class="img_container debug">
-						<img
-							src="https://www.blinkco.io/wp-content/uploads/2021/05/food-delivery_featured-image.jpeg"
+						<img src="https://www.blinkco.io/wp-content/uploads/2021/05/food-delivery_featured-image.jpeg"
 							alt="" />
 					</div>
 				</div>
@@ -83,7 +82,7 @@ img {
 	padding: 3rem 1rem;
 }
 
-.section_right > * {
+.section_right>* {
 	padding: 1rem 0;
 }
 
@@ -151,23 +150,26 @@ button:hover .background {
 </style>
 
 <style scoped>
-
 @media (max-width: 1250px) {
 
 	.section_left {
 		width: 100%;
 	}
+
 	.section_right {
 		width: 100%;
 	}
+
 	.section_container {
 		display: flex;
 		flex-direction: column;
 	}
+
 	.container-fluid {
 		min-height: 80rem;
 	}
 }
+
 @media (max-width: 1000px) {
 	.container-fluid {
 		min-height: 65rem;
