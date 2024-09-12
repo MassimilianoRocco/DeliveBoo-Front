@@ -116,19 +116,19 @@ h1 {
 }
 
 #myBtn {
-	color: black;
+	color: white;
 	z-index: 2;
 	overflow: hidden;
 	border: 5px solid transparent;
 	/* border-color: #fabe25;
 	color: #fabe25; */
-	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%);
+	background-color: #912731;
 
 	padding: 0.8rem;
 }
 
 #myBtn:hover {
-	color: #ffb700;
+	color: #912731;
 	border-color: transparent;
 }
 

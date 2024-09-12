@@ -251,9 +251,9 @@ export default {
 			return this.nameValid && this.emailValid && this.phoneValid && this.addressValid;
 		},
 
-		closeOffCanv(){
-			document.getElementById('my_closeOffCanv').click();
-		}
+		closeOffCanv() {
+			document.getElementById("my_closeOffCanv").click();
+		},
 	},
 	beforeUnmount() {
 		EventBus.off("refreshHeader", this.updateHeader);
@@ -329,7 +329,6 @@ export default {
 						>
 					</li>
 				</ul>
-
 				<div class="d-flex align-items-center gap-3">
 					<div
 						class="position-relative"
@@ -337,13 +336,16 @@ export default {
 						data-bs-target="#offcanvasScrolling"
 						aria-controls="offcanvasScrolling"
 						@click="initializeBraintree()">
-						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
+						<i class="fa-solid fa-cart-shopping fs-3"></i>
 						<span v-if="cart && cart.length > 0" class="my_cart_number">{{
 							cart.length
 						}}</span>
 					</div>
 					<a href="http://127.0.0.1:8000/auth">
-						<button type="button" class="btn btn-warning my_button">Login/Registrati</button>
+						<button type="button" class="btn position-relative fw-bold" id="myBtn">
+							<div class="background"></div>
+							Login/Registrati
+						</button>
 					</a>
 				</div>
 			</div>
@@ -583,6 +585,45 @@ header {
 	height: 120px;
 	-webkit-animation: spin 2s linear infinite;
 	animation: spin 2s linear infinite;
+}
+
+#myBtn {
+	color: white;
+	z-index: 2;
+	overflow: hidden;
+	border: 3px solid white;
+	/* border-color: #fabe25;
+	color: #fabe25; */
+	/* background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%); */
+	background-color: #912731;
+	padding: 0.4rem;
+}
+
+.fa-cart-shopping {
+	/* color: ; */
+}
+
+#myBtn:hover {
+	color: #912731;
+	border-color: transparent;
+}
+
+.background {
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	transition: 0.4s;
+	z-index: -1;
+	border: none;
+}
+
+button:hover .background {
+	width: 150%;
+	height: 150%;
 }
 
 @-webkit-keyframes spin {
