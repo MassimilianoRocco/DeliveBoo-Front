@@ -37,7 +37,6 @@ const storeData = {
 		{ link: "Sfoglia i Ristoranti", url: "#" },
 		{ link: "Opzioni di Pagamento", url: "#" },
 		{ link: "Assistenza Clienti", url: "#" },
-		{ link: "FAQ", url: "#" },
 		{ link: "Termini e Condizioni", url: "#" },
 	],
 	netLinks: [
