@@ -35,13 +35,16 @@ export default {
 
 				<div class="section_right debug">
 					<h1>Unisciti al nostro Team!</h1>
-					<p>Diventa un rider e inizia a guadagnare con flessibilità!"</p>
+					<p>Diventa un rider e inizia a guadagnare con flessibilità!</p>
 					<h5>
-						Stai cercando un lavoro flessibile che si adatti ai tuoi orari? Con [Nome
-						dell'App], puoi lavorare quando vuoi e guadagnare consegnando cibo nella tua
-						città. Unisciti a noi e inizia a fare la differenza, una consegna alla volta!
+						Stai cercando un lavoro flessibile che si adatti ai tuoi orari? Con DeliveBoo,
+						puoi lavorare quando vuoi e guadagnare consegnando cibo nella tua città. Unisciti
+						a noi e inizia a fare la differenza, una consegna alla volta!
 					</h5>
-					<button class="btn btn-primary">Diventa un rider</button>
+					<button type="button" class="btn position-relative fw-bold" id="myBtn">
+						<div class="background"></div>
+						DIVENTA UN RIDER
+					</button>
 				</div>
 			</div>
 		</div>
@@ -84,9 +87,9 @@ img {
 	padding: 1rem 0;
 }
 
-button {
+/* button {
 	padding: 0.5rem !important;
-}
+} */
 
 .section_container {
 	height: 90%;
@@ -111,13 +114,45 @@ h1 {
 	height: 50rem;
 	background: white;
 }
+
+#myBtn {
+	color: black;
+	z-index: 2;
+	overflow: hidden;
+	border: 5px solid transparent;
+	/* border-color: #fabe25;
+	color: #fabe25; */
+	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%);
+
+	padding: 0.8rem;
+}
+
+#myBtn:hover {
+	color: #ffb700;
+	border-color: transparent;
+}
+
+.background {
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	transition: 0.4s;
+	z-index: -1;
+	border: none;
+}
+
+button:hover .background {
+	width: 150%;
+	height: 150%;
+}
 </style>
 
 <style scoped>
 @media (max-width: 1250px) {
-	h1 {
-		color: fuchsia !important;
-	}
 	.section_left {
 		width: 100%;
 	}

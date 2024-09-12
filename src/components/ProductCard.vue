@@ -42,7 +42,9 @@ export default {
 			if (cart) {
 				cart = JSON.parse(cart);
 				const restaurantId = product;
-				this.differenceRestaurant = cart.some((element) => element.restaurant_id !== restaurantId);
+				this.differenceRestaurant = cart.some(
+					(element) => element.restaurant_id !== restaurantId
+				);
 			}
 			let result = price * this.quantity;
 			this.totalPrice = parseFloat(result);
@@ -69,7 +71,8 @@ export default {
 
 						productExists = true;
 						cart[index].quantity += singleProduct.quantity;
-						cart[index].totalPrice = parseFloat(cart[index].totalPrice) + parseFloat(singleProduct.totalPrice);
+						cart[index].totalPrice =
+							parseFloat(cart[index].totalPrice) + parseFloat(singleProduct.totalPrice);
 						let numeroStringa = cart[index].totalPrice.toString();
 						if (!numeroStringa.includes(".")) {
 							numeroStringa += ".00";
@@ -223,5 +226,9 @@ export default {
 
 input:disabled {
 	background-color: rgba(255, 255, 255, 0);
+}
+
+.input-wrapper {
+	pointer-events: none;
 }
 </style>
