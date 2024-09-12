@@ -128,7 +128,7 @@ h1 {
 }
 
 #myBtn:hover {
-	color: #ecb019;
+	color: #ffb700;
 	border-color: transparent;
 }
 
