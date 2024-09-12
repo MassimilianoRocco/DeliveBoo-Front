@@ -300,7 +300,7 @@ export default {
 </script>
 
 <template>
-	<header class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }">
+	<header class="p-3  text-white d-flex align-items-center" :style="{ background: dynamicBg }">
 		<div class="container-fluid h-auto">
 			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
 				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
@@ -325,10 +325,14 @@ export default {
 				<div class="d-flex align-items-center gap-3">
 					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
 						aria-controls="offcanvasScrolling" @click="initializeBraintree()">
-						<i class="fa-solid fa-cart-shopping fs-3"></i>
 						<span v-if="cart && cart.length > 0" class="my_cart_number">{{
 							cart.length
 						}}</span>
+						<div class="cart-icon-container position-relative">
+							<div class="background"></div>
+							<i class="fa-solid fa-cart-shopping fs-4"
+								:class="cart && cart.length > 0 ? 'fa-beat' : ''"></i>
+						</div>
 					</div>
 					<a href="http://127.0.0.1:8000/auth">
 						<button type="button" class="btn position-relative fw-bold" id="myBtn">
@@ -341,11 +345,11 @@ export default {
 		</div>
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
-		<div class="offcanvas w-50 offcanvas-end" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
+		<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
 			id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
 				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
-					Stai ordinando da {{ cart[0].restaurant.name }}
+					Stai ordinando da <br>{{ cart[0].restaurant.name }}
 				</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
 				<button id="my_closeOffCanv" type="button" class="btn-close" data-bs-dismiss="offcanvas"
@@ -441,12 +445,16 @@ export default {
 </template>
 
 <style scoped>
+.cart-icon-container i {
+	font-size: 15px;
+}
+
 .bg_header_noHomo {
 	background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 button {
-	background-color: #28a745;
+	background-color: #912731;
 	color: white;
 	padding: 10px 20px;
 	border: none;
@@ -459,18 +467,21 @@ button:disabled {
 }
 
 .my_cart_number {
-	font-size: 10px;
+	font-size: 12px;
+	font-weight: bold;
 	width: 20px;
 	height: 20px;
 	text-align: center;
-	line-height: 20px;
+	line-height: 16px;
 	position: absolute;
-	top: -10px;
+	top: -5px;
 	right: -10px;
 	background-color: white;
-	color: red;
-	border: 1px solid red;
+	color: #912731;
+	border: 2.5px solid #912731;
 	border-radius: 50%;
+	padding-left: 0.03rem;
+	z-index: 3;
 }
 
 .my_cart_number:empty {
@@ -492,15 +503,19 @@ header {
 }
 
 .my_button {
-	background-color: #bf1b2c;
+	background-color: #912731;
 	color: white;
 	border-color: unset;
 	padding: 2px 10px;
 }
 
 @media screen and (max-width: 992px) {
+	.offcanvas {
+		width: 75%;
+	}
+
 	header {
-		height: 10vh;
+		height: 13vh;
 	}
 
 	.my_logo {
@@ -538,20 +553,46 @@ header {
 	animation: spin 2s linear infinite;
 }
 
+.cart-icon-container-wrapper {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+}
+
+.cart-icon-container {
+	position: relative;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	background-color: #912731;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2.5px solid white;
+	padding-top: 0.2rem;
+	padding-right: 0.1rem;
+	z-index: 2;
+	overflow: hidden;
+}
+
+.cart-icon-container:hover {
+	border-color: #912731;
+	color: #912731;
+}
+
+.cart-icon-container:hover .background {
+	width: 150%;
+	height: 150%;
+}
+
 #myBtn {
 	color: white;
 	z-index: 2;
 	overflow: hidden;
-	border: 3px solid white;
-	/* border-color: #fabe25;
-	color: #fabe25; */
-	/* background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%); */
+	border: 2.5px solid white;
 	background-color: #912731;
 	padding: 0.4rem;
-}
-
-.fa-cart-shopping {
-	/* color: ; */
 }
 
 #myBtn:hover {
@@ -567,7 +608,7 @@ header {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: white;
-	transition: 0.4s;
+	transition: 0.6s;
 	z-index: -1;
 	border: none;
 }
@@ -594,6 +635,12 @@ button:hover .background {
 
 	100% {
 		transform: rotate(360deg);
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.offcanvas {
+		width: 100%;
 	}
 }
 </style>

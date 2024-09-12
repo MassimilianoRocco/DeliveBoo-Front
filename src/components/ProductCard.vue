@@ -125,13 +125,15 @@ export default {
 			</template>
 		</div>
 
-		<div class="card-body text-center fw-bold">
+		<div class="card-body text-center fw-bold p-0 pt-2">
 			<p>{{ singleProduct.name }}</p>
 			<div class="">
-				<p v-if="singleProduct.ingredients" class="text-center fw-bold m-0" style="font-size: 14px">INGREDIENTI
+				<p v-if="singleProduct.ingredients" class="text-center fw-bold m-0" style="font-size: 14px">
+					INGREDIENTI
 				</p>
-				<p v-if="singleProduct.ingredients" style="height: 3.2rem; font-size: 12px" class="overflow-auto">{{
-					singleProduct.ingredients }}</p>
+				<p v-if="singleProduct.ingredients" style="height: 3.2rem; font-size: 12px" class="overflow-auto">
+					{{ singleProduct.ingredients }}
+				</p>
 			</div>
 
 			<div class="card-footer">
@@ -143,7 +145,7 @@ export default {
 						<button @click="getPrice(singleProduct.price, singleProduct.restaurant_id)" type="button"
 							class="btn btn-warning btn-sm" data-bs-toggle="modal"
 							:data-bs-target="'#' + singleProduct.id">
-							<i class="fa-solid fa-plus"></i>
+							<i class="fa-solid fa-plus "></i>
 						</button>
 					</div>
 				</div>
@@ -158,14 +160,16 @@ export default {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 v-show="differenceRestaurant">Attenzione!</h5>
-					<h5 v-show="!differenceRestaurant" class="modal-title" id="modalTitleId">Aggiungere {{
-						singleProduct.name }} al carrello</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<h5 v-show="!differenceRestaurant" class="modal-title" id="modalTitleId">
+						Aggiungere {{ singleProduct.name }} al carrello?
+					</h5>
+					<button type="button" class="btn-close btn-warning" data-bs-dismiss="modal"
+						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<h5 v-show="differenceRestaurant">
-						Hai già un ordine in corso con un altro ristorante, per effettuare un nuovo ordine svuota il
-						carrello
+						Hai già un ordine in corso con un altro ristorante, per effettuare un nuovo ordine
+						svuota il carrello
 					</h5>
 					<button v-show="differenceRestaurant" @click="deleteCart()" data-bs-dismiss="modal" type="button"
 						class="btn btn-danger">
@@ -186,18 +190,21 @@ export default {
 							<div class="d-flex align-items-center justify-content-start gap-2">
 								<i @click="decreaseQuantity(singleProduct.price, singleProduct)"
 									class="fa-solid fa-minus p-2 bg-warning rounded-circle"></i>
-								<input v-model="quantity" class="my_quantity_input" disabled />
+								<input v-model="quantity" class="my_quantity_input fs-5" disabled />
 								<i @click="addQuantity(singleProduct.price, singleProduct)"
 									class="fa-solid fa-plus p-2 bg-warning rounded-circle"></i>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				<div v-show="!differenceRestaurant" class="modal-footer">
 					<button @click="addToCart(singleProduct)" data-bs-dismiss="modal" type="button"
-						class="btn btn-warning">
-						<i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i><input :value="totalPrice + '€'"
-							class="my_total_price_input" disabled />
+						class="btn btn-warning addCartBtn">
+						<i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i>
+						<span class="input-wrapper">
+							<input :value="totalPrice + '€'" class="my_total_price_input fw-bold" disabled />
+						</span>
 					</button>
 				</div>
 			</div>
@@ -206,6 +213,10 @@ export default {
 </template>
 
 <style scoped>
+.input-wrapper {
+	pointer-events: none;
+}
+
 .fa-minus:hover,
 .fa-plus:hover {
 	transform: scale(1.2);
@@ -232,5 +243,10 @@ input:disabled {
 
 .input-wrapper {
 	pointer-events: none;
+}
+
+.addCartBtn:hover {
+	scale: 1.1;
+	transition: 0.4s;
 }
 </style>

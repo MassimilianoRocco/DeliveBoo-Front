@@ -43,13 +43,13 @@ export default {
 	<div class="myBox" id="ristoranti">
 		<div class="container">
 			<div class="col text-center">
-				<h1 class="text-center fw-bold display-5 pb-5 text-white">SCEGLI IL TUO RISTORANTE</h1>
+				<h1 class="text-center fw-bold display-5 pb-5 myColor">SCEGLI IL TUO RISTORANTE</h1>
 			</div>
 
 			<Categories />
 
 			<div class="text-center mt-5">
-				<h1 class="text-center fw-bold display-5 my-4 pt-4 text-white">LISTA RISTORANTI</h1>
+				<h1 class="text-center fw-bold display-5 my-4 pt-4 myColor">LISTA RISTORANTI</h1>
 			</div>
 
 			<h4 class="ps-3">
@@ -81,5 +81,9 @@ export default {
 	background-color: #fbab7e;
 	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%);
 	padding: 6rem 0;
+}
+
+.myColor {
+	color: #912731;
 }
 </style>

@@ -18,35 +18,44 @@ export default {
 	},
 	methods: {
 		getProducts() {
-			axios.get("http://127.0.0.1:8000/api/restaurants/" + this.store.activeRestaurant.id + "/products").then((response) => {
-				if (response.data.product) {
-					// for (let i = 0; i < response.data.product.length; i++) {
-					// 	if (response.data.product[i].type == 'Food' || response.data.product[i].type == 'Dessert') {
-					// 		this.piatti.push(response.data.product[i])
-					// 		if (!this.piatti[i].visible) {
-					// 			this.piatti.splice(i, 1)
-					// 		}
-					// 		console.log(this.piatti)
-					// 	} else {
-					// 		this.bibite.push(response.data.product[i])
-					// 		if (!this.bibite[i].visible) {
-					// 			this.bibite.splice(i, 1)
-					// 		}
-					// 	}
-					// }
-					for (let i = 0; i < response.data.product.length; i++) {
-						if (response.data.product[i].type == "Food" || response.data.product[i].type == "Dessert") {
-							if (response.data.product[i].visible) {
-								this.piatti.push(response.data.product[i]);
-							}
-						} else {
-							if (response.data.product[i].visible) {
-								this.bibite.push(response.data.product[i]);
+			axios
+				.get(
+					"http://127.0.0.1:8000/api/restaurants/" +
+					this.store.activeRestaurant.id +
+					"/products"
+				)
+				.then((response) => {
+					if (response.data.product) {
+						// for (let i = 0; i < response.data.product.length; i++) {
+						// 	if (response.data.product[i].type == 'Food' || response.data.product[i].type == 'Dessert') {
+						// 		this.piatti.push(response.data.product[i])
+						// 		if (!this.piatti[i].visible) {
+						// 			this.piatti.splice(i, 1)
+						// 		}
+						// 		console.log(this.piatti)
+						// 	} else {
+						// 		this.bibite.push(response.data.product[i])
+						// 		if (!this.bibite[i].visible) {
+						// 			this.bibite.splice(i, 1)
+						// 		}
+						// 	}
+						// }
+						for (let i = 0; i < response.data.product.length; i++) {
+							if (
+								response.data.product[i].type == "Food" ||
+								response.data.product[i].type == "Dessert"
+							) {
+								if (response.data.product[i].visible) {
+									this.piatti.push(response.data.product[i]);
+								}
+							} else {
+								if (response.data.product[i].visible) {
+									this.bibite.push(response.data.product[i]);
+								}
 							}
 						}
 					}
-				}
-			});
+				});
 		},
 	},
 	mounted() {
@@ -77,9 +86,9 @@ export default {
 				</div>
 				<div class="col ms-2">
 					<h1>{{ restaurant.name }}</h1>
-					<h4>{{ restaurant.user.email }}</h4>
 					<h4>{{ restaurant.address }}</h4>
 					<h4>{{ restaurant.phone }}</h4>
+					<h4>{{ restaurant.user.email }}</h4>
 					<p>{{ restaurant.description }}</p>
 
 					<span v-for="singleCategory in restaurant.categories" class="badge bg-warning p-2 me-2">
@@ -91,12 +100,12 @@ export default {
 
 			<div v-if="piatti && bibite">
 				<div class="row mx-0">
-					<h1 class="text-white fw-bold ms-1">I NOSTRI PIATTI</h1>
+					<h1 class="fw-bold ms-1 myColor my-4">I NOSTRI PIATTI</h1>
 					<div v-for="singleProduct in piatti" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
 						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
 
-					<h1 class="text-white fw-bold ms-1">LE NOSTRE BEVANDE</h1>
+					<h1 class="fw-bold ms-1 myColor my-4">LE NOSTRE BEVANDE</h1>
 					<div v-for="singleProduct in bibite" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
 						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
@@ -118,7 +127,7 @@ export default {
 	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%);
 }
 
-.deb {
-	border: 3px dashed blue;
+.myColor {
+	color: #912731;
 }
 </style>

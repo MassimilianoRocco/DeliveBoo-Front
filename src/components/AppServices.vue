@@ -29,9 +29,9 @@ export default {
 </script>
 
 <template>
-	<div id="servizi" class="pt-5">
-		<div class="container-fluido mt-5">
-			<h1 class="text-center pb-5">I NOSTRI SERVIZI</h1>
+	<div id="servizi">
+		<div class="container-fluido mt-5 mb-5">
+			<h1 class="text-center pb-0 pb-lg-5  ">I NOSTRI SERVIZI</h1>
 
 			<!-- contenitore WIDE per le card -->
 			<div class="breakpoint_wide">
@@ -170,7 +170,7 @@ img {
 		display: block;
 	}
 
-.breakpoint_wide {
+	.breakpoint_wide {
 		display: none;
 	}
 
@@ -186,5 +186,4 @@ img {
 }
 
 @media (max-width: 770px) {}
-
 </style>

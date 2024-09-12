@@ -20,15 +20,14 @@ export default {
 </script>
 
 <template>
-	<div id="lavora" class="pt-5">
+	<div id="lavora">
 		<div class="container-fluid deb mt-5">
-			<h1 class="text-center">LAVORA CON NOI</h1>
+			<h1 class="text-center pt-5 ">LAVORA CON NOI</h1>
 
 			<div class="section_container d-flex">
 				<div class="section_left debug">
 					<div class="img_container debug">
-						<img
-							src="https://www.blinkco.io/wp-content/uploads/2021/05/food-delivery_featured-image.jpeg"
+						<img src="https://www.blinkco.io/wp-content/uploads/2021/05/food-delivery_featured-image.jpeg"
 							alt="" />
 					</div>
 				</div>
@@ -43,6 +42,7 @@ export default {
 					</h5>
 					<button type="button" class="btn position-relative fw-bold" id="myBtn">
 						<div class="background"></div>
+						<i class="fa-solid fa-person-biking fs-5 me-1"></i>
 						DIVENTA UN RIDER
 					</button>
 				</div>
@@ -83,7 +83,7 @@ img {
 	padding: 3rem 1rem;
 }
 
-.section_right > * {
+.section_right>* {
 	padding: 1rem 0;
 }
 
@@ -94,7 +94,6 @@ img {
 .section_container {
 	height: 90%;
 	margin: 3rem 0;
-
 }
 
 h1 {
@@ -105,7 +104,7 @@ h1 {
 	margin: auto;
 	margin-top: 10rem;
 	border-radius: 30px;
-	padding: 5rem;
+	/* padding: 5rem; */
 	padding-bottom: 5rem;
 	width: 90%;
 	-webkit-box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
@@ -151,23 +150,25 @@ button:hover .background {
 </style>
 
 <style scoped>
-
 @media (max-width: 1250px) {
-
 	.section_left {
 		width: 100%;
 	}
+
 	.section_right {
 		width: 100%;
 	}
+
 	.section_container {
 		display: flex;
 		flex-direction: column;
 	}
+
 	.container-fluid {
 		min-height: 80rem;
 	}
 }
+
 @media (max-width: 1000px) {
 	.container-fluid {
 		min-height: 65rem;

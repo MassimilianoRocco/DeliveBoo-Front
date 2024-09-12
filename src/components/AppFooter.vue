@@ -36,7 +36,7 @@ export default {
                 </ul>
             </div>
 
-            <div class="align-self-start col-lg-2 col-md-4 ms-md-2">
+            <div class="align-self-start col-lg-2 col-md-4 ms-lg-2">
                 <ul>
                     <li>
                         <h4 class="round-font mt-3 mb-2 mb-sm-3 "> {{ store.headTwo }} </h4>
