@@ -43,6 +43,7 @@ export default {
 					</h5>
 					<button type="button" class="btn position-relative fw-bold" id="myBtn">
 						<div class="background"></div>
+						<i class="fa-solid fa-person-biking fs-5 me-1"></i>
 						DIVENTA UN RIDER
 					</button>
 				</div>
@@ -94,7 +95,6 @@ img {
 .section_container {
 	height: 90%;
 	margin: 3rem 0;
-
 }
 
 h1 {
@@ -151,9 +151,7 @@ button:hover .background {
 </style>
 
 <style scoped>
-
 @media (max-width: 1250px) {
-
 	.section_left {
 		width: 100%;
 	}
