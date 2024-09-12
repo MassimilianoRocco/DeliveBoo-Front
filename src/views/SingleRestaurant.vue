@@ -92,12 +92,12 @@ export default {
 			<div v-if="piatti && bibite">
 				<div class="row mx-0">
 					<h1 class="text-white fw-bold ms-1">I NOSTRI PIATTI</h1>
-					<div v-for="singleProduct in piatti" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
+					<div v-for="singleProduct in piatti" class="col-6 col-md-6 col-lg-4 col-xl-3 p-1 p-sm-3 cardHeight">
 						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
 
 					<h1 class="text-white fw-bold ms-1">LE NOSTRE BEVANDE</h1>
-					<div v-for="singleProduct in bibite" class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
+					<div v-for="singleProduct in bibite" class="col-6 col-md-6 col-lg-4 col-xl-3 p-1 p-sm-3">
 						<ProductCard v-if="singleProduct.visible" :singleProduct="singleProduct" />
 					</div>
 				</div>
@@ -121,4 +121,10 @@ export default {
 .deb {
 	border: 3px dashed blue;
 }
+
+/* @media (max-width:576px) {
+	.cardHeight {
+		height: 30rem !important;
+	}
+} */
 </style>

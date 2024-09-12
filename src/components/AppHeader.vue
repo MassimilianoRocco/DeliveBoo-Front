@@ -300,18 +300,11 @@ export default {
 </script>
 
 <template>
-	<header class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }">
+	<header class="p-3  text-white d-flex align-items-center" :style="{ background: dynamicBg }">
 		<div class="container-fluid h-auto">
-			<div
-				id="my_box_header"
-				class="d-flex align-items-center justify-content-center justify-content-lg-start">
-				<a
-					href="/"
-					class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
-					<img
-						src="/src/assets/DeliveBoo-Photoroom.png"
-						alt="logo DeliveBoo"
-						class="my_logo" />
+			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
+				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
+					<img src="/src/assets/DeliveBoo-Photoroom.png" alt="logo DeliveBoo" class="my_logo" />
 				</a>
 
 				<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -319,35 +312,25 @@ export default {
 						<a href="http://localhost:5173/#video" class="nav-link px-2 text-white">Home</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white"
-							>Lista Ristoranti</a
-						>
+						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista
+							Ristoranti</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white"
-							>Cosa offriamo</a
-						>
+						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white">Cosa offriamo</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white"
-							>Lavora con noi</a
-						>
+						<a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white">Lavora con noi</a>
 					</li>
 				</ul>
 				<div class="d-flex align-items-center gap-3">
-					<div
-						class="position-relative"
-						data-bs-toggle="offcanvas"
-						data-bs-target="#offcanvasScrolling"
-						aria-controls="offcanvasScrolling"
-						@click="initializeBraintree()">
+					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+						aria-controls="offcanvasScrolling" @click="initializeBraintree()">
 						<span v-if="cart && cart.length > 0" class="my_cart_number">{{
 							cart.length
 						}}</span>
 						<div class="cart-icon-container position-relative">
 							<div class="background"></div>
-							<i
-								class="fa-solid fa-cart-shopping fs-4"
+							<i class="fa-solid fa-cart-shopping fs-4"
 								:class="cart && cart.length > 0 ? 'fa-beat' : ''"></i>
 						</div>
 					</div>
@@ -362,23 +345,14 @@ export default {
 		</div>
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
-		<div
-			class="offcanvas w-50 offcanvas-end"
-			data-bs-scroll="true"
-			data-bs-backdrop="true"
-			tabindex="-1"
-			id="offcanvasScrolling"
-			aria-labelledby="offcanvasScrollingLabel">
+		<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
+			id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
 				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
-					Riepilogo Carrello
+					Stai ordinando da <br>{{ cart[0].restaurant.name }}
 				</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
-				<button
-					id="my_closeOffCanv"
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="offcanvas"
+				<button id="my_closeOffCanv" type="button" class="btn-close" data-bs-dismiss="offcanvas"
 					aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
@@ -397,13 +371,10 @@ export default {
 							<tr v-for="(product, i) in cart" class="text-center">
 								<td>{{ product.name }}</td>
 								<td>
-									<i
-										@click="decreaseProduct(i)"
+									<i @click="decreaseProduct(i)"
 										class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
 									<span class="mx-2">{{ product.quantity }}</span>
-									<i
-										@click="addProduct(i)"
-										class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
+									<i @click="addProduct(i)" class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
 								</td>
 								<td>{{ product.totalPrice }} €</td>
 								<td>
@@ -428,63 +399,33 @@ export default {
 				<form v-if="cart && cart.length > 0" @submit.prevent="pay()">
 					<div class="mb-3">
 						<label for="name" class="form-label">Nome</label>
-						<input
-							@input="validateName()"
-							@focus="nameTouched = true"
-							v-model="name"
-							type="text"
-							class="shadow-none form-control"
-							id="name"
-							required />
+						<input @input="validateName()" @focus="nameTouched = true" v-model="name" type="text"
+							class="shadow-none form-control" id="name" required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateName() && nameTouched">
 							Inserisci un nome con almeno 3 caratteri
 						</p>
 					</div>
 					<div class="mb-3">
 						<label for="email" class="form-label">Email</label>
-						<input
-							@input="validateEmail(email)"
-							@focus="emailTouched = true"
-							v-model="email"
-							type="email"
-							class="form-control"
-							id="email"
-							required />
-						<p
-							class="alert alert-danger p-1 m-0"
-							v-if="!validateEmail(email) && emailTouched">
+						<input @input="validateEmail(email)" @focus="emailTouched = true" v-model="email" type="email"
+							class="form-control" id="email" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validateEmail(email) && emailTouched">
 							Inserisci una mail valida
 						</p>
 					</div>
 					<div class="mb-3">
 						<label for="phone" class="form-label">Telefono</label>
-						<input
-							@input="validatePhone(phone)"
-							@focus="phoneTouched = true"
-							v-model="phone"
-							type="text"
-							class="form-control"
-							id="phone"
-							required />
-						<p
-							class="alert alert-danger p-1 m-0"
-							v-if="!validatePhone(phone) && phoneTouched">
+						<input @input="validatePhone(phone)" @focus="phoneTouched = true" v-model="phone" type="text"
+							class="form-control" id="phone" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validatePhone(phone) && phoneTouched">
 							Inserisci un numero di 10 cifre
 						</p>
 					</div>
 					<div class="mb-3">
 						<label for="address" class="form-label">Indirizzo</label>
-						<input
-							@input="validateAddress(address)"
-							@focus="addressTouched = true"
-							v-model="address"
-							type="text"
-							class="form-control"
-							id="address"
-							required />
-						<p
-							class="alert alert-danger p-1 m-0"
-							v-if="!validateAddress(address) && addressTouched">
+						<input @input="validateAddress(address)" @focus="addressTouched = true" v-model="address"
+							type="text" class="form-control" id="address" required />
+						<p class="alert alert-danger p-1 m-0" v-if="!validateAddress(address) && addressTouched">
 							Campo obbligatorio
 						</p>
 					</div>
@@ -570,8 +511,12 @@ header {
 }
 
 @media screen and (max-width: 992px) {
+	.offcanvas {
+		width: 75%;
+	}
+
 	header {
-		height: 10vh;
+		height: 13vh;
 	}
 
 	.my_logo {
@@ -678,6 +623,7 @@ button:hover .background {
 	0% {
 		-webkit-transform: rotate(0deg);
 	}
+
 	100% {
 		-webkit-transform: rotate(360deg);
 	}
@@ -687,8 +633,15 @@ button:hover .background {
 	0% {
 		transform: rotate(0deg);
 	}
+
 	100% {
 		transform: rotate(360deg);
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.offcanvas {
+		width: 100%;
 	}
 }
 </style>

@@ -20,9 +20,9 @@ export default {
 </script>
 
 <template>
-	<div id="lavora" class="pt-5">
+	<div id="lavora">
 		<div class="container-fluid deb mt-5">
-			<h1 class="text-center ">LAVORA CON NOI</h1>
+			<h1 class="text-center pt-5 ">LAVORA CON NOI</h1>
 
 			<div class="section_container d-flex">
 				<div class="section_left debug">
@@ -104,7 +104,7 @@ h1 {
 	margin: auto;
 	margin-top: 10rem;
 	border-radius: 30px;
-	padding: 5rem;
+	/* padding: 5rem; */
 	padding-bottom: 5rem;
 	width: 90%;
 	-webkit-box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
