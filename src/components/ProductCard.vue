@@ -52,6 +52,8 @@ export default {
 		},
 
 		addToCart(singleProduct) {
+			console.log(singleProduct.restaurant.name)
+			this.store.nomeRestaurantCart = singleProduct.restaurant.name;
 			this.store.orderSent = false;
 			singleProduct.quantity = this.quantity;
 			singleProduct.totalPrice = this.totalPrice;
