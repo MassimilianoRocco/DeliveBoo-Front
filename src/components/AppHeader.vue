@@ -30,8 +30,7 @@ export default {
 			phoneTouched: false,
 			addressTouched: false,
 			dynamicBg: "none",
-
-			 isHome: false
+			isHome: true,
 		};
 	},
 	methods: {
@@ -43,7 +42,9 @@ export default {
 
 				console.log("sei nella home");
 				this.isHome = true
-			} 
+				console.log(this.isHome);
+				
+			}
 			else {
 
 				console.log("non ci sei");
@@ -261,6 +262,7 @@ export default {
 		validationInput() {
 			return this.nameValid && this.emailValid && this.phoneValid && this.addressValid;
 		},
+
 	},
 	beforeUnmount() {
 		EventBus.off("refreshHeader", this.updateHeader);
@@ -268,8 +270,8 @@ export default {
 
 	mounted() {
 		window.addEventListener("scroll", () => {
-			let headerHeight = this.$refs.headerElement.offsetHeight
-			const scrollTop = document.documentElement.scrollTop;
+			let headerHeight = document.getElementById("header").offsetHeight
+			let scrollTop = document.documentElement.scrollTop;
 			if (scrollTop >= (window.innerHeight - headerHeight)) {
 				this.dynamicBg = "rgba(0, 0, 0, 0.5) !important";
 			} else {
@@ -301,9 +303,10 @@ export default {
 		this.updateTotalPayment();
 	},
 	
+
 	watch: {
 		// osservo quando cambio rotta (questi eventlistener integrati sono una favola)
-		$route (to, from){
+		$route(to, from) {
 			this.checkIfHome();
 		}
 	}
@@ -311,7 +314,8 @@ export default {
 </script>
 
 <template>
-	<header ref="headerElement" class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }" :class="{bg_header_noHomo:!isHome}" >
+	<header id="header"  class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }"
+		:class="{ bg_header_noHomo: !isHome }">
 		<div class="container-fluid h-auto">
 			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
 				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
@@ -446,8 +450,8 @@ export default {
 </template>
 
 <style scoped>
-.bg_header_noHomo{
-	background-color:rgba(0, 0, 0, 0.5) !important;
+.bg_header_noHomo {
+	background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 button {
