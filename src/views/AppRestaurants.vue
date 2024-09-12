@@ -46,12 +46,10 @@ export default {
 				<h1 class="text-center fw-bold display-5 pb-5 text-white">SCEGLI IL TUO RISTORANTE</h1>
 			</div>
 
-			<!-- <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-5"> -->
 			<Categories />
-			<!-- </div> -->
 
-			<div class="text-center">
-				<h1 class="text-center fw-bold display-5 my-5 pb-2 text-white">LISTA RISTORANTI</h1>
+			<div class="text-center mt-5">
+				<h1 class="text-center fw-bold display-5 my-4 pt-4 text-white">LISTA RISTORANTI</h1>
 			</div>
 
 			<h4 class="ps-3">
@@ -74,23 +72,6 @@ export default {
 			<AppServices />
 
 			<AppWorkWithUs />
-
-			<!-- <RestaurantsCard v-for="post in posts.data" :element="post" />
-
-			<nav aria-label="Page navigation">
-				<ul class="pagination">
-					<li
-						v-for="link in posts.links"
-						class="page-item"
-						:class="{ disabled: !link.url, active: link.active }">
-						<a
-							href="#"
-							class="page-link"
-							@click="changePage(link.url)"
-							v-html="link.label"></a>
-					</li>
-				</ul>
-			</nav> -->
 		</div>
 	</div>
 </template>
@@ -99,8 +80,6 @@ export default {
 .myBox {
 	background-color: #fbab7e;
 	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%);
-
-	padding: 7rem 0;
-	/* padding-bottom:7rem 0 ; */
+	padding: 6rem 0;
 }
 </style>

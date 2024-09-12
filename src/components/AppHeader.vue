@@ -29,6 +29,9 @@ export default {
 			emailTouched: false,
 			phoneTouched: false,
 			addressTouched: false,
+
+			isSendingPayment: false,
+
 			dynamicBg: "none",
 			isHome: true,
 		};
@@ -157,8 +160,10 @@ export default {
 					this.cart = null;
 					this.store.orderSent = true;
 					setTimeout(() => {
+						this.isSendingPayment = false;
 						this.store.orderSent = false;
-					}, 5000);
+						this.closeOffCanv();
+					}, 2000);
 					localStorage.removeItem("cart");
 				} else {
 					console.error("Failed to submit order:", response.data);
@@ -187,6 +192,7 @@ export default {
 			);
 		},
 		pay() {
+			this.isSendingPayment = true;
 			if (!this.instance) return;
 			this.loading = true;
 
@@ -216,6 +222,7 @@ export default {
 					.catch((error) => {
 						console.error("Errore nel pagamento:", error);
 						this.loading = false;
+						this.isSendingPayment = false;
 					});
 			});
 		},
@@ -263,6 +270,9 @@ export default {
 			return this.nameValid && this.emailValid && this.phoneValid && this.addressValid;
 		},
 
+		closeOffCanv(){
+			document.getElementById('my_closeOffCanv').click();
+		}
 	},
 	beforeUnmount() {
 		EventBus.off("refreshHeader", this.updateHeader);
@@ -361,7 +371,12 @@ export default {
 					Riepilogo Carrello
 				</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				<button
+					id="my_closeOffCanv"
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="offcanvas"
+					aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
 				<div class="h-25 overflow-auto">
@@ -442,6 +457,9 @@ export default {
 						<div id="dropin-container"></div>
 						<button v-if="!validationInput()" disabled>Paga ora</button>
 						<button v-else :disabled="loading">Paga ora</button>
+						<div v-if="isSendingPayment" class="loader-overlay">
+							<div class="loader"></div>
+						</div>
 					</div>
 				</form>
 			</div>
@@ -522,6 +540,46 @@ header {
 
 	#my_box_header {
 		justify-content: space-between !important;
+	}
+}
+
+.loader-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loader {
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	width: 120px;
+	height: 120px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
 	}
 }
 </style>

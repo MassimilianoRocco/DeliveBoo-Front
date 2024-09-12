@@ -1,128 +1,120 @@
 <script>
-
-
 export default {
+	components: {},
 
-
-    components: {
-
-
-    },
-
-    data() {
-        return {
-
-            // polaceholder
-        }
-    },
-    methods: {
-        // palceholdewr
-    },
-    created() {
-        // polaceholder
-    },
-    mounted() {
-        // polaceholder
-    }
-
-}
+	data() {
+		return {
+			// polaceholder
+		};
+	},
+	methods: {
+		// palceholdewr
+	},
+	created() {
+		// polaceholder
+	},
+	mounted() {
+		// polaceholder
+	},
+};
 </script>
 
 <template>
-    <div class="container-fluid" id="lavora">
-        <h1 class="text-center">LAVORA CON NOI</h1>
+	<div id="lavora" class="pt-5">
+		<div class="container-fluid deb mt-5">
+			<h1 class="text-center">LAVORA CON NOI</h1>
 
-        <div class="section_container d-flex debug">
-            <div class="section_left debug">
-                <div class="img_container debug">
-                    <img src="https://www.blinkco.io/wp-content/uploads/2021/05/food-delivery_featured-image.jpeg"
-                        alt="">
-                </div>
-            </div>
+			<div class="section_container d-flex">
+				<div class="section_left debug">
+					<div class="img_container debug">
+						<img
+							src="https://www.blinkco.io/wp-content/uploads/2021/05/food-delivery_featured-image.jpeg"
+							alt="" />
+					</div>
+				</div>
 
-            <div class="section_right debug">
-                <h1>Unisciti al nostro Team!</h1>
-                <p>
-                    Diventa un rider e inizia a guadagnare con flessibilità!"
-                </p>
-                <h5>
-                    Stai cercando un lavoro flessibile che si adatti ai tuoi orari? Con [Nome dell'App], puoi lavorare
-                    quando vuoi e guadagnare consegnando cibo nella tua città. Unisciti a noi e inizia a fare la
-                    differenza, una consegna alla volta!
-                </h5>
-                <button class="btn btn-primary">Diventa un rider</button>
-            </div>
-        </div>
-
-    </div>
-
+				<div class="section_right debug">
+					<h1>Unisciti al nostro Team!</h1>
+					<p>Diventa un rider e inizia a guadagnare con flessibilità!"</p>
+					<h5>
+						Stai cercando un lavoro flessibile che si adatti ai tuoi orari? Con [Nome
+						dell'App], puoi lavorare quando vuoi e guadagnare consegnando cibo nella tua
+						città. Unisciti a noi e inizia a fare la differenza, una consegna alla volta!
+					</h5>
+					<button class="btn btn-primary">Diventa un rider</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <style scoped>
-.debug {
-    /* border: 2px dashed red; */
+#lavora {
+	margin-top: 8rem;
+	margin-bottom: 6rem;
 }
 
 .section_left {
-    width: 60%;
-    /* width: 100%; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 60%;
+	/* width: 100%; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .img_container {
-    width: 90%;
-    aspect-ratio: 1.1;
-    overflow: hidden;
-    border-radius: 30px;
+	width: 90%;
+	aspect-ratio: 1.1;
+	overflow: hidden;
+	border-radius: 30px;
 }
 
 img {
-    width: 140%;
-    margin: 0 -20%;
+	width: 140%;
+	margin: 0 -20%;
 }
 
 .section_right {
-    width: 40%;
-    /* width: 100%; */
-    padding: 3rem 1rem;
+	width: 40%;
+	/* width: 100%; */
+	padding: 3rem 1rem;
 }
 
-.section_right>* {
-    padding: 1rem 0;
+.section_right > * {
+	padding: 1rem 0;
 }
 
 button {
-    padding: .5rem !important;
+	padding: 0.5rem !important;
 }
 
 .section_container {
-    height: 90%;
-    margin: 3rem 0;
-    /* display: flex;
+	height: 90%;
+	margin: 3rem 0;
+	/* display: flex;
     flex-direction: column; */
 }
 
 h1 {
-    font-weight: 700;
+	font-weight: 700;
 }
 
 .container-fluid {
-    margin: auto;
-    margin-top: 10rem;
-    border-radius: 30px;
-    padding: 5rem;
-    padding-bottom: 5rem;
-    width: 90%;
-    -webkit-box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
-    height: 50rem;
-    background: white;
+	margin: auto;
+	margin-top: 10rem;
+	border-radius: 30px;
+	padding: 5rem;
+	padding-bottom: 5rem;
+	width: 90%;
+	-webkit-box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
+	height: 50rem;
+	background: white;
 }
 </style>
 
 <style scoped>
+<<<<<<< HEAD
 @media (max-width:1250px) {
 
 .section_left{
@@ -135,16 +127,30 @@ h1 {
         display: flex;
         flex-direction: column;
     }
+=======
+@media (max-width: 1250px) {
+	h1 {
+		color: fuchsia !important;
+	}
+	.section_left {
+		width: 100%;
+	}
+	.section_right {
+		width: 100%;
+	}
+	.section_container {
+		display: flex;
+		flex-direction: column;
+	}
+>>>>>>> main
 
-    .container-fluid {
-
-        min-height: 80rem;
-    }
+	.container-fluid {
+		min-height: 80rem;
+	}
 }
-@media (max-width:1000px) {
-    .container-fluid {
-
-min-height: 65rem;
-}
+@media (max-width: 1000px) {
+	.container-fluid {
+		min-height: 65rem;
+	}
 }
 </style>
