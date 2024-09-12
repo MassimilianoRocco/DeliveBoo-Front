@@ -43,7 +43,7 @@ export default {
 					</h5>
 					<button type="button" class="btn position-relative fw-bold" id="myBtn">
 						<div class="background"></div>
-						Diventa un rider
+						DIVENTA UN RIDER
 					</button>
 				</div>
 			</div>
@@ -116,16 +116,19 @@ h1 {
 }
 
 #myBtn {
-	background-color: white;
+	color: black;
 	z-index: 2;
 	overflow: hidden;
-	border: 4px solid #912731;
-	color: #912731;
+	border: 5px solid transparent;
+	/* border-color: #fabe25;
+	color: #fabe25; */
+	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%);
+
 	padding: 0.8rem;
 }
 
 #myBtn:hover {
-	color: white;
+	color: #ecb019;
 	border-color: transparent;
 }
 
@@ -136,7 +139,7 @@ h1 {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background-color: #912731;
+	background-color: white;
 	transition: 0.4s;
 	z-index: -1;
 	border: none;
