@@ -467,12 +467,12 @@ button:disabled {
 }
 
 .my_cart_number {
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	width: 20px;
 	height: 20px;
 	text-align: center;
-	line-height: 20px;
+	line-height: 16px;
 	position: absolute;
 	top: -5px;
 	right: -10px;
@@ -480,8 +480,7 @@ button:disabled {
 	color: #912731;
 	border: 2.5px solid #912731;
 	border-radius: 50%;
-	padding-left: 0.04rem;
-	padding-top: 0;
+	padding-left: 0.03rem;
 	z-index: 3;
 }
 
