@@ -42,7 +42,9 @@ export default {
 			if (cart) {
 				cart = JSON.parse(cart);
 				const restaurantId = product;
-				this.differenceRestaurant = cart.some((element) => element.restaurant_id !== restaurantId);
+				this.differenceRestaurant = cart.some(
+					(element) => element.restaurant_id !== restaurantId
+				);
 			}
 			let result = price * this.quantity;
 			this.totalPrice = parseFloat(result);
@@ -69,7 +71,8 @@ export default {
 
 						productExists = true;
 						cart[index].quantity += singleProduct.quantity;
-						cart[index].totalPrice = parseFloat(cart[index].totalPrice) + parseFloat(singleProduct.totalPrice);
+						cart[index].totalPrice =
+							parseFloat(cart[index].totalPrice) + parseFloat(singleProduct.totalPrice);
 						let numeroStringa = cart[index].totalPrice.toString();
 						if (!numeroStringa.includes(".")) {
 							numeroStringa += ".00";
@@ -113,18 +116,34 @@ export default {
 	<div class="card p-0 m-0">
 		<div class="img-container ratio ratio-4x3 p-0 m-0">
 			<template v-if="singleProduct.image_path.startsWith('http')">
-				<img :src="singleProduct.image_path" class="card-img-top p-0 m-0" :alt="singleProduct.name" />
+				<img
+					:src="singleProduct.image_path"
+					class="card-img-top p-0 m-0"
+					:alt="singleProduct.name" />
 			</template>
 			<template v-else>
-				<img :src="base_url + '/storage/' + singleProduct.image_path" class="card-img-top" :alt="singleProduct.name" />
+				<img
+					:src="base_url + '/storage/' + singleProduct.image_path"
+					class="card-img-top"
+					:alt="singleProduct.name" />
 			</template>
 		</div>
 
 		<div class="card-body text-center fw-bold">
 			<p>{{ singleProduct.name }}</p>
 			<div class="">
-				<p v-if="singleProduct.ingredients" class="text-center fw-bold m-0" style="font-size: 14px">INGREDIENTI</p>
-				<p v-if="singleProduct.ingredients" style="height: 3.2rem; font-size: 12px" class="overflow-auto">{{ singleProduct.ingredients }}</p>
+				<p
+					v-if="singleProduct.ingredients"
+					class="text-center fw-bold m-0"
+					style="font-size: 14px">
+					INGREDIENTI
+				</p>
+				<p
+					v-if="singleProduct.ingredients"
+					style="height: 3.2rem; font-size: 12px"
+					class="overflow-auto">
+					{{ singleProduct.ingredients }}
+				</p>
 			</div>
 
 			<div class="card-footer">
@@ -148,28 +167,52 @@ export default {
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" :id="singleProduct.id" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+	<div
+		class="modal fade"
+		:id="singleProduct.id"
+		tabindex="-1"
+		role="dialog"
+		aria-labelledby="modalTitleId"
+		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 v-show="differenceRestaurant">Attenzione!</h5>
-					<h5 v-show="!differenceRestaurant" class="modal-title" id="modalTitleId">Aggiungere {{ singleProduct.name }} al carrello</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<h5 v-show="!differenceRestaurant" class="modal-title" id="modalTitleId">
+						Aggiungere {{ singleProduct.name }} al carrello?
+					</h5>
+					<button
+						type="button"
+						class="btn-close"
+						data-bs-dismiss="modal"
+						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<h5 v-show="differenceRestaurant">
-						Hai già un ordine in corso con un altro ristorante, per effettuare un nuovo ordine svuota il carrello
+						Hai già un ordine in corso con un altro ristorante, per effettuare un nuovo ordine
+						svuota il carrello
 					</h5>
-					<button v-show="differenceRestaurant" @click="deleteCart()" data-bs-dismiss="modal" type="button" class="btn btn-danger">
+					<button
+						v-show="differenceRestaurant"
+						@click="deleteCart()"
+						data-bs-dismiss="modal"
+						type="button"
+						class="btn btn-danger">
 						Svuota carrello
 					</button>
 					<div v-show="!differenceRestaurant" class="row">
 						<div class="col-4">
 							<template v-if="singleProduct.image_path.startsWith('http')">
-								<img :src="singleProduct.image_path" class="img-fluid" :alt="singleProduct.name" />
+								<img
+									:src="singleProduct.image_path"
+									class="img-fluid"
+									:alt="singleProduct.name" />
 							</template>
 							<template v-else>
-								<img :src="base_url + '/storage/' + singleProduct.image_path" class="img-fluid" :alt="singleProduct.name" />
+								<img
+									:src="base_url + '/storage/' + singleProduct.image_path"
+									class="img-fluid"
+									:alt="singleProduct.name" />
 							</template>
 						</div>
 						<div class="col-6">
@@ -187,9 +230,15 @@ export default {
 					</div>
 				</div>
 				<div v-show="!differenceRestaurant" class="modal-footer">
-					<button @click="addToCart(singleProduct)" data-bs-dismiss="modal" type="button" class="btn btn-warning">
-						<i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i
-						><input :value="totalPrice + '€'" class="my_total_price_input" disabled />
+					<button
+						@click="addToCart(singleProduct)"
+						data-bs-dismiss="modal"
+						type="button"
+						class="btn btn-warning">
+						<i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i>
+						<span class="input-wrapper">
+							<input :value="totalPrice + '€'" class="my_total_price_input" disabled />
+						</span>
 					</button>
 				</div>
 			</div>
@@ -220,5 +269,9 @@ export default {
 
 input:disabled {
 	background-color: rgba(255, 255, 255, 0);
+}
+
+.input-wrapper {
+	pointer-events: none;
 }
 </style>

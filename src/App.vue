@@ -68,6 +68,12 @@ export default {
 	border: 4px solid #912731;
 }
 
+#btn-scroll-top:hover {
+	bottom: 24px;
+	right: 24px;
+	border-width: 0;
+}
+
 .background {
 	width: 0;
 	height: 0;
@@ -78,6 +84,7 @@ export default {
 	background-color: #912731;
 	transition: 0.5s;
 	z-index: -1;
+	border: none;
 }
 
 i {
