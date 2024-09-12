@@ -94,8 +94,7 @@ img {
 .section_container {
 	height: 90%;
 	margin: 3rem 0;
-	/* display: flex;
-    flex-direction: column; */
+
 }
 
 h1 {
@@ -152,7 +151,9 @@ button:hover .background {
 </style>
 
 <style scoped>
+
 @media (max-width: 1250px) {
+
 	.section_left {
 		width: 100%;
 	}
@@ -163,7 +164,6 @@ button:hover .background {
 		display: flex;
 		flex-direction: column;
 	}
-
 	.container-fluid {
 		min-height: 80rem;
 	}

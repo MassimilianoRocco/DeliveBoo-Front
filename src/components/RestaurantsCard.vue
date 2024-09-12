@@ -24,18 +24,12 @@ export default {
 
 <template>
 	<div class="card shadow-lg">
-		<router-link :to="{ name: 'single-restaurant', params: { id: singleRestaurat.id } }">
+		<router-link :to="{ name: 'single-restaurant', params: { slug: singleRestaurat.slug } }">
 			<template v-if="singleRestaurat.image_path.startsWith('http')">
-				<img
-					:src="singleRestaurat.image_path"
-					class="card-img-top"
-					:alt="singleRestaurat.name" />
+				<img :src="singleRestaurat.image_path" class="card-img-top" :alt="singleRestaurat.name" />
 			</template>
 			<template v-else>
-				<img
-					:src="'http://localhost:8000' + '/storage/' + singleRestaurat.image_path"
-					class="card-img-top"
-					:alt="singleRestaurat.name" />
+				<img :src="'http://localhost:8000' + '/storage/' + singleRestaurat.image_path" class="card-img-top" :alt="singleRestaurat.name" />
 			</template>
 		</router-link>
 
@@ -43,8 +37,7 @@ export default {
 
 		<div class="card-body text-center fw-bold position-relative">
 			<p class="m-0">{{ singleRestaurat.name }}</p>
-			<div
-				class="position-absolute top-0 start-50 translate-middle d-inline-flex justify-content-center">
+			<div class="position-absolute top-0 start-50 translate-middle d-inline-flex justify-content-center">
 				<span
 					v-for="(singolaCategoria, i) in singleRestaurat.categories"
 					class="mySecondBg badge rounded-pill me-1"

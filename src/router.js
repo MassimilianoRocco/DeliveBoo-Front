@@ -13,7 +13,7 @@ const router = createRouter({
 			component: AppRestaurant,
 		},
 		{
-			path: "/restaurants/:id",
+			path: "/restaurants/:slug",
 			name: "single-restaurant",
 			component: SingleRestaurant,
 		},
@@ -21,7 +21,7 @@ const router = createRouter({
 			path: "/:pathMatch(.*)*",
 			name: "not-found",
 			component: NotFound,
-		}
+		},
 	],
 });
 

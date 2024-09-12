@@ -33,17 +33,35 @@ export default {
 			isSendingPayment: false,
 
 			dynamicBg: "none",
+			isHome: true,
 		};
 	},
 	methods: {
+		// funzione che controlla se sono nella rotta home
+		checkIfHome() {
+			console.log("la tua rotta e : ", this.$route.name);
+
+			if (this.$route.name == "appRestaurant") {
+
+				console.log("sei nella home");
+				this.isHome = true
+				console.log(this.isHome);
+				
+			}
+			else {
+
+				console.log("non ci sei");
+				this.isHome = false
+				console.log(this.isHome);
+			}
+		},
 		addProduct(i) {
 			this.cart = localStorage.getItem("cart");
 			if (this.cart) {
 				this.cart = JSON.parse(this.cart);
 				if (this.cart[i].quantity < 99) {
 					this.cart[i].quantity += 1;
-					this.cart[i].totalPrice =
-						parseFloat(this.cart[i].totalPrice) + parseFloat(this.cart[i].price);
+					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) + parseFloat(this.cart[i].price);
 					let numeroStringa = this.cart[i].totalPrice.toString();
 					if (!numeroStringa.includes(".")) {
 						numeroStringa += ".00";
@@ -67,8 +85,7 @@ export default {
 				this.cart = JSON.parse(this.cart);
 				if (this.cart[i].quantity > 1) {
 					this.cart[i].quantity -= 1;
-					this.cart[i].totalPrice =
-						parseFloat(this.cart[i].totalPrice) - parseFloat(this.cart[i].price);
+					this.cart[i].totalPrice = parseFloat(this.cart[i].totalPrice) - parseFloat(this.cart[i].price);
 					let numeroStringa = this.cart[i].totalPrice.toString();
 					if (!numeroStringa.includes(".")) {
 						numeroStringa += ".00";
@@ -108,9 +125,7 @@ export default {
 		},
 		updateTotalPayment() {
 			if (this.cart) {
-				this.totalPayment = this.cart
-					.reduce((total, product) => total + parseFloat(product.totalPrice), 0)
-					.toFixed(2);
+				this.totalPayment = this.cart.reduce((total, product) => total + parseFloat(product.totalPrice), 0).toFixed(2);
 			} else {
 				this.totalPayment = "0.00";
 			}
@@ -251,17 +266,19 @@ export default {
 			return this.nameValid && this.emailValid && this.phoneValid && this.addressValid;
 		},
 
-		closeOffCanv(){
-			document.getElementById('my_closeOffCanv').click();
-		}
+		closeOffCanv() {
+			document.getElementById("my_closeOffCanv").click();
+		},
 	},
 	beforeUnmount() {
 		EventBus.off("refreshHeader", this.updateHeader);
 	},
+
 	mounted() {
 		window.addEventListener("scroll", () => {
-			const scrollTop = document.documentElement.scrollTop;
-			if (scrollTop >= 10) {
+			let headerHeight = document.getElementById("header").offsetHeight
+			let scrollTop = document.documentElement.scrollTop;
+			if (scrollTop >= (window.innerHeight - headerHeight)) {
 				this.dynamicBg = "rgba(0, 0, 0, 0.5) !important";
 			} else {
 				this.dynamicBg = "none";
@@ -291,22 +308,24 @@ export default {
 		}
 		this.updateTotalPayment();
 	},
+	
+
+	watch: {
+		// osservo quando cambio rotta (questi eventlistener integrati sono una favola)
+		$route(to, from) {
+			this.checkIfHome();
+		}
+	}
 };
 </script>
 
 <template>
-	<header class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }">
+	<header id="header"  class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }"
+		:class="{ bg_header_noHomo: !isHome }">
 		<div class="container-fluid h-auto">
-			<div
-				id="my_box_header"
-				class="d-flex align-items-center justify-content-center justify-content-lg-start">
-				<a
-					href="/"
-					class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
-					<img
-						src="/src/assets/DeliveBoo-Photoroom.png"
-						alt="logo DeliveBoo"
-						class="my_logo" />
+			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
+				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
+					<img src="/src/assets/DeliveBoo-Photoroom.png" alt="logo DeliveBoo" class="my_logo" />
 				</a>
 
 				<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -314,33 +333,21 @@ export default {
 						<a href="http://localhost:5173/#video" class="nav-link px-2 text-white">Home</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white"
-							>Lista Ristoranti</a
-						>
+						<a href="http://localhost:5173/#ristoranti" class="nav-link px-2 text-white">Lista Ristoranti</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white"
-							>Cosa offriamo</a
-						>
+						<a href="http://localhost:5173/#servizi" class="nav-link px-2 text-white">Cosa offriamo</a>
 					</li>
 					<li>
-						<a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white"
-							>Lavora con noi</a
-						>
+						<a href="http://localhost:5173/#lavora" class="nav-link px-2 text-white">Lavora con noi</a>
 					</li>
 				</ul>
 
 				<div class="d-flex align-items-center gap-3">
-					<div
-						class="position-relative"
-						data-bs-toggle="offcanvas"
-						data-bs-target="#offcanvasScrolling"
-						aria-controls="offcanvasScrolling"
-						@click="initializeBraintree()">
+					<div class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+						aria-controls="offcanvasScrolling" @click="initializeBraintree()">
 						<i class="fa-solid fa-cart-shopping fs-3 text-warning"></i>
-						<span v-if="cart && cart.length > 0" class="my_cart_number">{{
-							cart.length
-						}}</span>
+						<span v-if="cart && cart.length > 0" class="my_cart_number">{{ cart.length }}</span>
 					</div>
 					<a href="http://127.0.0.1:8000/auth">
 						<button type="button" class="btn btn-warning my_button">Login/Registrati</button>
@@ -351,23 +358,16 @@ export default {
 		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
 		<div
-			class="offcanvas w-25 offcanvas-end"
+			class="offcanvas w-50 offcanvas-end"
 			data-bs-scroll="true"
 			data-bs-backdrop="true"
 			tabindex="-1"
 			id="offcanvasScrolling"
 			aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
-				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
-					Riepilogo Carrello
-				</h5>
+				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">Riepilogo Carrello</h5>
 				<h5 v-else class="offcanvas-title" id="offcanvasScrollingLabel">Carrello vuoto</h5>
-				<button
-					id="my_closeOffCanv"
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="offcanvas"
-					aria-label="Close"></button>
+				<button id="my_closeOffCanv" type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
 				<div class="h-25 overflow-auto">
@@ -385,13 +385,9 @@ export default {
 							<tr v-for="(product, i) in cart" class="text-center">
 								<td>{{ product.name }}</td>
 								<td>
-									<i
-										@click="decreaseProduct(i)"
-										class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
+									<i @click="decreaseProduct(i)" class="fa-solid fa-minus bg-light p-1 rounded-circle"></i>
 									<span class="mx-2">{{ product.quantity }}</span>
-									<i
-										@click="addProduct(i)"
-										class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
+									<i @click="addProduct(i)" class="fa-solid fa-plus bg-light p-1 rounded-circle"></i>
 								</td>
 								<td>{{ product.totalPrice }} €</td>
 								<td>
@@ -424,9 +420,7 @@ export default {
 							class="shadow-none form-control"
 							id="name"
 							required />
-						<p class="alert alert-danger p-1 m-0" v-if="!validateName() && nameTouched">
-							Inserisci un nome con almeno 3 caratteri
-						</p>
+						<p class="alert alert-danger p-1 m-0" v-if="!validateName() && nameTouched">Inserisci un nome con almeno 3 caratteri</p>
 					</div>
 					<div class="mb-3">
 						<label for="email" class="form-label">Email</label>
@@ -438,11 +432,7 @@ export default {
 							class="form-control"
 							id="email"
 							required />
-						<p
-							class="alert alert-danger p-1 m-0"
-							v-if="!validateEmail(email) && emailTouched">
-							Inserisci una mail valida
-						</p>
+						<p class="alert alert-danger p-1 m-0" v-if="!validateEmail(email) && emailTouched">Inserisci una mail valida</p>
 					</div>
 					<div class="mb-3">
 						<label for="phone" class="form-label">Telefono</label>
@@ -454,11 +444,7 @@ export default {
 							class="form-control"
 							id="phone"
 							required />
-						<p
-							class="alert alert-danger p-1 m-0"
-							v-if="!validatePhone(phone) && phoneTouched">
-							Inserisci un numero di 10 cifre
-						</p>
+						<p class="alert alert-danger p-1 m-0" v-if="!validatePhone(phone) && phoneTouched">Inserisci un numero di 10 cifre</p>
 					</div>
 					<div class="mb-3">
 						<label for="address" class="form-label">Indirizzo</label>
@@ -470,11 +456,7 @@ export default {
 							class="form-control"
 							id="address"
 							required />
-						<p
-							class="alert alert-danger p-1 m-0"
-							v-if="!validateAddress(address) && addressTouched">
-							Campo obbligatorio
-						</p>
+						<p class="alert alert-danger p-1 m-0" v-if="!validateAddress(address) && addressTouched">Campo obbligatorio</p>
 					</div>
 					<!-- <button type="submit" class="btn btn-primary">Conferma Ordine</button> -->
 					<div>
@@ -492,6 +474,10 @@ export default {
 </template>
 
 <style scoped>
+.bg_header_noHomo {
+	background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
 button {
 	background-color: #28a745;
 	color: white;
