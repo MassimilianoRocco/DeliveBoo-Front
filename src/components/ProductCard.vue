@@ -178,11 +178,11 @@ export default {
 				<div class="modal-header">
 					<h5 v-show="differenceRestaurant">Attenzione!</h5>
 					<h5 v-show="!differenceRestaurant" class="modal-title" id="modalTitleId">
-						Aggiungere {{ singleProduct.name }} al carrello
+						Aggiungere {{ singleProduct.name }} al carrello?
 					</h5>
 					<button
 						type="button"
-						class="btn-close"
+						class="btn-close btn-warning"
 						data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
@@ -220,7 +220,7 @@ export default {
 								<i
 									@click="decreaseQuantity(singleProduct.price, singleProduct)"
 									class="fa-solid fa-minus p-2 bg-warning rounded-circle"></i>
-								<input v-model="quantity" class="my_quantity_input" disabled />
+								<input v-model="quantity" class="my_quantity_input fs-5" disabled />
 								<i
 									@click="addQuantity(singleProduct.price, singleProduct)"
 									class="fa-solid fa-plus p-2 bg-warning rounded-circle"></i>
@@ -228,15 +228,19 @@ export default {
 						</div>
 					</div>
 				</div>
+
 				<div v-show="!differenceRestaurant" class="modal-footer">
 					<button
 						@click="addToCart(singleProduct)"
 						data-bs-dismiss="modal"
 						type="button"
-						class="btn btn-warning">
+						class="btn btn-warning addCartBtn">
 						<i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i>
 						<span class="input-wrapper">
-							<input :value="totalPrice + '€'" class="my_total_price_input" disabled />
+							<input
+								:value="totalPrice + '€'"
+								class="my_total_price_input fw-bold"
+								disabled />
 						</span>
 					</button>
 				</div>
@@ -276,5 +280,10 @@ input:disabled {
 
 .input-wrapper {
 	pointer-events: none;
+}
+
+.addCartBtn:hover {
+	scale: 1.1;
+	transition: 0.4s;
 }
 </style>
