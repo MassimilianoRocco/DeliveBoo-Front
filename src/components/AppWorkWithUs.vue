@@ -114,24 +114,9 @@ h1 {
 </style>
 
 <style scoped>
-<<<<<<< HEAD
-@media (max-width:1250px) {
 
-.section_left{
-    width: 100%;
-}
-.section_right{
-    width: 100%;
-}
-    .section_container {
-        display: flex;
-        flex-direction: column;
-    }
-=======
 @media (max-width: 1250px) {
-	h1 {
-		color: fuchsia !important;
-	}
+
 	.section_left {
 		width: 100%;
 	}
@@ -142,8 +127,6 @@ h1 {
 		display: flex;
 		flex-direction: column;
 	}
->>>>>>> main
-
 	.container-fluid {
 		min-height: 80rem;
 	}

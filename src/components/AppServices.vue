@@ -37,9 +37,7 @@ export default {
 			<div class="breakpoint_wide">
 				<div class="card-container d-flex justify-content-center text-center gap-5">
 					<!-- ciclo per stampare le card e funzione che cambia l'index della descrizione-->
-					<div
-						v-for="(element, index) of store.services"
-						class="card_propria"
+					<div v-for="(element, index) of store.services" class="card_propria"
 						@mouseover="changeDescIndex(index)">
 						<div class="card-body">
 							<img :src="element.img" alt="" />
@@ -48,10 +46,7 @@ export default {
 					</div>
 				</div>
 
-				<div
-					v-for="(element, index) in store.services"
-					:key="index"
-					:class="{ active: descIndex === index }"
+				<div v-for="(element, index) in store.services" :key="index" :class="{ active: descIndex === index }"
 					class="desc_container text-center">
 					{{ element.desc }}
 				</div>
@@ -74,26 +69,15 @@ export default {
 }
 
 .card-title {
-<<<<<<< HEAD
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    text-shadow: 10px 10px 10px black;
-    /* outline:2px solid black; */
-
-    transform: translate(-50%, -50%);
-=======
 	color: white;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
->>>>>>> main
+
 }
 
 .card_propria img {
-	/* object-fit: contain; */
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -158,7 +142,6 @@ i {
 	transition: 0.4s;
 	overflow: hidden;
 	position: relative;
-	/* background-size: cover; */
 }
 
 .card_propria:hover {
@@ -166,39 +149,28 @@ i {
 	transform: scale(1.09);
 	transition: 0.4s;
 }
-img{
-    transition: .4s;
-    filter: brightness(.6);
-}
-.card_propria:hover img{
-    
-    filter: brightness(1);
+
+img {
+	transition: .4s;
+	filter: brightness(.6);
 }
 
-</style>
+.card_propria:hover img {
 
-<!-- medai quesries -->
-<style scoped>
-<<<<<<< HEAD
-@media (max-width:1450px) {
-    h1 {
-        padding-top: 2rem;
-    }
+	filter: brightness(1);
+}
 
-    .breakpoint_small {
-        display: block;
-    }
-=======
+/* media queries  */
 @media (max-width: 1450px) {
 	h1 {
 		padding-top: 2rem;
 	}
+
 	.breakpoint_small {
 		display: block;
 	}
->>>>>>> main
 
-	.breakpoint_wide {
+.breakpoint_wide {
 		display: none;
 	}
 
@@ -207,25 +179,12 @@ img{
 	}
 }
 
-<<<<<<< HEAD
-@media (max-width:995px) {
-
-
-
-    .container-fluido {
-        height: 700px;
-    }
-}
-
-@media (max-width:770px) {}
-</style>
-=======
 @media (max-width: 995px) {
 	.container-fluido {
 		height: 700px;
 	}
 }
-@media (max-width: 770px) {
-}
+
+@media (max-width: 770px) {}
+
 </style>
->>>>>>> main
