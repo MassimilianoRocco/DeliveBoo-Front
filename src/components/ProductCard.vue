@@ -64,7 +64,7 @@ export default {
 
 			if (cart) {
 				console.log("entrato nel primo if");
-				// if (cart.length > 0) {
+	
 				cart.forEach((element, index) => {
 					if (element.id === singleProduct.id) {
 						console.log("entrato nel foreach");

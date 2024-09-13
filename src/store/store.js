@@ -48,6 +48,8 @@ const storeData = {
 	],
 	headOne: "Get EduPrime",
 	headTwo: "Networking",
+
+	checkLog: null,
 };
 
 export default reactive(storeData);

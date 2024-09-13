@@ -26,20 +26,6 @@ export default {
 				)
 				.then((response) => {
 					if (response.data.product) {
-						// for (let i = 0; i < response.data.product.length; i++) {
-						// 	if (response.data.product[i].type == 'Food' || response.data.product[i].type == 'Dessert') {
-						// 		this.piatti.push(response.data.product[i])
-						// 		if (!this.piatti[i].visible) {
-						// 			this.piatti.splice(i, 1)
-						// 		}
-						// 		console.log(this.piatti)
-						// 	} else {
-						// 		this.bibite.push(response.data.product[i])
-						// 		if (!this.bibite[i].visible) {
-						// 			this.bibite.splice(i, 1)
-						// 		}
-						// 	}
-						// }
 						for (let i = 0; i < response.data.product.length; i++) {
 							if (
 								response.data.product[i].type == "Food" ||
