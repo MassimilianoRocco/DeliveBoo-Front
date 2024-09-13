@@ -18,33 +18,26 @@ export default {
 	},
 	methods: {
 		getProducts() {
-			axios
-				.get(
-					"http://127.0.0.1:8000/api/restaurants/" +
-					this.store.activeRestaurant.id +
-					"/products"
-				)
-				.then((response) => {
-					if (response.data.product) {
-						for (let i = 0; i < response.data.product.length; i++) {
-							if (
-								response.data.product[i].type == "Food" ||
-								response.data.product[i].type == "Dessert"
-							) {
-								if (response.data.product[i].visible) {
-									this.piatti.push(response.data.product[i]);
-								}
-							} else {
-								if (response.data.product[i].visible) {
-									this.bibite.push(response.data.product[i]);
-								}
+			axios.get("http://127.0.0.1:8000/api/restaurants/" + this.store.activeRestaurant.id + "/products").then((response) => {
+				if (response.data.product) {
+					for (let i = 0; i < response.data.product.length; i++) {
+						if (response.data.product[i].type == "Food" || response.data.product[i].type == "Dessert") {
+							if (response.data.product[i].visible) {
+								this.piatti.push(response.data.product[i]);
+							}
+						} else {
+							if (response.data.product[i].visible) {
+								this.bibite.push(response.data.product[i]);
 							}
 						}
 					}
-				});
+				}
+			});
 		},
 	},
 	mounted() {
+		window.scrollTo(0, 0);
+
 		const url = `${this.store.requestRestaurants.url}/${this.$route.params.slug}`;
 
 		axios.get(url).then((response) => {

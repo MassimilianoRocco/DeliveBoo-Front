@@ -25,11 +25,9 @@ export default {
 			<h1 class="text-center pt-5 fw-bold display-5 myColor">LAVORA CON NOI</h1>
 
 			<div class="section_container d-flex">
-				<div class="section_left debug">
-					<div class="img_container debug">
-						<img
-							src="https://www.blinkco.io/wp-content/uploads/2021/05/food-delivery_featured-image.jpeg"
-							alt="" />
+				<div class="section_left">
+					<div class="img_container">
+						<img src="https://www.blinkco.io/wp-content/uploads/2021/05/food-delivery_featured-image.jpeg" alt="" />
 					</div>
 				</div>
 
@@ -37,9 +35,8 @@ export default {
 					<h1 class="myColor">Unisciti al nostro Team!</h1>
 					<p>Diventa un rider e inizia a guadagnare con flessibilità!</p>
 					<h5>
-						Stai cercando un lavoro flessibile che si adatti ai tuoi orari? Con DeliveBoo,
-						puoi lavorare quando vuoi e guadagnare consegnando cibo nella tua città. Unisciti
-						a noi e inizia a fare la differenza, una consegna alla volta!
+						Stai cercando un lavoro flessibile che si adatti ai tuoi orari? Con DeliveBoo, puoi lavorare quando vuoi e guadagnare
+						consegnando cibo nella tua città. Unisciti a noi e inizia a fare la differenza, una consegna alla volta!
 					</h5>
 					<button type="button" class="btn position-relative fw-bold" id="myBtn">
 						<div class="background"></div>
@@ -91,7 +88,6 @@ img {
 }
 
 .section_container {
-	height: 90%;
 	margin: 3rem 0;
 }
 
@@ -103,11 +99,9 @@ h1 {
 	margin: auto;
 	margin-top: 10rem;
 	border-radius: 30px;
-	padding-bottom: 5rem;
 	width: 90%;
 	-webkit-box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
 	box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
-	height: 50rem;
 	background: white;
 }
 
@@ -152,7 +146,7 @@ button:hover .background {
 	}
 }
 
-@media (max-width: 1250px) {
+/* @media (max-width: 1250px) {
 	.section_left {
 		width: 100%;
 	}
@@ -169,11 +163,20 @@ button:hover .background {
 	.container-fluid {
 		min-height: 80rem;
 	}
-}
+} */
 
 @media (max-width: 1000px) {
-	.container-fluid {
-		min-height: 65rem;
+	.section_left {
+		width: 100%;
+	}
+
+	.section_right {
+		width: 100%;
+	}
+
+	.section_container {
+		display: flex;
+		flex-direction: column;
 	}
 }
 </style>
