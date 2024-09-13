@@ -96,37 +96,37 @@ footer {
 }
 
 .social {
-    border: 3px solid white;
     border-radius: 50%;
     width: 70px;
     height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.3s;
+    transition: 404ms;
 }
 
 .facebook:hover {
     cursor: pointer;
-    border: 3px solid white;
     background: #0866FF;
 }
 
 .twitter:hover {
     cursor: pointer;
-    border: 3px solid white;
     background: #1C9CEA;
 }
 
 .instagram:hover {
     cursor: pointer;
-    border: 3px solid white;
-    background: rgb(131, 58, 180);
     background: linear-gradient(214deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
 }
 
 .social i {
     font-size: 1.5rem;
+    transition: 404ms;
+}
+
+.social:hover i{
+    color: aliceblue;
 }
 
 
