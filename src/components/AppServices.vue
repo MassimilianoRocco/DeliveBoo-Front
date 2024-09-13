@@ -31,13 +31,15 @@ export default {
 <template>
 	<div id="servizi">
 		<div class="container-fluido mt-5 mb-5">
-			<h1 class="text-center pb-0 pb-lg-5  ">I NOSTRI SERVIZI</h1>
+			<h1 class="text-center pb-0 pb-lg-5">I NOSTRI SERVIZI</h1>
 
 			<!-- contenitore WIDE per le card -->
 			<div class="breakpoint_wide">
 				<div class="card-container d-flex justify-content-center text-center gap-5">
 					<!-- ciclo per stampare le card e funzione che cambia l'index della descrizione-->
-					<div v-for="(element, index) of store.services" class="card_propria"
+					<div
+						v-for="(element, index) of store.services"
+						class="card_propria"
 						@mouseover="changeDescIndex(index)">
 						<div class="card-body">
 							<img :src="element.img" alt="" />
@@ -46,7 +48,10 @@ export default {
 					</div>
 				</div>
 
-				<div v-for="(element, index) in store.services" :key="index" :class="{ active: descIndex === index }"
+				<div
+					v-for="(element, index) in store.services"
+					:key="index"
+					:class="{ active: descIndex === index }"
 					class="desc_container text-center">
 					{{ element.desc }}
 				</div>
@@ -74,7 +79,6 @@ export default {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-
 }
 
 .card_propria img {
@@ -151,16 +155,21 @@ i {
 }
 
 img {
-	transition: .4s;
-	filter: brightness(.6);
+	transition: 0.4s;
+	filter: brightness(0.6);
 }
 
 .card_propria:hover img {
-
 	filter: brightness(1);
 }
 
 /* media queries  */
+@media (min-width: 1451px) {
+	#servizi {
+		padding-top: 4rem;
+	}
+}
+
 @media (max-width: 1450px) {
 	h1 {
 		padding-top: 2rem;
@@ -185,5 +194,6 @@ img {
 	}
 }
 
-@media (max-width: 770px) {}
+@media (max-width: 770px) {
+}
 </style>
