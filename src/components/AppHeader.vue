@@ -399,32 +399,32 @@ export default {
 				<form v-if="cart && cart.length > 0" @submit.prevent="pay()">
 					<div class="mb-3">
 						<label for="name" class="form-label">Nome</label>
-						<input @input="validateName()" @focus="nameTouched = true" v-model="name" type="text"
-							class="shadow-none form-control" id="name" required />
+						<input autocomplete="off" @input="validateName()" @focus="nameTouched = true" v-model="name"
+							type="text" class="shadow-none form-control" id="name" required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateName() && nameTouched">
 							Inserisci un nome con almeno 3 caratteri
 						</p>
 					</div>
 					<div class="mb-3">
 						<label for="email" class="form-label">Email</label>
-						<input @input="validateEmail(email)" @focus="emailTouched = true" v-model="email" type="email"
-							class="form-control" id="email" required />
+						<input autocomplete="off" @input="validateEmail(email)" @focus="emailTouched = true"
+							v-model="email" type="email" class="form-control" id="email" required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateEmail(email) && emailTouched">
 							Inserisci una mail valida
 						</p>
 					</div>
 					<div class="mb-3">
 						<label for="phone" class="form-label">Telefono</label>
-						<input @input="validatePhone(phone)" @focus="phoneTouched = true" v-model="phone" type="text"
-							class="form-control" id="phone" required />
+						<input autocomplete="off" @input="validatePhone(phone)" @focus="phoneTouched = true"
+							v-model="phone" type="text" class="form-control" id="phone" required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validatePhone(phone) && phoneTouched">
 							Inserisci un numero di 10 cifre
 						</p>
 					</div>
 					<div class="mb-3">
 						<label for="address" class="form-label">Indirizzo</label>
-						<input @input="validateAddress(address)" @focus="addressTouched = true" v-model="address"
-							type="text" class="form-control" id="address" required />
+						<input autocomplete="off" @input="validateAddress(address)" @focus="addressTouched = true"
+							v-model="address" type="text" class="form-control" id="address" required />
 						<p class="alert alert-danger p-1 m-0" v-if="!validateAddress(address) && addressTouched">
 							Campo obbligatorio
 						</p>
