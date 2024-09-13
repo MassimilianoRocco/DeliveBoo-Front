@@ -60,7 +60,6 @@ export default {
 
 .section_left {
 	width: 60%;
-	/* width: 100%; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -80,17 +79,12 @@ img {
 
 .section_right {
 	width: 40%;
-	/* width: 100%; */
 	padding: 3rem 1rem;
 }
 
 .section_right > * {
 	padding: 1rem 0;
 }
-
-/* button {
-	padding: 0.5rem !important;
-} */
 
 .section_container {
 	height: 90%;
@@ -105,7 +99,6 @@ h1 {
 	margin: auto;
 	margin-top: 10rem;
 	border-radius: 30px;
-	/* padding: 5rem; */
 	padding-bottom: 5rem;
 	width: 90%;
 	-webkit-box-shadow: 0px 0px 50px -4px rgba(0, 0, 0, 0.5);
@@ -119,8 +112,6 @@ h1 {
 	z-index: 2;
 	overflow: hidden;
 	border: 5px solid transparent;
-	/* border-color: #fabe25;
-	color: #fabe25; */
 	background-color: #912731;
 
 	padding: 0.8rem;

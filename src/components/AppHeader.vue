@@ -343,9 +343,8 @@ export default {
 				</div>
 			</div>
 		</div>
-		<!-- <button class="btn btn-primary" type="button">Enable body scrolling</button> -->
 
-		<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
+		<div class="offcanvas offcanvas-end w-50" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
 			id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
 				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
@@ -357,7 +356,6 @@ export default {
 			</div>
 			<div class="offcanvas-body">
 				<div class="h-25 overflow-auto">
-					<!-- <h5 v-if="cart && cart.length == 0">Carrello vuoto</h5> -->
 					<table v-if="cart && cart.length > 0" class="table">
 						<thead>
 							<tr class="text-center">

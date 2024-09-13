@@ -88,9 +88,6 @@ export default {
 
 <style scoped>
 footer {
-    /* background: #F5E6CC; */
-    /* background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%); */
-    /* background-image: linear-gradient(90deg, #c97b5a 0%, #f3a953 50%, #c97b5a 100%); */
     background-color: white
 }
 
@@ -164,9 +161,4 @@ li:hover a {
     }
 }
 
-/* @media (max-width: 576px) {
-    h4 {
-        margin-bottom: 0;
-    }
-} */
 </style>
