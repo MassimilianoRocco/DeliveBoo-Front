@@ -2,6 +2,8 @@
 import { RouterView } from "vue-router";
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
+import store from "./store/store";
+import axios from "axios";
 
 export default {
 	name: "App",
@@ -12,6 +14,7 @@ export default {
 
 	data() {
 		return {
+			store,
 			checkScroll: false,
 		};
 	},
@@ -32,6 +35,25 @@ export default {
 	},
 	mounted() {
 		window.addEventListener(`scroll`, this.handleScroll);
+		axios
+			.get("http://localhost:8000/api/check-ip")
+			.then((response) => {
+				if (response.data.is_authenticated) {
+					console.log("User email:", response.data.email);
+					this.store.checkLog = {
+						isAuth: true,
+						email: response.data.email,
+					};
+				} else {
+					console.log("User not logged in");
+					this.store.checkLog = {
+						isAuth: false,
+					};
+				}
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			});
 	},
 };
 </script>
@@ -46,12 +68,7 @@ export default {
 
 		<AppFooter />
 
-		<button
-			type="button"
-			class="btn position-fixed rounded-circle"
-			id="btn-scroll-top"
-			v-if="checkScroll"
-			@click="backToTop">
+		<button type="button" class="btn position-fixed rounded-circle" id="btn-scroll-top" v-if="checkScroll" @click="backToTop">
 			<div class="background"></div>
 			<i class="fas fa-arrow-up fa-lg"></i>
 		</button>
