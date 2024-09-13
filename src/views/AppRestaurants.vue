@@ -43,7 +43,7 @@ export default {
 	<div class="myBox" id="ristoranti">
 		<div class="container">
 			<div class="col text-center">
-				<h1 class="text-center fw-bold display-5 pb-5 myColor">SCEGLI IL TUO RISTORANTE</h1>
+				<h1 class="text-center fw-bold display-5 pb-5 myColor">COSA VUOI MAGIARE OGGI ?</h1>
 			</div>
 
 			<Categories />

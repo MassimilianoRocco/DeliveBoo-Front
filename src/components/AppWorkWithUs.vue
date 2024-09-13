@@ -22,7 +22,7 @@ export default {
 <template>
 	<div id="lavora">
 		<div class="container-fluid deb mt-5">
-			<h1 class="text-center pt-5">LAVORA CON NOI</h1>
+			<h1 class="text-center pt-5 fw-bold display-5 myColor">LAVORA CON NOI</h1>
 
 			<div class="section_container d-flex">
 				<div class="section_left debug">
@@ -34,7 +34,7 @@ export default {
 				</div>
 
 				<div class="section_right debug">
-					<h1>Unisciti al nostro Team!</h1>
+					<h1 class="myColor">Unisciti al nostro Team!</h1>
 					<p>Diventa un rider e inizia a guadagnare con flessibilità!</p>
 					<h5>
 						Stai cercando un lavoro flessibile che si adatti ai tuoi orari? Con DeliveBoo,
@@ -53,6 +53,10 @@ export default {
 </template>
 
 <style scoped>
+.myColor {
+	color: #912731;
+}
+
 #lavora {
 	margin-top: 8rem;
 	margin-bottom: 6rem;
