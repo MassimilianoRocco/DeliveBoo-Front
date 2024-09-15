@@ -20,10 +20,10 @@ export default {
 </script>
 
 <template>
-	<footer class="border-top border-3 border-white">
-		<div class="row align-items-center m-0">
-			<div class="align-self-start offset-lg-1 col-lg-2 offset-md-0 col-md-4">
-				<ul>
+	<footer v-if="store.existData" class="border-top border-3 border-white">
+		<div class="row justify-content-around m-0">
+			<div class="col-lg-2 col-md-5">
+				<ul class="p-0">
 					<li>
 						<h4 class="round-font text-nowrap mb-2 mb-sm-3 mt-sm-3">Scopri Deliveboo</h4>
 					</li>
@@ -33,8 +33,8 @@ export default {
 				</ul>
 			</div>
 
-			<div class="align-self-start col-lg-2 col-md-4 ms-lg-2">
-				<ul>
+			<div class="col-lg-2 col-md-5">
+				<ul class="p-0">
 					<li>
 						<h4 class="round-font mt-3 mb-2 mb-sm-3">{{ store.headTwo }}</h4>
 					</li>
@@ -44,8 +44,8 @@ export default {
 				</ul>
 			</div>
 
-			<div class="align-self-start col-lg-2 col-md-4">
-				<ul>
+			<div class="col-lg-2 col-md-5">
+				<ul class="p-0">
 					<li>
 						<h4 class="round-font mt-3 mb-2 mb-sm-3">Aiuto</h4>
 					</li>
@@ -61,8 +61,8 @@ export default {
 				</ul>
 			</div>
 
-			<div class="col-lg-4">
-				<p id="foot-desc">
+			<div class="col-lg-2 col-md-5">
+				<p id="foot-desc" class="mt-3">
 					Bopoleveroo è la tua piattaforma di food delivery che ti collega ai migliori ristoranti della città con consegne rapide e
 					affidabili. Mangia bene, ovunque tu sia!
 				</p>
@@ -85,10 +85,7 @@ export default {
 <style scoped>
 footer {
 	background-color: white;
-}
-
-.row {
-	padding: 3rem;
+	padding: 1rem 2rem;
 }
 
 .social {
@@ -96,7 +93,6 @@ footer {
 	width: 70px;
 	height: 70px;
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	transition: 404ms;
 }
@@ -127,7 +123,6 @@ footer {
 
 ul {
 	list-style: none;
-	width: 13.5rem;
 }
 
 a {
@@ -146,7 +141,6 @@ li:hover a {
 	}
 
 	#foot-icon {
-		justify-content: center;
 		margin-top: 1.5rem;
 	}
 

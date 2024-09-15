@@ -296,7 +296,7 @@ export default {
 </script>
 
 <template>
-	<header class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }">
+	<header v-if="store.existData" class="p-3 text-white d-flex align-items-center" :style="{ background: dynamicBg }">
 		<div class="container-fluid h-auto">
 			<div id="my_box_header" class="d-flex align-items-center justify-content-center justify-content-lg-start">
 				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-center text-decoration-none">
@@ -343,8 +343,13 @@ export default {
 			</div>
 		</div>
 
-		<div class="offcanvas offcanvas-end w-50" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
-			id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+		<div
+			class="offcanvas offcanvas-end w-50"
+			data-bs-scroll="true"
+			data-bs-backdrop="true"
+			tabindex="-1"
+			id="offcanvasScrolling"
+			aria-labelledby="offcanvasScrollingLabel">
 			<div class="offcanvas-header">
 				<h5 v-if="cart && cart.length > 0" class="offcanvas-title" id="offcanvasScrollingLabel">
 					Stai ordinando da <br />{{ cart[0].restaurant.name }}

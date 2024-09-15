@@ -2,6 +2,7 @@
 import { RouterView } from "vue-router";
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
+import Loader from "./components/Loader.vue";
 import store from "./store/store";
 import axios from "axios";
 
@@ -10,6 +11,7 @@ export default {
 	components: {
 		AppHeader,
 		AppFooter,
+		Loader,
 	},
 
 	data() {
@@ -59,6 +61,7 @@ export default {
 </script>
 
 <template>
+	<Loader v-if="!store.existData" />
 	<div class="app_Container w-100">
 		<AppHeader />
 

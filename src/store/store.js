@@ -1,6 +1,7 @@
 import { reactive } from "vue";
 
 const storeData = {
+	existData: false,
 	services: [
 		{
 			title: "CONSEGAN RAPIDA E AFFIDABILE",

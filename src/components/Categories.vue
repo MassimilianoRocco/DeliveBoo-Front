@@ -17,9 +17,7 @@ export default {
 
 			if (this.selectedCategories.includes(indice)) {
 				this.selectedCategories = this.selectedCategories.filter((i) => i !== indice);
-				this.store.categoriesSelected = this.store.categoriesSelected.filter(
-					(id) => id !== categoryId
-				);
+				this.store.categoriesSelected = this.store.categoriesSelected.filter((id) => id !== categoryId);
 			} else {
 				this.selectedCategories.push(indice);
 				this.store.categoriesSelected.push(categoryId);
@@ -44,27 +42,21 @@ export default {
 	mounted() {
 		axios.get("http://127.0.0.1:8000/api/categories").then((response) => {
 			this.categories = response.data.categories;
+			store.existData = true;
 		});
 	},
 };
 </script>
 
 <template>
-	<div class="row mx-0 px-0 justify-content-center mb-5">
-		<div
-			v-for="(category, indice) in categories"
-			:key="category"
-			class="col-6 col-sm-4 col-md-3 col-lg-2 p-3">
+	<div v-if="store.existData" class="row mx-0 px-0 justify-content-center mb-5">
+		<div v-for="(category, indice) in categories" :key="category" class="col-6 col-sm-4 col-md-3 col-lg-2 p-3">
 			<div
 				id="img_container"
 				class="w-100 shadow-lg rounded-4 p-2 border border-2 position-relative myBg"
 				@click="selectCategory(indice)"
 				:class="{ grayscale: !isCategorySelected(indice) && selectedCategories.length > 0 }">
-				<img
-					class="img-fluid mx-auto d-block"
-					:src="category.image_path"
-					alt=""
-					style="height: 100px" />
+				<img class="img-fluid mx-auto d-block" :src="category.image_path" alt="" style="height: 100px" />
 				<div
 					class="position-absolute top-100 start-50 translate-middle text-dark bg-white text-center fs-5 fw-bold text-nowrap badge rounded-pill">
 					{{ category.name }}

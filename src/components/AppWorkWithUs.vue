@@ -1,10 +1,12 @@
 <script>
+import store from "../store/store";
 export default {
 	components: {},
 
 	data() {
 		return {
 			// polaceholder
+			store,
 		};
 	},
 	methods: {
@@ -20,7 +22,7 @@ export default {
 </script>
 
 <template>
-	<div id="lavora">
+	<div v-if="store.existData" id="lavora">
 		<div class="container-fluid deb mt-5">
 			<h1 class="text-center pt-5 fw-bold display-5 myColor">LAVORA CON NOI</h1>
 

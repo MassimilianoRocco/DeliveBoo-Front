@@ -20,6 +20,7 @@ export default {
 		getProducts() {
 			axios.get("http://127.0.0.1:8000/api/restaurants/" + this.store.activeRestaurant.id + "/products").then((response) => {
 				if (response.data.product) {
+					store.existData = true;
 					for (let i = 0; i < response.data.product.length; i++) {
 						if (response.data.product[i].type == "Food" || response.data.product[i].type == "Dessert") {
 							if (response.data.product[i].visible) {
@@ -44,7 +45,7 @@ export default {
 			if (response.data.restaurant.length > 0) {
 				this.restaurant = response.data.restaurant[0];
 				this.store.activeRestaurant = response.data.restaurant[0];
-				console.log(this.store.activeRestaurant);
+				console.log("singlerest", this.store.activeRestaurant);
 				this.getProducts();
 			} else {
 				this.$router.push({ name: "not-found" });
@@ -55,7 +56,7 @@ export default {
 </script>
 
 <template>
-	<div class="myBox">
+	<div v-if="store.existData" class="myBox">
 		<div class="container">
 			<!-- CONTROLLO V-IF PERCHÈ LA PAGINA CARICA PRIMA DELLA CHIAMATA API -->
 
