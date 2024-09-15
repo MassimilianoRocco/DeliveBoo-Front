@@ -30,7 +30,7 @@ export default {
 	<div v-if="store.existData" id="video" class="container-fluid bg-warning my_container g-0 p-0">
 		<!-- VIDEO SECTION  -->
 		<div class="my_videoSection p-0 m-0 g-0 position-relative">
-			<div class="text_container w-100">
+			<div class="text_container w-100 z-2">
 				<img src="/src/assets/DeliveBoo-Photoroom-text.png" class="img-fluid" alt="" />
 				<h2 class="text1">I tuoi ristoranti preferiti</h2>
 				<h2 class="text2">Direttamente a casa tua!</h2>
@@ -49,7 +49,6 @@ export default {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	text-align: center;
-	z-index: 999;
 }
 
 .text1 {
