@@ -11,8 +11,6 @@ export default {
 
             scrollable: '0',
             scrolled: '0',
-            // scrollWidth: '',
-            // scrollLeft: '',
         }
     },
     methods: {
@@ -59,17 +57,6 @@ export default {
 
     },
     mounted() {
-        //  debugging
-        //  setInterval(() => {
-        //      const carousel = document.getElementById('carousel');
-        //      const distanzaScrollabile = carousel.scrollWidth - carousel.clientWidth;
-        //      const distanzaScrollata = carousel.scrollLeft
-
-        //      this.scrollable = distanzaScrollabile
-        //      this.scrolled = distanzaScrollata
-
-        //  }, 20);
-
         document.addEventListener('mouseup', this.mouseRelease)
 
     }
@@ -87,7 +74,6 @@ export default {
         <button class="sx" @click="Left()">
             <i class="fa-solid fa-chevron-left"></i>
         </button>
-        <!-- la documentazione su questi "@events" è in fondo alla pagina -->
 
         <div class="debug" id="carousel" :class="{ smooth: isSmooth, slow: isSmooth }" @mousemove="dragging"
             @mousedown="isClicked = !isClicked, isSmooth = !isSmooth">
@@ -126,7 +112,6 @@ export default {
     margin: auto;
     border-radius: 30px;
     overflow: hidden;
-    /* border: 2px dashed blue; */
 }
 
 button {
@@ -136,11 +121,14 @@ button {
     border-radius: 25px;
     background: orange;
     color: white;
-    margin: 7px;
 }
-
+.sx{
+margin-left: 20px;
+}
+.dx{
+margin-right: 20px;
+}
 .container_a {
-    /* border: 2px dashed black; */
     text-align: center;
     display: flex;
     align-items: center;
@@ -150,7 +138,6 @@ button {
 }
 
 #carousel {
-    /* border: 2px dashed greenyellow; */
     width: 1000px;
     height: 100%;
     display: flex;
@@ -163,15 +150,12 @@ button {
 }
 
 #element-container {
-    /* border: 2px dashed purple; */
     padding: 0 30px;
     min-width: 100%;
 }
 
 
 .elemento {
-
-    /* border: 2px dashed red; */
     border-radius: 30px;
     height: 550px;
     background: white;
@@ -247,9 +231,6 @@ p {
 
 @media (max-width:995px) {
 
-    /* .name {
-        color: orange;
-    } */
     .container_a {
         height: 800 !important;
     }
@@ -266,20 +247,13 @@ p {
 
 @media (max-width:770px) {
 
-    /* .name {
-        color: orange;
-    } */
-
-
     .img-container {
-        /* border: 2px dashed blue; */
         height: 50%;
 
     }
 
     .immagine {
         width: 400px;
-        /* border: 2px dashed orange; */
     }
     button{
         display: none;
