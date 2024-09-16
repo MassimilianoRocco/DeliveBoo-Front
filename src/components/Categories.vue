@@ -67,6 +67,7 @@ export default {
 </template>
 
 <style scoped>
+
 #img_container:hover {
 	transition: 0.4s ease-in-out;
 	scale: 1.05;
@@ -75,9 +76,11 @@ export default {
 
 .myBg {
 	background-color: #912731;
+	transition: .4s;
 }
 
 .grayscale {
 	filter: grayscale(100%);
+	transition: .4s;
 }
 </style>
