@@ -23,7 +23,7 @@ export default {
 
 <template>
 	<div v-if="store.existData" id="lavora">
-		<div class="container-fluid deb mt-5">
+		<div class="container-fluid deb mt-5 pb-3">
 			<h1 class="text-center pt-5 fw-bold display-5 myColor">LAVORA CON NOI</h1>
 
 			<div class="section_container d-flex">
@@ -147,25 +147,6 @@ button:hover .background {
 		padding-top: 4rem;
 	}
 }
-
-/* @media (max-width: 1250px) {
-	.section_left {
-		width: 100%;
-	}
-
-	.section_right {
-		width: 100%;
-	}
-
-	.section_container {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.container-fluid {
-		min-height: 80rem;
-	}
-} */
 
 @media (max-width: 1000px) {
 	.section_left {

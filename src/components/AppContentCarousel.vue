@@ -122,12 +122,17 @@ button {
     background: orange;
     color: white;
 }
-.sx{
-margin-left: 20px;
+
+.sx {
+    margin-left: 20px;
+    margin-right: 10px;
 }
-.dx{
-margin-right: 20px;
+
+.dx {
+    margin-left: 10px;
+    margin-right: 20px;
 }
+
 .container_a {
     text-align: center;
     display: flex;
@@ -255,7 +260,8 @@ p {
     .immagine {
         width: 400px;
     }
-    button{
+
+    button {
         display: none;
     }
 }
