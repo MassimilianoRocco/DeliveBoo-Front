@@ -85,36 +85,35 @@ export default {
 <style scoped>
 footer {
 	background-color: white;
-	padding: 1rem 2rem;
+	padding:2rem;
 }
 
 .social {
-	border-radius: 50%;
-	width: 70px;
-	height: 70px;
-	display: flex;
-	align-items: center;
-	transition: 404ms;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    margin-top: 1rem;
 }
 
 .facebook:hover {
-	cursor: pointer;
-	background: #0866ff;
+    background: #0866FF;
 }
 
 .twitter:hover {
-	cursor: pointer;
-	background: #1c9cea;
+    background: #1C9CEA;
 }
 
 .instagram:hover {
-	cursor: pointer;
-	background: linear-gradient(214deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+    background: rgb(131, 58, 180);
+    background: linear-gradient(214deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
 }
 
 .social i {
-	font-size: 1.5rem;
-	transition: 404ms;
+    font-size: 1.5rem;
 }
 
 .social:hover i {
@@ -128,7 +127,7 @@ ul {
 a {
 	color: black;
 	text-decoration: none;
-	transition: 300ms ease;
+	transition: 400ms ease;
 }
 
 li:hover a {
