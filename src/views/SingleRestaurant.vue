@@ -62,7 +62,13 @@ export default {
 
 			<div v-if="restaurant" class="row mx-0 mb-4 p-2 mx-3 bg-white rounded-4 justify-content-center">
 				<div class="col-3 p-0">
-					<img class="w-100 rounded-4" :src="restaurant.image_path" loading="lazy" />
+					<template v-if="restaurant.image_path.startsWith('http')">
+						<img class="w-100 rounded-4" :src="restaurant.image_path" loading="lazy" />
+					</template>
+					<template v-else>
+						<img class="w-100 rounded-4"
+							:src="'http://localhost:8000' + '/storage/' + restaurant.image_path" loading="lazy" />
+					</template>
 				</div>
 				<div class="col ms-2">
 					<h1>{{ restaurant.name }}</h1>
