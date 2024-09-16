@@ -1,172 +1,152 @@
 <script>
-import store from "../store/store.js"
+import store from "../store/store.js";
 export default {
-    data() {
-        return {
-            shorten: false,
-            store,
-        }
-    },
-    methods: {
-        isHover() {
-            this.shorten = true
-        },
-        isNotHover() {
-            this.shorten = false
-        }
-    },
-    mounted() {
-
-    }
-}
+	data() {
+		return {
+			shorten: false,
+			store,
+		};
+	},
+	methods: {
+		isHover() {
+			this.shorten = true;
+		},
+		isNotHover() {
+			this.shorten = false;
+		},
+	},
+	mounted() {},
+};
 </script>
 
 <template>
-    <footer class="border-top border-3 border-white">
-        <div class="row align-items-center m-0">
+	<footer v-if="store.existData" class="border-top border-3 border-white">
+		<div class="row justify-content-around m-0">
+			<div class="col-lg-2 col-md-5">
+				<ul class="p-0">
+					<li>
+						<h4 class="round-font text-nowrap mb-2 mb-sm-3 mt-sm-3">Scopri Deliveboo</h4>
+					</li>
+					<li v-for="links in store.getLinks" class="mb-2">
+						<a :href="links.url"> {{ links.link }} </a>
+					</li>
+				</ul>
+			</div>
 
-            <div class="offset-lg-1 col-lg-2 offset-md-0 col-md-4">
-                <ul>
-                    <li>
-                        <h4 class="round-font text-nowrap mb-2 mb-sm-3 mt-sm-3">Scopri Deliveboo </h4>
-                    </li>
-                    <li v-for="links in store.getLinks" class="mb-2">
-                        <a :href="links.url"> {{ links.link }} </a>
-                    </li>
-                </ul>
-            </div>
+			<div class="col-lg-2 col-md-5">
+				<ul class="p-0">
+					<li>
+						<h4 class="round-font mt-3 mb-2 mb-sm-3">{{ store.headTwo }}</h4>
+					</li>
+					<li v-for="links in store.netLinks" class="mb-2">
+						<a :href="links.url"> {{ links.link }} </a>
+					</li>
+				</ul>
+			</div>
 
-            <div class="align-self-start col-lg-2 col-md-4 ms-lg-2">
-                <ul>
-                    <li>
-                        <h4 class="round-font mt-3 mb-2 mb-sm-3 "> {{ store.headTwo }} </h4>
-                    </li>
-                    <li v-for="links in store.netLinks" class="mb-2">
-                        <a :href="links.url"> {{ links.link }} </a>
-                    </li>
-                </ul>
-            </div>
+			<div class="col-lg-2 col-md-5">
+				<ul class="p-0">
+					<li>
+						<h4 class="round-font mt-3 mb-2 mb-sm-3">Aiuto</h4>
+					</li>
+					<li class="mb-2">
+						<a href="#"> Contatti</a>
+					</li>
+					<li class="mb-2">
+						<a href="#"> FAQ </a>
+					</li>
+					<li class="mb-2">
+						<a href="#"> Tipi di cucina</a>
+					</li>
+				</ul>
+			</div>
 
-            <div class="align-self-start col-lg-2 col-md-4">
-                <ul>
-                    <li>
-                        <h4 class="round-font mt-3 mb-2 mb-sm-3">Aiuto </h4>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#"> Contatti</a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#"> FAQ </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#"> Tipi di cucina</a>
-                    </li>
-                </ul>
-            </div>
-
-
-            <div class="col-lg-4">
-                <p id="foot-desc">Bopoleveroo è la tua piattaforma di food delivery che ti collega ai migliori
-                    ristoranti della
-                    città
-                    con consegne rapide e affidabili. Mangia bene, ovunque tu sia!</p>
-                <div id="foot-icon" class="d-flex flex-row gap-4">
-                    <div class="social facebook">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </div>
-                    <div class="social twitter">
-                        <i class="fa-brands fa-twitter"></i>
-                    </div>
-                    <div class="social instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+			<div class="col-lg-2 col-md-5">
+				<p id="foot-desc" class="mt-3">
+					Bopoleveroo è la tua piattaforma di food delivery che ti collega ai migliori ristoranti della città con consegne rapide e
+					affidabili. Mangia bene, ovunque tu sia!
+				</p>
+				<div id="foot-icon" class="d-flex flex-row gap-4">
+					<div class="social facebook">
+						<i class="fa-brands fa-facebook-f"></i>
+					</div>
+					<div class="social twitter">
+						<i class="fa-brands fa-twitter"></i>
+					</div>
+					<div class="social instagram">
+						<i class="fa-brands fa-instagram"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 </template>
 
 <style scoped>
 footer {
-    /* background: #F5E6CC; */
-    /* background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 50%, #fbab7e 100%); */
-    /* background-image: linear-gradient(90deg, #c97b5a 0%, #f3a953 50%, #c97b5a 100%); */
-    background-color: white
-}
-
-.row {
-    padding: 3rem;
+	background-color: white;
+	padding: 1rem 2rem;
 }
 
 .social {
-    border: 3px solid white;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.3s;
+	border-radius: 50%;
+	width: 70px;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	transition: 404ms;
 }
 
 .facebook:hover {
-    cursor: pointer;
-    border: 3px solid white;
-    background: #0866FF;
+	cursor: pointer;
+	background: #0866ff;
 }
 
 .twitter:hover {
-    cursor: pointer;
-    border: 3px solid white;
-    background: #1C9CEA;
+	cursor: pointer;
+	background: #1c9cea;
 }
 
 .instagram:hover {
-    cursor: pointer;
-    border: 3px solid white;
-    background: rgb(131, 58, 180);
-    background: linear-gradient(214deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+	cursor: pointer;
+	background: linear-gradient(214deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
 }
 
 .social i {
-    font-size: 1.5rem;
+	font-size: 1.5rem;
+	transition: 404ms;
 }
 
+.social:hover i {
+	color: aliceblue;
+}
 
 ul {
-    list-style: none;
-    width: 13.5rem;
+	list-style: none;
 }
 
 a {
-    color: black;
-    text-decoration: none;
-    transition: 300ms ease;
+	color: black;
+	text-decoration: none;
+	transition: 300ms ease;
 }
 
 li:hover a {
-    color: orangered;
+	color: orangered;
 }
 
 @media (max-width: 992px) {
-    #foot-desc {
-        display: none;
-    }
+	#foot-desc {
+		display: none;
+	}
 
-    #foot-icon {
-        justify-content: center;
-        margin-top: 1.5rem;
-    }
+	#foot-icon {
+		margin-top: 1.5rem;
+	}
 
-    .social {
-        width: 50px;
-        height: 50px
-    }
+	.social {
+		width: 50px;
+		height: 50px;
+	}
 }
-
-/* @media (max-width: 576px) {
-    h4 {
-        margin-bottom: 0;
-    }
-} */
 </style>

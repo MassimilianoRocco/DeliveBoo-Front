@@ -23,7 +23,7 @@ export default {
 </script>
 
 <template>
-	<div class="card shadow-lg">
+	<div v-if="store.existData" @click="store.existData = false" class="card shadow-lg">
 		<router-link :to="{ name: 'single-restaurant', params: { slug: singleRestaurat.slug } }">
 			<template v-if="singleRestaurat.image_path.startsWith('http')">
 				<img :src="singleRestaurat.image_path" class="card-img-top" :alt="singleRestaurat.name" />

@@ -1,6 +1,7 @@
 import { reactive } from "vue";
 
 const storeData = {
+	existData: false,
 	services: [
 		{
 			title: "CONSEGAN RAPIDA E AFFIDABILE",
@@ -48,6 +49,8 @@ const storeData = {
 	],
 	headOne: "Get EduPrime",
 	headTwo: "Networking",
+
+	checkLog: null,
 };
 
 export default reactive(storeData);

@@ -29,18 +29,15 @@ export default {
 </script>
 
 <template>
-	<div id="servizi">
+	<div v-if="store.existData" id="servizi">
 		<div class="container-fluido mt-5 mb-5">
-			<h1 class="text-center pb-0 pb-lg-5">I NOSTRI SERVIZI</h1>
+			<h1 class="text-center pb-0 pb-lg-5 myColor fw-bold display-5">I NOSTRI SERVIZI</h1>
 
 			<!-- contenitore WIDE per le card -->
 			<div class="breakpoint_wide">
 				<div class="card-container d-flex justify-content-center text-center gap-5">
 					<!-- ciclo per stampare le card e funzione che cambia l'index della descrizione-->
-					<div
-						v-for="(element, index) of store.services"
-						class="card_propria"
-						@mouseover="changeDescIndex(index)">
+					<div v-for="(element, index) of store.services" class="card_propria" @mouseover="changeDescIndex(index)">
 						<div class="card-body">
 							<img :src="element.img" alt="" />
 							<p class="card-title fw-bold">{{ element.title }}</p>
@@ -146,6 +143,9 @@ i {
 	transition: 0.4s;
 	overflow: hidden;
 	position: relative;
+}
+.myColor {
+	color: #912731;
 }
 
 .card_propria:hover {

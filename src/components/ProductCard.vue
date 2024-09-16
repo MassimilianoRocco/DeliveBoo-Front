@@ -42,9 +42,7 @@ export default {
 			if (cart) {
 				cart = JSON.parse(cart);
 				const restaurantId = product;
-				this.differenceRestaurant = cart.some(
-					(element) => element.restaurant_id !== restaurantId
-				);
+				this.differenceRestaurant = cart.some((element) => element.restaurant_id !== restaurantId);
 			}
 			let result = price * this.quantity;
 			this.totalPrice = parseFloat(result);
@@ -66,15 +64,14 @@ export default {
 
 			if (cart) {
 				console.log("entrato nel primo if");
-				// if (cart.length > 0) {
+
 				cart.forEach((element, index) => {
 					if (element.id === singleProduct.id) {
 						console.log("entrato nel foreach");
 
 						productExists = true;
 						cart[index].quantity += singleProduct.quantity;
-						cart[index].totalPrice =
-							parseFloat(cart[index].totalPrice) + parseFloat(singleProduct.totalPrice);
+						cart[index].totalPrice = parseFloat(cart[index].totalPrice) + parseFloat(singleProduct.totalPrice);
 						let numeroStringa = cart[index].totalPrice.toString();
 						if (!numeroStringa.includes(".")) {
 							numeroStringa += ".00";
@@ -109,7 +106,7 @@ export default {
 			EventBus.emit("refreshHeader");
 		},
 	},
-	mounted() { },
+	mounted() {},
 };
 </script>
 
@@ -120,17 +117,14 @@ export default {
 				<img :src="singleProduct.image_path" class="card-img-top p-0 m-0" :alt="singleProduct.name" />
 			</template>
 			<template v-else>
-				<img :src="base_url + '/storage/' + singleProduct.image_path" class="card-img-top"
-					:alt="singleProduct.name" />
+				<img :src="base_url + '/storage/' + singleProduct.image_path" class="card-img-top" :alt="singleProduct.name" />
 			</template>
 		</div>
 
 		<div class="card-body text-center fw-bold p-0 pt-2">
 			<p>{{ singleProduct.name }}</p>
 			<div class="">
-				<p v-if="singleProduct.ingredients" class="text-center fw-bold m-0" style="font-size: 14px">
-					INGREDIENTI
-				</p>
+				<p v-if="singleProduct.ingredients" class="text-center fw-bold m-0" style="font-size: 14px">INGREDIENTI</p>
 				<p v-if="singleProduct.ingredients" style="height: 3.2rem; font-size: 12px" class="overflow-auto">
 					{{ singleProduct.ingredients }}
 				</p>
@@ -142,10 +136,13 @@ export default {
 						<p class="m-0 pe-sm-0 pe-md-2">{{ singleProduct.price }}€</p>
 					</div>
 					<div class="col-sm-12 col-md-3">
-						<button @click="getPrice(singleProduct.price, singleProduct.restaurant_id)" type="button"
-							class="btn btn-warning btn-sm" data-bs-toggle="modal"
+						<button
+							@click="getPrice(singleProduct.price, singleProduct.restaurant_id)"
+							type="button"
+							class="btn btn-warning btn-sm"
+							data-bs-toggle="modal"
 							:data-bs-target="'#' + singleProduct.id">
-							<i class="fa-solid fa-plus "></i>
+							<i class="fa-solid fa-plus"></i>
 						</button>
 					</div>
 				</div>
@@ -154,25 +151,19 @@ export default {
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" :id="singleProduct.id" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
-		aria-hidden="true">
+	<div class="modal fade" :id="singleProduct.id" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 v-show="differenceRestaurant">Attenzione!</h5>
-					<h5 v-show="!differenceRestaurant" class="modal-title" id="modalTitleId">
-						Aggiungere {{ singleProduct.name }} al carrello?
-					</h5>
-					<button type="button" class="btn-close btn-warning" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+					<h5 v-show="!differenceRestaurant" class="modal-title" id="modalTitleId">Aggiungere {{ singleProduct.name }} al carrello?</h5>
+					<button type="button" class="btn-close btn-warning" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<h5 v-show="differenceRestaurant">
-						Hai già un ordine in corso con un altro ristorante, per effettuare un nuovo ordine
-						svuota il carrello
+						Hai già un ordine in corso con un altro ristorante, per effettuare un nuovo ordine svuota il carrello
 					</h5>
-					<button v-show="differenceRestaurant" @click="deleteCart()" data-bs-dismiss="modal" type="button"
-						class="btn btn-danger">
+					<button v-show="differenceRestaurant" @click="deleteCart()" data-bs-dismiss="modal" type="button" class="btn btn-danger">
 						Svuota carrello
 					</button>
 					<div v-show="!differenceRestaurant" class="row">
@@ -181,17 +172,18 @@ export default {
 								<img :src="singleProduct.image_path" class="img-fluid" :alt="singleProduct.name" />
 							</template>
 							<template v-else>
-								<img :src="base_url + '/storage/' + singleProduct.image_path" class="img-fluid"
-									:alt="singleProduct.name" />
+								<img :src="base_url + '/storage/' + singleProduct.image_path" class="img-fluid" :alt="singleProduct.name" />
 							</template>
 						</div>
 						<div class="col-6">
 							<p><span class="fw-bold">Prezzo : </span>{{ singleProduct.price }}€</p>
 							<div class="d-flex align-items-center justify-content-start gap-2">
-								<i @click="decreaseQuantity(singleProduct.price, singleProduct)"
+								<i
+									@click="decreaseQuantity(singleProduct.price, singleProduct)"
 									class="fa-solid fa-minus p-2 bg-warning rounded-circle"></i>
 								<input v-model="quantity" class="my_quantity_input fs-5" disabled />
-								<i @click="addQuantity(singleProduct.price, singleProduct)"
+								<i
+									@click="addQuantity(singleProduct.price, singleProduct)"
 									class="fa-solid fa-plus p-2 bg-warning rounded-circle"></i>
 							</div>
 						</div>
@@ -199,8 +191,7 @@ export default {
 				</div>
 
 				<div v-show="!differenceRestaurant" class="modal-footer">
-					<button @click="addToCart(singleProduct)" data-bs-dismiss="modal" type="button"
-						class="btn btn-warning addCartBtn">
+					<button @click="addToCart(singleProduct)" data-bs-dismiss="modal" type="button" class="btn btn-warning addCartBtn">
 						<i class="fs-5 text-white fa-solid fa-cart-plus me-2"></i>
 						<span class="input-wrapper">
 							<input :value="totalPrice + '€'" class="my_total_price_input fw-bold" disabled />

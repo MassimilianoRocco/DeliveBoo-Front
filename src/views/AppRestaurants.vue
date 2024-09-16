@@ -23,11 +23,7 @@ export default {
 		};
 	},
 	methods: {
-		// changePage(url) {
-		// 	axios.get(url).then((result) => {
-		// 		this.posts = result.data.posts;
-		// 	});
-		// },
+
 	},
 	mounted() {
 		axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
@@ -43,7 +39,7 @@ export default {
 	<div class="myBox" id="ristoranti">
 		<div class="container">
 			<div class="col text-center">
-				<h1 class="text-center fw-bold display-5 pb-5 myColor">SCEGLI IL TUO RISTORANTE</h1>
+				<h1 class="text-center fw-bold display-5 pb-5 myColor">COSA VUOI MAGIARE OGGI ?</h1>
 			</div>
 
 			<Categories />
