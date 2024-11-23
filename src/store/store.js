@@ -4,7 +4,7 @@ const storeData = {
 	existData: false,
 	services: [
 		{
-			title: "CONSEGAN RAPIDA E AFFIDABILE",
+			title: "CONSEGNA RAPIDA E AFFIDABILE",
 			img: "https://www.foodserviceweb.it/wp-content/uploads/sites/4/2020/11/contratto-rider.jpg",
 			desc: "Goditi i tuoi piatti preferiti comodamente a casa tua con il nostro servizio di consegna rapida e affidabile. Scegli tra una vasta selezione di ristoranti e ricevi il tuo ordine in tempi record, senza stress e senza attese!",
 		},

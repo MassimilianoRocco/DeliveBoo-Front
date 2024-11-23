@@ -656,7 +656,7 @@ button:hover .background {
 
 @media screen and (max-width: 576px) {
 	.offcanvas {
-		width: 100%;
+		width: 100% !important;
 	}
 }
 </style>
